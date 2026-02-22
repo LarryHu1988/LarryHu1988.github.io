@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Larry Hu 的个人网站：诗歌、APP、摄影、写作、半导体职业与个人简历。"
+    />
+    <title>Larry Hu | 个人网站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="orb orb-a" aria-hidden="true"></div>
+    <div class="orb orb-b" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top">Larry Hu</a>
+      <button class="menu-toggle" aria-label="切换菜单">菜单</button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#poetry">诗歌</a></li>
+          <li><a href="#apps">APP</a></li>
+          <li><a href="#photo">摄影</a></li>
+          <li><a href="#writing">写作</a></li>
+          <li><a href="#career">职业</a></li>
+          <li><a href="#resume">简历</a></li>
+          <li><a href="#contact">联系</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero-grid reveal">
+        <article class="card hero-main">
+          <p class="eyebrow">Personal Dashboard</p>
+          <h1>你好，我是 Larry Hu</h1>
+          <p>
+            我关注技术与表达的交汇：在工程上做可落地的产品，在生活里保留诗意。
+            这个网站是我的长期实验室，记录作品、思考和职业成长。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#resume">查看简历</a>
+            <a class="btn btn-secondary" href="#contact">联系我</a>
+          </div>
+          <ul class="chip-row">
+            <li>半导体行业</li>
+            <li>产品与工程</li>
+            <li>写作与摄影</li>
+          </ul>
+        </article>
+
+        <article class="card hero-status">
+          <h2>当前状态</h2>
+          <div class="status-item">
+            <span>职业主线</span>
+            <strong>半导体器件与应用</strong>
+          </div>
+          <div class="status-item">
+            <span>最近在做</span>
+            <strong>个人站建设与作品整理</strong>
+          </div>
+          <div class="status-item">
+            <span>长期目标</span>
+            <strong>打造跨技术与内容的个人品牌</strong>
+          </div>
+        </article>
+
+        <article class="card hero-poem">
+          <h2>今日诗句</h2>
+          <p class="poem-text">“山有顶峰，湖有彼岸。漫漫长途，终有回转。”</p>
+          <p class="poem-source">摘录于我的诗歌笔记</p>
+        </article>
+      </section>
+
+      <section class="module-grid">
+        <article id="poetry" class="card module poetry reveal">
+          <div class="card-head">
+            <h2>诗歌</h2>
+            <a href="#">查看全部</a>
+          </div>
+          <p>记录情绪、城市和时间变化。短句和长诗都会放在这里。</p>
+          <ul class="plain-list">
+            <li>《清晨四点的地铁站》</li>
+            <li>《硅片上的月光》</li>
+            <li>《给未来的自己》</li>
+          </ul>
+        </article>
+
+        <article id="apps" class="card module apps reveal">
+          <div class="card-head">
+            <h2>APP</h2>
+            <a href="#">项目归档</a>
+          </div>
+          <p>我做过和正在做的应用，关注可用性、性能和真实场景价值。</p>
+          <div class="app-table">
+            <div class="row">
+              <strong>Focus Ledger</strong>
+              <span>任务记录与复盘</span>
+              <em>Beta</em>
+            </div>
+            <div class="row">
+              <strong>Photo Atlas</strong>
+              <span>摄影素材管理</span>
+              <em>Design</em>
+            </div>
+            <div class="row">
+              <strong>Chip Notes</strong>
+              <span>半导体学习卡片</span>
+              <em>Live</em>
+            </div>
+          </div>
+        </article>
+
+        <article id="photo" class="card module photo reveal">
+          <div class="card-head">
+            <h2>摄影</h2>
+            <a href="#">作品集</a>
+          </div>
+          <div class="photo-wall" aria-label="摄影预览占位图">
+            <div class="tile tile-1"></div>
+            <div class="tile tile-2"></div>
+            <div class="tile tile-3"></div>
+            <div class="tile tile-4"></div>
+          </div>
+          <p>偏好街拍、建筑和光影对比。后续会加入完整相册。</p>
+        </article>
+
+        <article id="writing" class="card module writing reveal">
+          <div class="card-head">
+            <h2>写作</h2>
+            <a href="#">阅读文章</a>
+          </div>
+          <ul class="article-list">
+            <li>
+              <span>技术笔记</span>
+              <strong>从 0 到 1：个人网站上线清单</strong>
+            </li>
+            <li>
+              <span>行业观察</span>
+              <strong>半导体周期里的个人成长策略</strong>
+            </li>
+            <li>
+              <span>方法论</span>
+              <strong>如何保持长期创作与执行力</strong>
+            </li>
+          </ul>
+        </article>
+
+        <article id="career" class="card module career reveal">
+          <div class="card-head">
+            <h2>职业（半导体）</h2>
+            <a href="#">职业路径</a>
+          </div>
+          <ol class="timeline">
+            <li>
+              <span>阶段 1</span>
+              <p>进入半导体行业，建立器件、工艺与测试基础。</p>
+            </li>
+            <li>
+              <span>阶段 2</span>
+              <p>参与产品导入与跨团队协作，沉淀工程方法。</p>
+            </li>
+            <li>
+              <span>阶段 3</span>
+              <p>结合软件能力，推动自动化与知识体系化。</p>
+            </li>
+          </ol>
+        </article>
+
+        <article id="resume" class="card module resume reveal">
+          <div class="card-head">
+            <h2>个人简历</h2>
+            <a href="assets/LarryHu-Resume.pdf">下载 PDF</a>
+          </div>
+          <ul class="plain-list">
+            <li>技术方向：半导体 + 软件工程</li>
+            <li>关键词：量产导入、问题闭环、跨团队协作</li>
+            <li>能力补充：产品思维、写作表达、摄影审美</li>
+          </ul>
+          <p class="tip">
+            提示：把你的真实简历文件放到
+            <code>assets/LarryHu-Resume.pdf</code>。
+          </p>
+        </article>
+
+        <article id="contact" class="card module contact reveal">
+          <div class="card-head">
+            <h2>联系方式</h2>
+            <a href="mailto:hello@larryhu.com">发邮件</a>
+          </div>
+          <div class="contact-grid">
+            <a href="mailto:hello@larryhu.com">邮箱：hello@larryhu.com</a>
+            <a href="https://github.com/LarryHu1988" target="_blank" rel="noreferrer"
+              >GitHub：LarryHu1988</a
+            >
+            <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noreferrer"
+              >LinkedIn：your-linkedin</a
+            >
+            <span>微信：请替换为你的微信号</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Larry Hu · Built with GitHub Pages</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
