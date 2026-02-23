@@ -75,8 +75,10 @@
 
         <article class="card hero-poem">
           <h2>今日诗句</h2>
-          <p id="hero-poem-text" class="poem-text">“正在从诗歌库加载诗句……”</p>
-          <p id="hero-poem-source" class="poem-source">诗歌库自动轮换</p>
+          <p id="hero-poem-text" class="poem-text">
+            “二姥爷是个哑巴，只能大声咿呀 用力比划。”
+          </p>
+          <p id="hero-poem-source" class="poem-source">《二姥爷是个哑巴》 · 龙雨</p>
         </article>
       </section>
 
@@ -86,35 +88,18 @@
             <h2>诗歌</h2>
             <span>原创作品</span>
           </div>
-          <p class="poetry-note">
-            新诗发布后只需要更新 <code>poems.js</code>，首页诗句会自动轮换。
-          </p>
           <div id="poetry-library" class="poetry-library"></div>
         </article>
 
         <article id="apps" class="card module apps reveal">
           <div class="card-head">
             <h2>APP</h2>
-            <a href="#">项目归档</a>
+            <a href="https://github.com/LarryHu1988?tab=repositories" target="_blank" rel="noreferrer"
+              >GitHub 仓库</a
+            >
           </div>
-          <p>我做过和正在做的应用，关注可用性、性能和真实场景价值。</p>
-          <div class="app-table">
-            <div class="row">
-              <strong>Focus Ledger</strong>
-              <span>任务记录与复盘</span>
-              <em>Beta</em>
-            </div>
-            <div class="row">
-              <strong>Photo Atlas</strong>
-              <span>摄影素材管理</span>
-              <em>Design</em>
-            </div>
-            <div class="row">
-              <strong>Chip Notes</strong>
-              <span>半导体学习卡片</span>
-              <em>Live</em>
-            </div>
-          </div>
+          <p>这里展示我在 GitHub 发布的项目，按最近更新时间自动刷新。</p>
+          <div id="github-projects" class="project-grid"></div>
         </article>
 
         <article id="photo" class="card module photo reveal">
