@@ -410,21 +410,21 @@ main {
 
 .poem-cover {
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(57, 92, 128, 0.2);
   border-radius: 1rem;
   min-height: 9.2rem;
   padding: 0.85rem;
   cursor: pointer;
   overflow: hidden;
   text-align: left;
-  color: #f7fbff;
-  box-shadow: 0 16px 34px rgba(14, 28, 45, 0.24);
+  color: #1d3750;
+  box-shadow: 0 10px 22px rgba(24, 44, 70, 0.12);
   transition: transform 170ms ease, box-shadow 170ms ease;
 }
 
 .poem-cover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 40px rgba(14, 28, 45, 0.29);
+  box-shadow: 0 14px 28px rgba(24, 44, 70, 0.16);
 }
 
 .poem-cover::before {
@@ -432,16 +432,16 @@ main {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.3), transparent 38%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.42), transparent 42%),
     repeating-linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.1) 0,
-      rgba(255, 255, 255, 0.1) 2px,
+      rgba(255, 255, 255, 0.18) 0,
+      rgba(255, 255, 255, 0.18) 2px,
       transparent 2px,
-      transparent 8px
+      transparent 10px
     );
-  mix-blend-mode: screen;
-  opacity: 0.68;
+  mix-blend-mode: normal;
+  opacity: 0.48;
   pointer-events: none;
 }
 
@@ -451,19 +451,19 @@ main {
 }
 
 .poem-cover.theme-a {
-  background: linear-gradient(148deg, #1b4f8d, #2f72bd, #8aaee0);
+  background: linear-gradient(148deg, #e7f2ff, #dcedff, #f7fbff);
 }
 
 .poem-cover.theme-b {
-  background: linear-gradient(148deg, #2b6a63, #2e9186, #7fd0c5);
+  background: linear-gradient(148deg, #e7f8f4, #d9f1e9, #f6fcfa);
 }
 
 .poem-cover.theme-c {
-  background: linear-gradient(148deg, #6c3f79, #9f61b1, #dca8e8);
+  background: linear-gradient(148deg, #f3ebff, #ebdfff, #fcf8ff);
 }
 
 .poem-cover.theme-d {
-  background: linear-gradient(148deg, #844d1f, #c87e33, #e9b684);
+  background: linear-gradient(148deg, #fff2e6, #ffe8d4, #fffaf5);
 }
 
 .poem-cover-title {
@@ -476,24 +476,26 @@ main {
   margin: 0;
   font-size: 0.75rem;
   letter-spacing: 0.03em;
-  opacity: 0.9;
+  opacity: 0.75;
 }
 
 .poem-cover-preview {
   margin: 0.58rem 0 0;
   font-size: 0.84rem;
   line-height: 1.5;
-  opacity: 0.94;
+  color: #324e6b;
+  opacity: 0.92;
 }
 
 .poem-cover-tag {
   margin-top: 0.62rem;
   display: inline-flex;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(52, 88, 123, 0.2);
   border-radius: 999px;
   padding: 0.11rem 0.5rem;
   font-size: 0.72rem;
-  background: rgba(255, 255, 255, 0.14);
+  color: #355678;
+  background: rgba(255, 255, 255, 0.72);
 }
 
 .article-list,
