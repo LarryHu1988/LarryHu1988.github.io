@@ -299,12 +299,20 @@ main {
   font-family: "Noto Serif SC", serif;
   font-size: 1.16rem;
   margin-bottom: 0.35rem;
+  min-height: 3.8rem;
+  transition: opacity 220ms ease;
 }
 
 .poem-source {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
+  transition: opacity 220ms ease;
+}
+
+.poem-text.is-switching,
+.poem-source.is-switching {
+  opacity: 0.2;
 }
 
 .module-grid {
@@ -384,8 +392,19 @@ main {
   color: var(--muted);
 }
 
-.poem-entry {
+.poetry-note {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.poetry-library {
   margin-top: 0.9rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.poem-entry {
+  margin-top: 0;
   padding: 0.9rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
