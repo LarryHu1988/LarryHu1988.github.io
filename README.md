@@ -11,7 +11,7 @@
 
 ## 0. 先改成你的真实信息
 
-编辑 `/Users/larry/Documents/LarryWebsite/index.html`：
+编辑 `index.html`：
 - 邮箱、GitHub、LinkedIn、微信
 - 诗歌标题、APP 名称、文章标题
 - 职业经历和简历下载链接
@@ -19,7 +19,7 @@
 ## 1. 本地预览
 
 ```bash
-cd /Users/larry/Documents/LarryWebsite
+cd <your-project-folder>
 python3 -m http.server 8080
 ```
 
@@ -28,7 +28,7 @@ python3 -m http.server 8080
 ## 2. 推送到 GitHub
 
 ```bash
-cd /Users/larry/Documents/LarryWebsite
+cd <your-project-folder>
 git init
 git add .
 git commit -m "feat: personal website first version"
@@ -100,4 +100,3 @@ dig www.larryhu.com +short
   https://help.aliyun.com/zh/dns/add-a-dns-record
 - 阿里云解析配置示例（主机记录 @ / www）：
   https://help.aliyun.com/zh/dns/configure-dns-resolution-for-a-domain-name
-
