@@ -335,7 +335,7 @@ main {
 }
 
 .poetry {
-  grid-column: span 4;
+  grid-column: span 12;
 }
 
 .apps {
@@ -377,6 +377,38 @@ main {
 
 .plain-list li:last-child {
   border-bottom: 0;
+}
+
+.poetry .card-head span {
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.poem-entry {
+  margin-top: 0.9rem;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.poem-title {
+  margin-bottom: 0.2rem;
+  font-size: 1.06rem;
+}
+
+.poem-author {
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.poem-body {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: "Noto Serif SC", serif;
+  font-size: 0.96rem;
+  line-height: 1.9;
 }
 
 .app-table {
