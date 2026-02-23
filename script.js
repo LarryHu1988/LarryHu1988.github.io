@@ -38,13 +38,20 @@ const observer = new IntersectionObserver(
 
 revealItems.forEach((item) => observer.observe(item));
 
-const poemLibrary = Array.isArray(window.POEM_LIBRARY) ? window.POEM_LIBRARY : [];
+const poemLibraryRaw = Array.isArray(window.POEM_LIBRARY) ? window.POEM_LIBRARY : [];
 const poetryLibraryNode = document.getElementById('poetry-library');
 const heroPoemTextNode = document.getElementById('hero-poem-text');
 const heroPoemSourceNode = document.getElementById('hero-poem-source');
+const poemModalNode = document.getElementById('poem-modal');
+const poemModalBackdropNode = document.getElementById('poem-modal-backdrop');
+const poemModalCloseNode = document.getElementById('poem-modal-close');
+const poemModalTitleNode = document.getElementById('poem-modal-title');
+const poemModalMetaNode = document.getElementById('poem-modal-meta');
+const poemModalBodyNode = document.getElementById('poem-modal-body');
 const githubProjectsNode = document.getElementById('github-projects');
 
 const GITHUB_USERNAME = 'LarryHu1988';
+const POEM_COVER_THEMES = ['theme-a', 'theme-b', 'theme-c', 'theme-d'];
 const PROJECT_FALLBACK = [
   {
     name: 'Matchday',
@@ -64,8 +71,26 @@ const PROJECT_FALLBACK = [
   }
 ];
 
+let normalizedPoems = [];
+
 function normalizeText(value) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function normalizePoem(poem) {
+  const title = normalizeText(poem.title);
+  const author = normalizeText(poem.author);
+  const content = normalizeText(poem.content);
+  const writtenAt = normalizeText(poem.writtenAt);
+  const quotes = Array.isArray(poem.quotes)
+    ? poem.quotes.map((quote) => normalizeText(quote)).filter((quote) => quote.length > 0)
+    : [];
+
+  if (!title || !author || !content) {
+    return null;
+  }
+
+  return { title, author, content, writtenAt, quotes };
 }
 
 function extractPreview(content) {
@@ -81,60 +106,39 @@ function extractPreview(content) {
   return lines.slice(0, 2).join(' / ');
 }
 
-function createPoemCard(poem) {
-  const title = normalizeText(poem.title);
-  const author = normalizeText(poem.author);
-  const content = normalizeText(poem.content);
-  const writtenAt = normalizeText(poem.writtenAt);
+function getPoemMeta(poem) {
+  return poem.writtenAt ? `${poem.author} · ${poem.writtenAt}` : poem.author;
+}
 
-  if (!title || !author || !content) {
-    return null;
-  }
+function createPoemCover(poem, index) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = `poem-cover ${POEM_COVER_THEMES[index % POEM_COVER_THEMES.length]}`;
+  button.dataset.poemIndex = String(index);
+  button.setAttribute('aria-label', `打开诗歌《${poem.title}》`);
 
-  const card = document.createElement('details');
-  card.className = 'poem-card';
+  const inner = document.createElement('div');
+  inner.className = 'poem-cover-inner';
 
-  const summary = document.createElement('summary');
-  summary.className = 'poem-summary';
+  const titleNode = document.createElement('h3');
+  titleNode.className = 'poem-cover-title';
+  titleNode.textContent = `《${poem.title}》`;
 
-  const top = document.createElement('span');
-  top.className = 'poem-summary-top';
+  const metaNode = document.createElement('p');
+  metaNode.className = 'poem-cover-meta';
+  metaNode.textContent = getPoemMeta(poem);
 
-  const titleNode = document.createElement('span');
-  titleNode.className = 'poem-title';
-  titleNode.textContent = `《${title}》`;
+  const previewNode = document.createElement('p');
+  previewNode.className = 'poem-cover-preview';
+  previewNode.textContent = poem.quotes[0] || extractPreview(poem.content);
 
-  const actionNode = document.createElement('span');
-  actionNode.className = 'poem-action';
-  actionNode.textContent = '展开';
+  const tagNode = document.createElement('span');
+  tagNode.className = 'poem-cover-tag';
+  tagNode.textContent = '点击阅读全文';
 
-  top.append(titleNode, actionNode);
-
-  const authorNode = document.createElement('span');
-  authorNode.className = 'poem-author';
-  authorNode.textContent = writtenAt ? `${author} · ${writtenAt}` : author;
-
-  const previewNode = document.createElement('span');
-  previewNode.className = 'poem-preview';
-  previewNode.textContent = extractPreview(content);
-
-  summary.append(top, authorNode, previewNode);
-
-  const detail = document.createElement('div');
-  detail.className = 'poem-detail';
-
-  const bodyNode = document.createElement('pre');
-  bodyNode.className = 'poem-body';
-  bodyNode.textContent = content;
-
-  detail.append(bodyNode);
-  card.append(summary, detail);
-
-  card.addEventListener('toggle', () => {
-    actionNode.textContent = card.open ? '收起' : '展开';
-  });
-
-  return card;
+  inner.append(titleNode, metaNode, previewNode, tagNode);
+  button.append(inner);
+  return button;
 }
 
 function renderPoetryLibrary(poems) {
@@ -144,32 +148,77 @@ function renderPoetryLibrary(poems) {
 
   poetryLibraryNode.innerHTML = '';
 
-  const cards = poems
-    .map((poem) => createPoemCard(poem))
-    .filter((card) => card !== null);
-
-  if (cards.length === 0) {
+  if (poems.length === 0) {
     const empty = document.createElement('p');
-    empty.className = 'poem-author';
+    empty.className = 'project-empty';
     empty.textContent = '诗歌暂未公开。';
     poetryLibraryNode.append(empty);
     return;
   }
 
-  cards.forEach((card) => {
-    poetryLibraryNode.append(card);
+  poems.forEach((poem, index) => {
+    poetryLibraryNode.append(createPoemCover(poem, index));
+  });
+}
 
-    card.addEventListener('toggle', () => {
-      if (!card.open) {
+function openPoemModal(index) {
+  if (!poemModalNode || !poemModalTitleNode || !poemModalMetaNode || !poemModalBodyNode) {
+    return;
+  }
+
+  const poem = normalizedPoems[index];
+  if (!poem) {
+    return;
+  }
+
+  poemModalTitleNode.textContent = `《${poem.title}》`;
+  poemModalMetaNode.textContent = getPoemMeta(poem);
+  poemModalBodyNode.textContent = poem.content;
+
+  poemModalNode.classList.add('open');
+  poemModalNode.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+
+function closePoemModal() {
+  if (!poemModalNode) {
+    return;
+  }
+
+  poemModalNode.classList.remove('open');
+  poemModalNode.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
+function bindPoemModalEvents() {
+  if (poetryLibraryNode) {
+    poetryLibraryNode.addEventListener('click', (event) => {
+      const cover = event.target.closest('.poem-cover');
+      if (!cover) {
         return;
       }
 
-      cards.forEach((otherCard) => {
-        if (otherCard !== card) {
-          otherCard.open = false;
-        }
-      });
+      const index = Number.parseInt(cover.dataset.poemIndex || '', 10);
+      if (Number.isNaN(index)) {
+        return;
+      }
+
+      openPoemModal(index);
     });
+  }
+
+  if (poemModalBackdropNode) {
+    poemModalBackdropNode.addEventListener('click', closePoemModal);
+  }
+
+  if (poemModalCloseNode) {
+    poemModalCloseNode.addEventListener('click', closePoemModal);
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closePoemModal();
+    }
   });
 }
 
@@ -177,21 +226,8 @@ function buildQuotePool(poems) {
   const quotePool = [];
 
   poems.forEach((poem) => {
-    const title = normalizeText(poem.title);
-    const author = normalizeText(poem.author);
-    const quotes = Array.isArray(poem.quotes) ? poem.quotes : [];
-
-    if (!title || !author) {
-      return;
-    }
-
-    quotes.forEach((quote) => {
-      const text = normalizeText(quote);
-      if (!text) {
-        return;
-      }
-
-      quotePool.push({ text, source: `《${title}》 · ${author}` });
+    poem.quotes.forEach((quote) => {
+      quotePool.push({ text: quote, source: `《${poem.title}》 · ${poem.author}` });
     });
   });
 
@@ -358,15 +394,18 @@ async function loadGitHubProjects() {
     const repos = await response.json();
     const projects = repos
       .filter((repo) => !repo.fork)
+      .filter((repo) => !repo.archived)
       .filter((repo) => repo.name !== `${GITHUB_USERNAME}.github.io`)
       .slice(0, 6);
 
     renderGitHubProjects(projects.length > 0 ? projects : PROJECT_FALLBACK);
-  } catch (error) {
+  } catch (_error) {
     renderGitHubProjects(PROJECT_FALLBACK);
   }
 }
 
-renderPoetryLibrary(poemLibrary);
-startHeroQuoteRotation(poemLibrary);
+normalizedPoems = poemLibraryRaw.map((poem) => normalizePoem(poem)).filter((poem) => poem !== null);
+renderPoetryLibrary(normalizedPoems);
+bindPoemModalEvents();
+startHeroQuoteRotation(normalizedPoems);
 loadGitHubProjects();

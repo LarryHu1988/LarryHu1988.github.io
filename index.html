@@ -98,7 +98,6 @@
               >GitHub 仓库</a
             >
           </div>
-          <p>这里展示我在 GitHub 发布的项目，按最近更新时间自动刷新。</p>
           <div id="github-projects" class="project-grid"></div>
         </article>
 
@@ -168,10 +167,6 @@
             <li>关键词：量产导入、问题闭环、跨团队协作</li>
             <li>能力补充：产品思维、写作表达、摄影审美</li>
           </ul>
-          <p class="tip">
-            提示：把你的真实简历文件放到
-            <code>assets/LarryHu-Resume.pdf</code>。
-          </p>
         </article>
 
         <article id="contact" class="card module contact reveal">
@@ -196,6 +191,23 @@
     <footer class="site-footer">
       <p>© <span id="year"></span> Larry Hu · Built with GitHub Pages</p>
     </footer>
+
+    <div id="poem-modal" class="poem-modal" aria-hidden="true">
+      <button
+        id="poem-modal-backdrop"
+        class="poem-modal-backdrop"
+        type="button"
+        aria-label="关闭诗歌弹窗"
+      ></button>
+      <article class="poem-modal-card" role="dialog" aria-modal="true" aria-labelledby="poem-modal-title">
+        <div class="poem-modal-head">
+          <h3 id="poem-modal-title" class="poem-modal-title">诗歌标题</h3>
+          <button id="poem-modal-close" class="poem-modal-close" type="button" aria-label="关闭">关闭</button>
+        </div>
+        <p id="poem-modal-meta" class="poem-modal-meta">作者</p>
+        <pre id="poem-modal-body" class="poem-modal-body"></pre>
+      </article>
+    </div>
 
     <script src="poems.js"></script>
     <script src="script.js"></script>
