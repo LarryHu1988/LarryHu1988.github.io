@@ -1,0 +1,69 @@
+{
+  "updated_at": "2026-03-05T15:43:04.839934+00:00",
+  "source": "api-football",
+  "timezone": "Asia/Shanghai",
+  "barca": [
+    {
+      "date": "2026-03-08T04:00:00+08:00",
+      "opponent": "Athletic Club",
+      "league": "La Liga · Regular Season - 27",
+      "is_home": false
+    },
+    {
+      "date": "2026-03-11T04:00:00+08:00",
+      "opponent": "Newcastle",
+      "league": "UEFA Champions League · Round of 16",
+      "is_home": false
+    },
+    {
+      "date": "2026-03-15T23:15:00+08:00",
+      "opponent": "Sevilla",
+      "league": "La Liga · Regular Season - 28",
+      "is_home": true
+    },
+    {
+      "date": "2026-03-19T01:45:00+08:00",
+      "opponent": "Newcastle",
+      "league": "UEFA Champions League · Round of 16",
+      "is_home": true
+    },
+    {
+      "date": "2026-03-22T21:00:00+08:00",
+      "opponent": "Rayo Vallecano",
+      "league": "La Liga · Regular Season - 29",
+      "is_home": true
+    }
+  ],
+  "messi": [
+    {
+      "date": "2026-03-08T05:30:00+08:00",
+      "opponent": "DC United",
+      "league": "Major League Soccer · Regular season",
+      "is_home": false
+    },
+    {
+      "date": "2026-03-12T07:30:00+08:00",
+      "opponent": "Nashville SC",
+      "league": "CONCACAF Champions League · Round of 16",
+      "is_home": false
+    },
+    {
+      "date": "2026-03-15T07:30:00+08:00",
+      "opponent": "Charlotte",
+      "league": "Major League Soccer · Regular season",
+      "is_home": false
+    },
+    {
+      "date": "2026-03-19T07:00:00+08:00",
+      "opponent": "Nashville SC",
+      "league": "CONCACAF Champions League · Round of 16",
+      "is_home": true
+    },
+    {
+      "date": "2026-03-23T01:00:00+08:00",
+      "opponent": "New York City FC",
+      "league": "Major League Soccer · Regular season",
+      "is_home": false
+    }
+  ]
+}

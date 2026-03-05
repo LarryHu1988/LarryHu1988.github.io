@@ -21,20 +21,22 @@ const GITHUB_USERNAME = 'LarryHu1988'
 const LANG_STORAGE_KEY = 'larry-site-lang'
 const DEFAULT_LANG = 'zh-Hans'
 const POEM_COVER_THEMES = ['theme-a', 'theme-b', 'theme-c', 'theme-d']
-const SPORTS_TARGETS = [
-  {
+const SPORTS_CONFIG = {
+  barca: {
     containerId: 'barca-schedule',
-    league: 'esp.1',
-    teamId: '83',
+    apiFootballTeamId: 529,
+    espnLeague: 'esp.1',
+    espnTeamId: '83',
     fallbackKey: 'sports_fallback_barca'
   },
-  {
+  messi: {
     containerId: 'messi-schedule',
-    league: 'usa.1',
-    teamId: '20232',
+    apiFootballTeamId: 9568,
+    espnLeague: 'usa.1',
+    espnTeamId: '20232',
     fallbackKey: 'sports_fallback_messi'
   }
-]
+}
 
 const I18N = {
   'zh-Hans': {
@@ -150,6 +152,10 @@ let currentLang = loadStoredLanguage()
 let normalizedPoems = []
 let quoteIntervalId = null
 let latestProjects = []
+let latestSportsEntries = {
+  barca: [],
+  messi: []
+}
 
 function t(key) {
   const table = I18N[currentLang] || I18N[DEFAULT_LANG]
@@ -227,7 +233,11 @@ function applyLanguage(lang, shouldRefresh = true) {
     renderPoetryLibrary(normalizedPoems)
     startHeroQuoteRotation(normalizedPoems)
     renderGitHubProjects(latestProjects)
-    SPORTS_TARGETS.forEach((target) => loadTeamSchedule(target))
+    if (hasAnySportsEntries()) {
+      renderSportsFromLatestEntries()
+    } else {
+      loadSportsData()
+    }
   }
 }
 
@@ -582,52 +592,59 @@ function formatMatchDateTime(isoTime) {
   })
 }
 
-function findCompetition(event) {
-  if (!event || !Array.isArray(event.competitions) || event.competitions.length === 0) {
+function hasAnySportsEntries(entries = latestSportsEntries) {
+  return Object.values(entries).some((list) => Array.isArray(list) && list.length > 0)
+}
+
+function normalizeScheduleEntry(entry) {
+  if (!entry || typeof entry !== 'object') {
     return null
   }
 
-  return event.competitions[0]
-}
+  const date = normalizeText(entry.date)
+  const opponent = normalizeText(entry.opponent)
+  const league = normalizeText(entry.league)
 
-function describeMatch(event, teamId) {
-  const competition = findCompetition(event)
-  const competitors = Array.isArray(competition?.competitors) ? competition.competitors : []
-
-  if (competitors.length === 0) {
-    return {
-      main: event.shortName || event.name || t('sports_match_generic'),
-      meta: formatMatchDateTime(event.date)
-    }
+  if (!date || !opponent) {
+    return null
   }
 
-  const me = competitors.find((item) => String(item.team?.id) === String(teamId))
-  const opponent = competitors.find((item) => String(item.team?.id) !== String(teamId))
-
-  const opponentName =
-    opponent?.team?.displayName ||
-    opponent?.team?.shortDisplayName ||
-    opponent?.team?.name ||
-    t('sports_opponent')
-
-  const side = me?.homeAway === 'home' ? t('sports_home_vs') : t('sports_away_at')
-  const leagueName = competition?.league?.name || event.season?.displayName || t('sports_league_fallback')
-  const dateText = formatMatchDateTime(event.date)
+  const isHome = typeof entry.is_home === 'boolean' ? entry.is_home : Boolean(entry.isHome)
 
   return {
-    main: `${side} ${opponentName}`,
-    meta: `${dateText} · ${leagueName}`
+    date,
+    opponent,
+    league,
+    isHome
   }
 }
 
-function renderScheduleList(container, events, teamId, fallbackText) {
+function normalizeSportsPayload(payload) {
+  const normalized = {
+    barca: [],
+    messi: []
+  }
+
+  if (!payload || typeof payload !== 'object') {
+    return normalized
+  }
+
+  Object.keys(normalized).forEach((key) => {
+    const rawList = Array.isArray(payload[key]) ? payload[key] : []
+    normalized[key] = rawList.map((entry) => normalizeScheduleEntry(entry)).filter((entry) => entry !== null)
+  })
+
+  return normalized
+}
+
+function renderScheduleEntries(container, entries, fallbackText) {
   if (!container) {
     return
   }
 
   container.innerHTML = ''
 
-  if (!Array.isArray(events) || events.length === 0) {
+  if (!Array.isArray(entries) || entries.length === 0) {
     const empty = document.createElement('p')
     empty.className = 'project-empty'
     empty.textContent = fallbackText
@@ -635,26 +652,73 @@ function renderScheduleList(container, events, teamId, fallbackText) {
     return
   }
 
-  events.forEach((event) => {
-    const match = describeMatch(event, teamId)
-
+  entries.forEach((entry) => {
+    const side = entry.isHome ? t('sports_home_vs') : t('sports_away_at')
+    const leagueName = entry.league || t('sports_league_fallback')
     const item = document.createElement('article')
     item.className = 'match-item'
 
     const main = document.createElement('p')
     main.className = 'match-main'
-    main.textContent = match.main
+    main.textContent = `${side} ${entry.opponent}`
 
     const meta = document.createElement('p')
     meta.className = 'match-meta'
-    meta.textContent = match.meta
+    meta.textContent = `${formatMatchDateTime(entry.date)} · ${leagueName}`
 
     item.append(main, meta)
     container.append(item)
   })
 }
 
-function pickUpcomingEvents(events) {
+function renderSportsFromLatestEntries() {
+  Object.entries(SPORTS_CONFIG).forEach(([key, config]) => {
+    const container = document.getElementById(config.containerId)
+    renderScheduleEntries(container, latestSportsEntries[key], t(config.fallbackKey))
+  })
+}
+
+function findEspnCompetition(event) {
+  if (!event || !Array.isArray(event.competitions) || event.competitions.length === 0) {
+    return null
+  }
+
+  return event.competitions[0]
+}
+
+function toEspnScheduleEntry(event, teamId) {
+  if (!event || !event.date) {
+    return null
+  }
+
+  const competition = findEspnCompetition(event)
+  const competitors = Array.isArray(competition?.competitors) ? competition.competitors : []
+
+  if (competitors.length === 0) {
+    return {
+      date: event.date,
+      opponent: event.shortName || event.name || t('sports_opponent'),
+      league: competition?.league?.name || event.season?.displayName || t('sports_league_fallback'),
+      isHome: true
+    }
+  }
+
+  const me = competitors.find((item) => String(item.team?.id) === String(teamId))
+  const opponent = competitors.find((item) => String(item.team?.id) !== String(teamId))
+
+  return {
+    date: event.date,
+    opponent:
+      opponent?.team?.displayName ||
+      opponent?.team?.shortDisplayName ||
+      opponent?.team?.name ||
+      t('sports_opponent'),
+    league: competition?.league?.name || event.season?.displayName || t('sports_league_fallback'),
+    isHome: me?.homeAway === 'home'
+  }
+}
+
+function pickUpcomingEspnEntries(events, teamId) {
   if (!Array.isArray(events)) {
     return []
   }
@@ -668,17 +732,14 @@ function pickUpcomingEvents(events) {
     })
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .slice(0, 5)
+    .map((event) => toEspnScheduleEntry(event, teamId))
+    .filter((entry) => entry !== null)
 }
 
-async function loadTeamSchedule(target) {
-  const container = document.getElementById(target.containerId)
-  if (!container) {
-    return
-  }
-
+async function loadTeamScheduleFromEspn(key, config) {
   try {
     const response = await fetch(
-      `https://site.api.espn.com/apis/site/v2/sports/soccer/${target.league}/teams/${target.teamId}/schedule`
+      `https://site.api.espn.com/apis/site/v2/sports/soccer/${config.espnLeague}/teams/${config.espnTeamId}/schedule`
     )
 
     if (!response.ok) {
@@ -686,11 +747,48 @@ async function loadTeamSchedule(target) {
     }
 
     const data = await response.json()
-    const events = pickUpcomingEvents(data.events)
-    renderScheduleList(container, events, target.teamId, t(target.fallbackKey))
+    latestSportsEntries[key] = pickUpcomingEspnEntries(data.events, config.espnTeamId)
   } catch (_error) {
-    renderScheduleList(container, [], target.teamId, t(target.fallbackKey))
+    latestSportsEntries[key] = []
   }
+}
+
+async function loadSportsFromEspnFallback() {
+  await Promise.all(
+    Object.entries(SPORTS_CONFIG).map(([key, config]) => loadTeamScheduleFromEspn(key, config))
+  )
+
+  renderSportsFromLatestEntries()
+}
+
+async function loadSportsFromStaticFile() {
+  try {
+    const response = await fetch('data/sports.json', { cache: 'no-store' })
+    if (!response.ok) {
+      throw new Error(`sports.json ${response.status}`)
+    }
+
+    const payload = await response.json()
+    const normalized = normalizeSportsPayload(payload)
+    if (!hasAnySportsEntries(normalized)) {
+      throw new Error('sports payload empty')
+    }
+
+    latestSportsEntries = normalized
+    renderSportsFromLatestEntries()
+    return true
+  } catch (_error) {
+    return false
+  }
+}
+
+async function loadSportsData() {
+  const loadedFromStatic = await loadSportsFromStaticFile()
+  if (loadedFromStatic) {
+    return
+  }
+
+  await loadSportsFromEspnFallback()
 }
 
 if (menuBtn && navLinks) {
@@ -743,4 +841,4 @@ renderPoetryLibrary(normalizedPoems)
 bindPoemModalEvents()
 startHeroQuoteRotation(normalizedPoems)
 loadGitHubProjects()
-SPORTS_TARGETS.forEach((target) => loadTeamSchedule(target))
+loadSportsData()
