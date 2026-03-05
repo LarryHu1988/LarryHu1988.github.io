@@ -79,9 +79,9 @@ const I18N = {
     sports_time_pending: '时间待定',
     sports_match_generic: '比赛',
     sports_opponent: '对手',
-    sports_home_vs: '主场 vs',
-    sports_away_at: '客场 @',
-    sports_league_fallback: '足球赛事'
+    sports_league_fallback: '足球赛事',
+    sports_home_short: '主',
+    sports_away_short: '客'
   },
   'zh-Hant': {
     menu: '選單',
@@ -123,9 +123,9 @@ const I18N = {
     sports_time_pending: '時間待定',
     sports_match_generic: '比賽',
     sports_opponent: '對手',
-    sports_home_vs: '主場 vs',
-    sports_away_at: '客場 @',
-    sports_league_fallback: '足球賽事'
+    sports_league_fallback: '足球賽事',
+    sports_home_short: '主',
+    sports_away_short: '客'
   }
 }
 
@@ -576,22 +576,6 @@ async function loadGitHubProjects() {
   }
 }
 
-function formatMatchDateTime(isoTime) {
-  const date = new Date(isoTime)
-
-  if (Number.isNaN(date.getTime())) {
-    return t('sports_time_pending')
-  }
-
-  return date.toLocaleString(getLocale(), {
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  })
-}
-
 function hasAnySportsEntries(entries = latestSportsEntries) {
   return Object.values(entries).some((list) => Array.isArray(list) && list.length > 0)
 }
@@ -615,7 +599,8 @@ function normalizeScheduleEntry(entry) {
     date,
     opponent,
     league,
-    isHome
+    isHome,
+    opponentLogo: normalizeText(entry.opponent_logo || entry.opponentLogo)
   }
 }
 
@@ -653,20 +638,81 @@ function renderScheduleEntries(container, entries, fallbackText) {
   }
 
   entries.forEach((entry) => {
-    const side = entry.isHome ? t('sports_home_vs') : t('sports_away_at')
     const leagueName = entry.league || t('sports_league_fallback')
+    const homeShort = t('sports_home_short')
+    const awayShort = t('sports_away_short')
+    const venueText = entry.isHome ? homeShort : awayShort
+    const date = new Date(entry.date)
+
+    const dayText = Number.isNaN(date.getTime())
+      ? t('sports_time_pending')
+      : date.toLocaleDateString(getLocale(), {
+          month: '2-digit',
+          day: '2-digit',
+          weekday: 'short'
+        })
+
+    const kickoffText = Number.isNaN(date.getTime())
+      ? '--:--'
+      : date.toLocaleTimeString(getLocale(), {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        })
+
     const item = document.createElement('article')
     item.className = 'match-item'
 
-    const main = document.createElement('p')
-    main.className = 'match-main'
-    main.textContent = `${side} ${entry.opponent}`
+    const head = document.createElement('div')
+    head.className = 'match-head'
 
-    const meta = document.createElement('p')
-    meta.className = 'match-meta'
-    meta.textContent = `${formatMatchDateTime(entry.date)} · ${leagueName}`
+    const leagueNode = document.createElement('p')
+    leagueNode.className = 'match-league'
+    leagueNode.textContent = leagueName
 
-    item.append(main, meta)
+    const dayNode = document.createElement('p')
+    dayNode.className = 'match-day'
+    dayNode.textContent = dayText
+
+    head.append(leagueNode, dayNode)
+
+    const body = document.createElement('div')
+    body.className = 'match-body'
+
+    const teamLine = document.createElement('div')
+    teamLine.className = 'match-teamline'
+
+    const venue = document.createElement('span')
+    venue.className = `match-venue ${entry.isHome ? 'is-home' : 'is-away'}`
+    venue.textContent = venueText
+
+    if (entry.opponentLogo) {
+      const logo = document.createElement('img')
+      logo.className = 'match-logo'
+      logo.src = entry.opponentLogo
+      logo.alt = entry.opponent
+      logo.loading = 'lazy'
+      teamLine.append(logo)
+    } else {
+      const logoFallback = document.createElement('span')
+      logoFallback.className = 'match-logo-fallback'
+      logoFallback.textContent = (entry.opponent || t('sports_opponent')).slice(0, 1).toUpperCase()
+      teamLine.append(logoFallback)
+    }
+
+    const opponent = document.createElement('span')
+    opponent.className = 'match-opponent'
+    opponent.textContent = entry.opponent
+
+    teamLine.append(venue, opponent)
+
+    const kickoff = document.createElement('p')
+    kickoff.className = 'match-kickoff'
+    kickoff.textContent = kickoffText
+
+    body.append(teamLine, kickoff)
+
+    item.append(head, body)
     container.append(item)
   })
 }
@@ -714,7 +760,8 @@ function toEspnScheduleEntry(event, teamId) {
       opponent?.team?.name ||
       t('sports_opponent'),
     league: competition?.league?.name || event.season?.displayName || t('sports_league_fallback'),
-    isHome: me?.homeAway === 'home'
+    isHome: me?.homeAway === 'home',
+    opponentLogo: normalizeText(opponent?.team?.logo)
   }
 }
 
