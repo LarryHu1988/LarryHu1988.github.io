@@ -34,6 +34,17 @@
 - 诗歌卡片会自动渲染到“诗歌”模块
 - 首页“今日诗句”会自动从 `quotes` 池中轮换
 
+### 体育赛程（API-FOOTBALL）
+
+网站会优先读取 `data/sports.json`，文件由 GitHub Actions 自动更新：
+- 工作流文件：`.github/workflows/update-sports.yml`
+- 更新脚本：`scripts/update_sports.py`
+
+请在仓库 `Settings -> Secrets and variables -> Actions` 新增密钥：
+- `APIFOOTBALL_API_KEY`：你的 API-FOOTBALL Key
+
+设置后可以在 Actions 页面手动运行一次 `Update Sports Data`，之后会按定时任务自动刷新。
+
 ## 1. 本地预览
 
 ```bash
