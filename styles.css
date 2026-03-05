@@ -9,7 +9,6 @@
   --muted: #5d708a;
   --blue: #2b73d1;
   --ink: #12305e;
-  --rain: #2584dc;
   --shadow: 0 18px 44px rgba(21, 45, 78, 0.12);
   --radius-lg: 1.5rem;
   --radius-md: 1rem;
@@ -57,11 +56,6 @@ a {
   color: var(--ink);
 }
 
-.rain-char {
-  color: var(--rain);
-  font-weight: 700;
-}
-
 .site-header,
 main,
 .site-footer {
@@ -89,6 +83,39 @@ main,
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-left: auto;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 0.24rem;
+}
+
+.lang-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 0.24rem 0.58rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: rgba(43, 115, 209, 0.16);
+  font-weight: 600;
 }
 
 .menu-toggle {
@@ -217,12 +244,26 @@ main {
 }
 
 .studio-en {
-  margin-top: 0.9rem;
-  font-size: clamp(1.15rem, 2.4vw, 1.8rem);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: none;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  line-height: 1.12;
+  white-space: nowrap;
+}
+
+.studio-en-main {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
   color: #1f3f67;
+}
+
+.studio-en-sub {
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #2d5b8d;
 }
 
 .intro-card {
@@ -361,6 +402,16 @@ main {
 #notes.module-card {
   background: linear-gradient(155deg, rgba(246, 244, 252, 0.9), rgba(255, 255, 255, 0.88));
   border-color: rgba(156, 142, 186, 0.28);
+}
+
+#melody.module-card {
+  background: linear-gradient(155deg, rgba(239, 251, 248, 0.9), rgba(255, 255, 255, 0.88));
+  border-color: rgba(102, 184, 161, 0.28);
+}
+
+#cinema.module-card {
+  background: linear-gradient(155deg, rgba(255, 241, 243, 0.9), rgba(255, 255, 255, 0.88));
+  border-color: rgba(214, 132, 157, 0.28);
 }
 
 .span-6 {
@@ -722,6 +773,11 @@ body.modal-open .site-footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .lang-btn {
+    font-size: 0.76rem;
+    padding: 0.22rem 0.48rem;
   }
 
   nav {

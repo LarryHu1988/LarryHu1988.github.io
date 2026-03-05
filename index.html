@@ -21,14 +21,22 @@
 
     <header class="site-header">
       <a class="brand" href="#top">Larry Studio</a>
-      <button class="menu-toggle" aria-label="切换菜单">菜单</button>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="语言切换">
+          <button class="lang-btn active" type="button" data-lang="zh-Hans">简体</button>
+          <button class="lang-btn" type="button" data-lang="zh-Hant">繁體</button>
+        </div>
+        <button class="menu-toggle" aria-label="切换菜单" data-i18n="menu">菜单</button>
+      </div>
       <nav>
         <ul class="nav-links">
-          <li><a href="#poetry">诗情雨意</a></li>
-          <li><a href="#apps">数码雨饭</a></li>
-          <li><a href="#sports">体育风雨</a></li>
-          <li><a href="#insight">世说心雨</a></li>
-          <li><a href="#notes">胡言乱雨</a></li>
+          <li><a href="#poetry" data-i18n="nav_poetry">诗情雨意</a></li>
+          <li><a href="#apps" data-i18n="nav_apps">数码雨饭</a></li>
+          <li><a href="#sports" data-i18n="nav_sports">体育风雨</a></li>
+          <li><a href="#insight" data-i18n="nav_insight">世说心雨</a></li>
+          <li><a href="#notes" data-i18n="nav_notes">胡言乱雨</a></li>
+          <li><a href="#melody" data-i18n="nav_melody">如雨如歌</a></li>
+          <li><a href="#cinema" data-i18n="nav_cinema">观影雨感</a></li>
         </ul>
       </nav>
     </header>
@@ -37,20 +45,23 @@
       <section class="hero-grid reveal">
         <article class="card hero-card studio-card">
           <p class="studio-title-line">
-            <span class="studio-zh-main">滴水龙雨</span>
-            <span class="studio-zh-sub">工作室</span>
+            <span class="studio-zh-main" data-i18n="studio_zh_main">滴水龙雨</span>
+            <span class="studio-zh-sub" data-i18n="studio_zh_sub">工作室</span>
           </p>
-          <p class="studio-en">Larry Studio</p>
+          <p class="studio-en">
+            <span class="studio-en-main">Larry</span>
+            <span class="studio-en-sub">Studio</span>
+          </p>
         </article>
 
         <article class="card hero-card intro-card">
           <div class="card-head">
-            <h1>滴水龙雨</h1>
+            <h1 data-i18n="intro_zh_title">滴水龙雨</h1>
           </div>
           <div class="intro-copy">
             <section class="intro-block">
-              <h3>滴水龙雨</h3>
-              <p>
+              <h3 data-i18n="intro_zh_title">滴水龙雨</h3>
+              <p data-i18n-html="intro_zh_body">
                 生于滴水沿，现居滴水湖。<br />
                 生肖属龙，生时逢雨。<br />
                 半导体行业从业十二年，<br />
@@ -75,7 +86,7 @@
         </article>
 
         <article class="card quote-card">
-          <p class="quote-label">今日诗句</p>
+          <p class="quote-label" data-i18n="quote_label">今日诗句</p>
           <p id="hero-poem-text" class="quote-text"></p>
           <p id="hero-poem-source" class="quote-source"></p>
         </article>
@@ -84,14 +95,14 @@
       <section class="content-grid">
         <article id="poetry" class="card module-card span-6 reveal">
           <div class="card-head">
-            <h2>诗情雨意</h2>
+            <h2 data-i18n="card_poetry">诗情雨意</h2>
           </div>
           <div id="poetry-library" class="poetry-library"></div>
         </article>
 
         <article id="apps" class="card module-card span-6 reveal">
           <div class="card-head">
-            <h2>数码雨饭</h2>
+            <h2 data-i18n="card_apps">数码雨饭</h2>
             <a href="https://github.com/LarryHu1988?tab=repositories" target="_blank" rel="noreferrer"
               >GitHub</a
             >
@@ -101,15 +112,15 @@
 
         <article id="sports" class="card module-card span-6 reveal">
           <div class="card-head">
-            <h2>体育风雨</h2>
+            <h2 data-i18n="card_sports">体育风雨</h2>
           </div>
           <div class="sports-columns">
             <section class="sports-block">
-              <h3>巴萨赛程</h3>
+              <h3 data-i18n="sports_barca">巴萨赛程</h3>
               <div id="barca-schedule" class="schedule-list"></div>
             </section>
             <section class="sports-block">
-              <h3>梅西赛程</h3>
+              <h3 data-i18n="sports_messi">梅西赛程</h3>
               <div id="messi-schedule" class="schedule-list"></div>
             </section>
           </div>
@@ -117,26 +128,44 @@
 
         <article id="insight" class="card module-card span-3 reveal">
           <div class="card-head">
-            <h2>世说心雨</h2>
+            <h2 data-i18n="card_insight">世说心雨</h2>
           </div>
           <div class="placeholder-body">
-            <p>内容待定</p>
+            <p data-i18n="placeholder_todo">内容待定</p>
           </div>
         </article>
 
         <article id="notes" class="card module-card span-3 reveal">
           <div class="card-head">
-            <h2>胡言乱雨</h2>
+            <h2 data-i18n="card_notes">胡言乱雨</h2>
           </div>
           <div class="placeholder-body">
-            <p>内容待定</p>
+            <p data-i18n="placeholder_todo">内容待定</p>
+          </div>
+        </article>
+
+        <article id="melody" class="card module-card span-3 reveal">
+          <div class="card-head">
+            <h2 data-i18n="card_melody">如雨如歌</h2>
+          </div>
+          <div class="placeholder-body">
+            <p data-i18n="placeholder_todo">内容待定</p>
+          </div>
+        </article>
+
+        <article id="cinema" class="card module-card span-3 reveal">
+          <div class="card-head">
+            <h2 data-i18n="card_cinema">观影雨感</h2>
+          </div>
+          <div class="placeholder-body">
+            <p data-i18n="placeholder_todo">内容待定</p>
           </div>
         </article>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="year"></span> 滴水龙雨工作室 · Larry Studio</p>
+      <p>© <span id="year"></span> <span data-i18n="footer_brand">滴水龙雨工作室</span> · Larry Studio</p>
     </footer>
 
     <div id="poem-modal" class="poem-modal" aria-hidden="true">
@@ -149,7 +178,7 @@
       <article class="poem-modal-card" role="dialog" aria-modal="true" aria-labelledby="poem-modal-title">
         <div class="poem-modal-head">
           <h3 id="poem-modal-title" class="poem-modal-title">诗歌标题</h3>
-          <button id="poem-modal-close" class="poem-modal-close" type="button" aria-label="关闭">关闭</button>
+          <button id="poem-modal-close" class="poem-modal-close" type="button" aria-label="关闭" data-i18n="close">关闭</button>
         </div>
         <p id="poem-modal-meta" class="poem-modal-meta">作者</p>
         <pre id="poem-modal-body" class="poem-modal-body"></pre>
