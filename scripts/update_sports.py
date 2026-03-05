@@ -42,6 +42,7 @@ def normalize_fixture(item: Dict[str, Any], team_id: int) -> Dict[str, Any] | No
     is_home = home_id == team_id
 
     opponent = away.get("name") if is_home else home.get("name")
+    opponent_logo = away.get("logo") if is_home else home.get("logo")
     if not opponent:
         return None
 
@@ -52,6 +53,7 @@ def normalize_fixture(item: Dict[str, Any], team_id: int) -> Dict[str, Any] | No
     return {
         "date": fixture_date,
         "opponent": opponent,
+        "opponent_logo": opponent_logo or "",
         "league": league_display,
         "is_home": bool(is_home),
     }

@@ -585,7 +585,7 @@ main {
 .sports-block {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(249, 252, 255, 0.92);
   padding: 0.7rem;
   display: flex;
   flex-direction: column;
@@ -594,35 +594,131 @@ main {
 
 .sports-block h3 {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #355781;
 }
 
 .schedule-list {
-  margin-top: 0.55rem;
-  display: grid;
-  gap: 0.5rem;
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.48rem;
 }
 
 .match-item {
-  border: 1px solid var(--line);
-  border-radius: 0.78rem;
+  border: 1px solid #dbe5f3;
+  border-radius: 0.84rem;
   background: #fff;
-  padding: 0.52rem 0.56rem;
+  padding: 0.56rem 0.6rem;
+  box-shadow: 0 4px 12px rgba(28, 66, 112, 0.06);
 }
 
-.match-item p {
+.match-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.42rem;
+}
+
+.match-league,
+.match-day,
+.match-kickoff {
   margin: 0;
 }
 
-.match-main {
-  font-size: 0.84rem;
-  color: #274b73;
+.match-league {
+  font-size: 0.68rem;
+  color: #6a7f9a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.match-meta {
-  margin-top: 0.2rem;
+.match-day {
   font-size: 0.76rem;
-  color: var(--muted);
+  color: #6a7f9a;
+  flex-shrink: 0;
+}
+
+.match-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.62rem;
+}
+
+.match-teamline {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  min-width: 0;
+}
+
+.match-logo,
+.match-logo-fallback {
+  width: 1.12rem;
+  height: 1.12rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.match-logo {
+  object-fit: cover;
+  border: 1px solid #dbe5f3;
+  background: #fff;
+}
+
+.match-logo-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.67rem;
+  font-weight: 700;
+  color: #3c5f86;
+  border: 1px solid #dbe5f3;
+  background: #eef4fc;
+}
+
+.match-venue {
+  min-width: 1.42rem;
+  text-align: center;
+  font-size: 0.69rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.1rem 0.26rem;
+  flex-shrink: 0;
+}
+
+.match-venue.is-home {
+  color: #0f7d3d;
+  background: rgba(16, 185, 129, 0.17);
+}
+
+.match-venue.is-away {
+  color: #225fa5;
+  background: rgba(37, 132, 220, 0.14);
+}
+
+.match-opponent {
+  font-size: 0.85rem;
+  color: #1f3b5e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.match-kickoff {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #10283f;
+  font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
 }
 
 .placeholder-body {
