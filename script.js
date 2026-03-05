@@ -1,44 +1,10 @@
 const menuBtn = document.querySelector('.menu-toggle')
 const navLinks = document.querySelector('.nav-links')
-
-if (menuBtn && navLinks) {
-  menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('open')
-  })
-
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'))
-  })
-
-  document.addEventListener('click', (event) => {
-    const clickInsideMenu = navLinks.contains(event.target)
-    const clickMenuBtn = menuBtn.contains(event.target)
-
-    if (!clickInsideMenu && !clickMenuBtn) {
-      navLinks.classList.remove('open')
-    }
-  })
-}
+const langButtons = document.querySelectorAll('.lang-btn')
+const i18nTextNodes = document.querySelectorAll('[data-i18n]')
+const i18nHtmlNodes = document.querySelectorAll('[data-i18n-html]')
 
 const yearNode = document.getElementById('year')
-if (yearNode) {
-  yearNode.textContent = String(new Date().getFullYear())
-}
-
-const revealItems = document.querySelectorAll('.reveal')
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-      }
-    })
-  },
-  { threshold: 0.16 }
-)
-
-revealItems.forEach((item) => observer.observe(item))
-
 const poemLibraryRaw = Array.isArray(window.POEM_LIBRARY) ? window.POEM_LIBRARY : []
 const poetryLibraryNode = document.getElementById('poetry-library')
 const heroPoemTextNode = document.getElementById('hero-poem-text')
@@ -52,21 +18,114 @@ const poemModalBodyNode = document.getElementById('poem-modal-body')
 const githubProjectsNode = document.getElementById('github-projects')
 
 const GITHUB_USERNAME = 'LarryHu1988'
+const LANG_STORAGE_KEY = 'larry-site-lang'
+const DEFAULT_LANG = 'zh-Hans'
 const POEM_COVER_THEMES = ['theme-a', 'theme-b', 'theme-c', 'theme-d']
 const SPORTS_TARGETS = [
   {
     containerId: 'barca-schedule',
     league: 'esp.1',
     teamId: '83',
-    fallback: '巴萨赛程加载失败，请稍后刷新。'
+    fallbackKey: 'sports_fallback_barca'
   },
   {
     containerId: 'messi-schedule',
     league: 'usa.1',
     teamId: '20232',
-    fallback: '梅西赛程加载失败，请稍后刷新。'
+    fallbackKey: 'sports_fallback_messi'
   }
 ]
+
+const I18N = {
+  'zh-Hans': {
+    menu: '菜单',
+    nav_poetry: '诗情雨意',
+    nav_apps: '数码雨饭',
+    nav_sports: '体育风雨',
+    nav_insight: '世说心雨',
+    nav_notes: '胡言乱雨',
+    nav_melody: '如雨如歌',
+    nav_cinema: '观影雨感',
+    studio_zh_main: '滴水龙雨',
+    studio_zh_sub: '工作室',
+    intro_zh_title: '滴水龙雨',
+    intro_zh_body:
+      '生于滴水沿，现居滴水湖。<br />生肖属龙，生时逢雨。<br />半导体行业从业十二年，<br />从产品工程到工艺整合。<br />追梅西，忠巴萨，念科比。<br />看读库，读新诗，写小诗。<br />玩实况，打黑猴，码APP。',
+    quote_label: '今日诗句',
+    card_poetry: '诗情雨意',
+    card_apps: '数码雨饭',
+    card_sports: '体育风雨',
+    sports_barca: '巴萨赛程',
+    sports_messi: '梅西赛程',
+    card_insight: '世说心雨',
+    card_notes: '胡言乱雨',
+    card_melody: '如雨如歌',
+    card_cinema: '观影雨感',
+    placeholder_todo: '内容待定',
+    footer_brand: '滴水龙雨工作室',
+    close: '关闭',
+    poetry_empty: '诗歌暂未公开。',
+    poem_open_label: '打开诗歌《{title}》',
+    hero_fallback_text: '“诗歌正在生长。”',
+    hero_fallback_source: '龙雨',
+    project_no_desc: '暂无项目描述。',
+    project_view_repo: '查看仓库',
+    project_empty: '暂时没有可展示的项目。',
+    project_updated_prefix: '更新',
+    sports_fallback_barca: '巴萨赛程加载失败，请稍后刷新。',
+    sports_fallback_messi: '梅西赛程加载失败，请稍后刷新。',
+    sports_time_pending: '时间待定',
+    sports_match_generic: '比赛',
+    sports_opponent: '对手',
+    sports_home_vs: '主场 vs',
+    sports_away_at: '客场 @',
+    sports_league_fallback: '足球赛事'
+  },
+  'zh-Hant': {
+    menu: '選單',
+    nav_poetry: '詩情雨意',
+    nav_apps: '數碼雨飯',
+    nav_sports: '體育風雨',
+    nav_insight: '世說心雨',
+    nav_notes: '胡言亂雨',
+    nav_melody: '如雨如歌',
+    nav_cinema: '觀影雨感',
+    studio_zh_main: '滴水龍雨',
+    studio_zh_sub: '工作室',
+    intro_zh_title: '滴水龍雨',
+    intro_zh_body:
+      '生於滴水沿，現居滴水湖。<br />生肖屬龍，生時逢雨。<br />半導體行業從業十二年，<br />從產品工程到工藝整合。<br />追梅西，忠巴薩，念科比。<br />看讀庫，讀新詩，寫小詩。<br />玩實況，打黑猴，碼APP。',
+    quote_label: '今日詩句',
+    card_poetry: '詩情雨意',
+    card_apps: '數碼雨飯',
+    card_sports: '體育風雨',
+    sports_barca: '巴薩賽程',
+    sports_messi: '梅西賽程',
+    card_insight: '世說心雨',
+    card_notes: '胡言亂雨',
+    card_melody: '如雨如歌',
+    card_cinema: '觀影雨感',
+    placeholder_todo: '內容待定',
+    footer_brand: '滴水龍雨工作室',
+    close: '關閉',
+    poetry_empty: '詩歌暫未公開。',
+    poem_open_label: '打開詩歌《{title}》',
+    hero_fallback_text: '“詩歌正在生長。”',
+    hero_fallback_source: '龍雨',
+    project_no_desc: '暫無專案描述。',
+    project_view_repo: '查看倉庫',
+    project_empty: '暫時沒有可展示的專案。',
+    project_updated_prefix: '更新',
+    sports_fallback_barca: '巴薩賽程載入失敗，請稍後重新整理。',
+    sports_fallback_messi: '梅西賽程載入失敗，請稍後重新整理。',
+    sports_time_pending: '時間待定',
+    sports_match_generic: '比賽',
+    sports_opponent: '對手',
+    sports_home_vs: '主場 vs',
+    sports_away_at: '客場 @',
+    sports_league_fallback: '足球賽事'
+  }
+}
 
 const PROJECT_FALLBACK = [
   {
@@ -87,73 +146,89 @@ const PROJECT_FALLBACK = [
   }
 ]
 
+let currentLang = loadStoredLanguage()
 let normalizedPoems = []
+let quoteIntervalId = null
+let latestProjects = []
 
-function accentRainCharacters(rootNode) {
-  if (!rootNode) {
-    return
+function t(key) {
+  const table = I18N[currentLang] || I18N[DEFAULT_LANG]
+  return table[key] || I18N[DEFAULT_LANG][key] || ''
+}
+
+function formatTemplate(template, vars = {}) {
+  return String(template).replace(/\{(\w+)\}/g, (_, key) => (key in vars ? String(vars[key]) : ''))
+}
+
+function getLocale() {
+  return currentLang === 'zh-Hant' ? 'zh-HK' : 'zh-CN'
+}
+
+function loadStoredLanguage() {
+  try {
+    const stored = window.localStorage.getItem(LANG_STORAGE_KEY)
+    if (stored === 'zh-Hans' || stored === 'zh-Hant') {
+      return stored
+    }
+  } catch (_error) {
+    return DEFAULT_LANG
   }
 
-  const walker = document.createTreeWalker(
-    rootNode,
-    NodeFilter.SHOW_TEXT,
-    {
-      acceptNode(node) {
-        if (!node.nodeValue || !node.nodeValue.includes('雨')) {
-          return NodeFilter.FILTER_REJECT
-        }
+  return DEFAULT_LANG
+}
 
-        const parent = node.parentNode
-        if (!parent) {
-          return NodeFilter.FILTER_REJECT
-        }
-
-        if (parent.nodeType === Node.ELEMENT_NODE && parent.classList.contains('rain-char')) {
-          return NodeFilter.FILTER_REJECT
-        }
-
-        const tagName = parent.nodeName
-        if (tagName === 'SCRIPT' || tagName === 'STYLE' || tagName === 'NOSCRIPT') {
-          return NodeFilter.FILTER_REJECT
-        }
-
-        return NodeFilter.FILTER_ACCEPT
-      }
-    },
-    false
-  )
-
-  const textNodes = []
-  while (walker.nextNode()) {
-    textNodes.push(walker.currentNode)
+function saveLanguage(lang) {
+  try {
+    window.localStorage.setItem(LANG_STORAGE_KEY, lang)
+  } catch (_error) {
+    // ignore storage failures
   }
+}
 
-  textNodes.forEach((node) => {
-    const content = node.nodeValue
-    if (!content || !content.includes('雨')) {
+function applyLanguage(lang, shouldRefresh = true) {
+  currentLang = lang === 'zh-Hant' ? 'zh-Hant' : 'zh-Hans'
+
+  document.documentElement.lang = currentLang === 'zh-Hant' ? 'zh-Hant' : 'zh-CN'
+
+  i18nTextNodes.forEach((node) => {
+    const key = node.dataset.i18n
+    if (!key) {
       return
     }
 
-    const parts = content.split('雨')
-    const fragment = document.createDocumentFragment()
-
-    parts.forEach((part, index) => {
-      if (part.length > 0) {
-        fragment.append(document.createTextNode(part))
-      }
-
-      if (index < parts.length - 1) {
-        const marker = document.createElement('span')
-        marker.className = 'rain-char'
-        marker.textContent = '雨'
-        fragment.append(marker)
-      }
-    })
-
-    if (node.parentNode) {
-      node.parentNode.replaceChild(fragment, node)
-    }
+    node.textContent = t(key)
   })
+
+  i18nHtmlNodes.forEach((node) => {
+    const key = node.dataset.i18nHtml
+    if (!key) {
+      return
+    }
+
+    node.innerHTML = t(key)
+  })
+
+  if (menuBtn) {
+    menuBtn.setAttribute('aria-label', t('menu'))
+  }
+
+  if (poemModalCloseNode) {
+    poemModalCloseNode.setAttribute('aria-label', t('close'))
+  }
+
+  langButtons.forEach((button) => {
+    const langValue = button.dataset.lang
+    button.classList.toggle('active', langValue === currentLang)
+  })
+
+  saveLanguage(currentLang)
+
+  if (shouldRefresh) {
+    renderPoetryLibrary(normalizedPoems)
+    startHeroQuoteRotation(normalizedPoems)
+    renderGitHubProjects(latestProjects)
+    SPORTS_TARGETS.forEach((target) => loadTeamSchedule(target))
+  }
 }
 
 function normalizeText(value) {
@@ -198,7 +273,7 @@ function createPoemCover(poem, index) {
   button.type = 'button'
   button.className = `poem-cover ${POEM_COVER_THEMES[index % POEM_COVER_THEMES.length]}`
   button.dataset.poemIndex = String(index)
-  button.setAttribute('aria-label', `打开诗歌《${poem.title}》`)
+  button.setAttribute('aria-label', formatTemplate(t('poem_open_label'), { title: poem.title }))
 
   const inner = document.createElement('div')
   inner.className = 'poem-cover-inner'
@@ -231,7 +306,7 @@ function renderPoetryLibrary(poems) {
   if (poems.length === 0) {
     const empty = document.createElement('p')
     empty.className = 'project-empty'
-    empty.textContent = '诗歌暂未公开。'
+    empty.textContent = t('poetry_empty')
     poetryLibraryNode.append(empty)
     return
   }
@@ -239,8 +314,6 @@ function renderPoetryLibrary(poems) {
   poems.forEach((poem, index) => {
     poetryLibraryNode.append(createPoemCover(poem, index))
   })
-
-  accentRainCharacters(poetryLibraryNode)
 }
 
 function openPoemModal(index) {
@@ -256,9 +329,6 @@ function openPoemModal(index) {
   poemModalTitleNode.textContent = `《${poem.title}》`
   poemModalMetaNode.textContent = getPoemMeta(poem)
   poemModalBodyNode.textContent = poem.content
-  accentRainCharacters(poemModalTitleNode)
-  accentRainCharacters(poemModalMetaNode)
-  accentRainCharacters(poemModalBodyNode)
 
   poemModalNode.classList.add('open')
   poemModalNode.setAttribute('aria-hidden', 'false')
@@ -327,8 +397,6 @@ function paintHeroQuote(quote, animate = true) {
   if (!animate) {
     heroPoemTextNode.textContent = `“${quote.text}”`
     heroPoemSourceNode.textContent = quote.source
-    accentRainCharacters(heroPoemTextNode)
-    accentRainCharacters(heroPoemSourceNode)
     return
   }
 
@@ -338,8 +406,6 @@ function paintHeroQuote(quote, animate = true) {
   window.setTimeout(() => {
     heroPoemTextNode.textContent = `“${quote.text}”`
     heroPoemSourceNode.textContent = quote.source
-    accentRainCharacters(heroPoemTextNode)
-    accentRainCharacters(heroPoemSourceNode)
     heroPoemTextNode.classList.remove('is-switching')
     heroPoemSourceNode.classList.remove('is-switching')
   }, 160)
@@ -356,13 +422,16 @@ function startHeroQuoteRotation(poems) {
     return
   }
 
+  if (quoteIntervalId) {
+    window.clearInterval(quoteIntervalId)
+    quoteIntervalId = null
+  }
+
   const quotePool = buildQuotePool(poems)
 
   if (quotePool.length === 0) {
-    heroPoemTextNode.textContent = '“诗歌正在生长。”'
-    heroPoemSourceNode.textContent = '龙雨'
-    accentRainCharacters(heroPoemTextNode)
-    accentRainCharacters(heroPoemSourceNode)
+    heroPoemTextNode.textContent = t('hero_fallback_text')
+    heroPoemSourceNode.textContent = t('hero_fallback_source')
     return
   }
 
@@ -373,7 +442,7 @@ function startHeroQuoteRotation(poems) {
     return
   }
 
-  window.setInterval(() => {
+  quoteIntervalId = window.setInterval(() => {
     if (document.hidden) {
       return
     }
@@ -393,7 +462,7 @@ function formatDate(isoTime) {
     return ''
   }
 
-  return date.toLocaleDateString('zh-CN', {
+  return date.toLocaleDateString(getLocale(), {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit'
@@ -416,7 +485,7 @@ function createProjectCard(project) {
 
   const desc = document.createElement('p')
   desc.className = 'project-desc'
-  desc.textContent = normalizeText(project.description) || '暂无项目描述。'
+  desc.textContent = normalizeText(project.description) || t('project_no_desc')
 
   const meta = document.createElement('div')
   meta.className = 'project-meta'
@@ -434,7 +503,7 @@ function createProjectCard(project) {
   const updated = formatDate(project.updated_at)
   if (updated) {
     const date = document.createElement('span')
-    date.textContent = `更新 ${updated}`
+    date.textContent = `${t('project_updated_prefix')} ${updated}`
     meta.append(date)
   }
 
@@ -443,7 +512,7 @@ function createProjectCard(project) {
   link.href = project.html_url
   link.target = '_blank'
   link.rel = 'noreferrer'
-  link.textContent = '查看仓库'
+  link.textContent = t('project_view_repo')
 
   card.append(title, desc, meta, link)
   return card
@@ -459,13 +528,12 @@ function renderGitHubProjects(projects) {
   if (!Array.isArray(projects) || projects.length === 0) {
     const empty = document.createElement('p')
     empty.className = 'project-empty'
-    empty.textContent = '暂时没有可展示的项目。'
+    empty.textContent = t('project_empty')
     githubProjectsNode.append(empty)
     return
   }
 
   projects.forEach((project) => githubProjectsNode.append(createProjectCard(project)))
-  accentRainCharacters(githubProjectsNode)
 }
 
 async function loadGitHubProjects() {
@@ -485,14 +553,15 @@ async function loadGitHubProjects() {
 
     const repos = await response.json()
 
-    const projects = repos
+    latestProjects = repos
       .filter((repo) => !repo.fork)
       .filter((repo) => !repo.archived)
       .filter((repo) => repo.name !== `${GITHUB_USERNAME}.github.io`)
       .slice(0, 8)
 
-    renderGitHubProjects(projects.length > 0 ? projects : PROJECT_FALLBACK)
+    renderGitHubProjects(latestProjects.length > 0 ? latestProjects : PROJECT_FALLBACK)
   } catch (_error) {
+    latestProjects = PROJECT_FALLBACK
     renderGitHubProjects(PROJECT_FALLBACK)
   }
 }
@@ -501,10 +570,10 @@ function formatMatchDateTime(isoTime) {
   const date = new Date(isoTime)
 
   if (Number.isNaN(date.getTime())) {
-    return '时间待定'
+    return t('sports_time_pending')
   }
 
-  return date.toLocaleString('zh-CN', {
+  return date.toLocaleString(getLocale(), {
     month: '2-digit',
     day: '2-digit',
     hour: '2-digit',
@@ -527,7 +596,7 @@ function describeMatch(event, teamId) {
 
   if (competitors.length === 0) {
     return {
-      main: event.shortName || event.name || '比赛',
+      main: event.shortName || event.name || t('sports_match_generic'),
       meta: formatMatchDateTime(event.date)
     }
   }
@@ -539,10 +608,10 @@ function describeMatch(event, teamId) {
     opponent?.team?.displayName ||
     opponent?.team?.shortDisplayName ||
     opponent?.team?.name ||
-    '对手'
+    t('sports_opponent')
 
-  const side = me?.homeAway === 'home' ? '主场 vs' : '客场 @'
-  const leagueName = competition?.league?.name || event.season?.displayName || '足球赛事'
+  const side = me?.homeAway === 'home' ? t('sports_home_vs') : t('sports_away_at')
+  const leagueName = competition?.league?.name || event.season?.displayName || t('sports_league_fallback')
   const dateText = formatMatchDateTime(event.date)
 
   return {
@@ -583,8 +652,6 @@ function renderScheduleList(container, events, teamId, fallbackText) {
     item.append(main, meta)
     container.append(item)
   })
-
-  accentRainCharacters(container)
 }
 
 function pickUpcomingEvents(events) {
@@ -620,16 +687,60 @@ async function loadTeamSchedule(target) {
 
     const data = await response.json()
     const events = pickUpcomingEvents(data.events)
-    renderScheduleList(container, events, target.teamId, target.fallback)
+    renderScheduleList(container, events, target.teamId, t(target.fallbackKey))
   } catch (_error) {
-    renderScheduleList(container, [], target.teamId, target.fallback)
+    renderScheduleList(container, [], target.teamId, t(target.fallbackKey))
   }
 }
 
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('open')
+  })
+
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'))
+  })
+
+  document.addEventListener('click', (event) => {
+    const clickInsideMenu = navLinks.contains(event.target)
+    const clickMenuBtn = menuBtn.contains(event.target)
+
+    if (!clickInsideMenu && !clickMenuBtn) {
+      navLinks.classList.remove('open')
+    }
+  })
+}
+
+if (yearNode) {
+  yearNode.textContent = String(new Date().getFullYear())
+}
+
+const revealItems = document.querySelectorAll('.reveal')
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible')
+      }
+    })
+  },
+  { threshold: 0.16 }
+)
+
+revealItems.forEach((item) => observer.observe(item))
+
+langButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const lang = button.dataset.lang
+    applyLanguage(lang, true)
+  })
+})
+
 normalizedPoems = poemLibraryRaw.map((poem) => normalizePoem(poem)).filter((poem) => poem !== null)
+applyLanguage(currentLang, false)
 renderPoetryLibrary(normalizedPoems)
 bindPoemModalEvents()
 startHeroQuoteRotation(normalizedPoems)
 loadGitHubProjects()
 SPORTS_TARGETS.forEach((target) => loadTeamSchedule(target))
-accentRainCharacters(document.body)
