@@ -89,6 +89,73 @@ const PROJECT_FALLBACK = [
 
 let normalizedPoems = []
 
+function accentRainCharacters(rootNode) {
+  if (!rootNode) {
+    return
+  }
+
+  const walker = document.createTreeWalker(
+    rootNode,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode(node) {
+        if (!node.nodeValue || !node.nodeValue.includes('雨')) {
+          return NodeFilter.FILTER_REJECT
+        }
+
+        const parent = node.parentNode
+        if (!parent) {
+          return NodeFilter.FILTER_REJECT
+        }
+
+        if (parent.nodeType === Node.ELEMENT_NODE && parent.classList.contains('rain-char')) {
+          return NodeFilter.FILTER_REJECT
+        }
+
+        const tagName = parent.nodeName
+        if (tagName === 'SCRIPT' || tagName === 'STYLE' || tagName === 'NOSCRIPT') {
+          return NodeFilter.FILTER_REJECT
+        }
+
+        return NodeFilter.FILTER_ACCEPT
+      }
+    },
+    false
+  )
+
+  const textNodes = []
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode)
+  }
+
+  textNodes.forEach((node) => {
+    const content = node.nodeValue
+    if (!content || !content.includes('雨')) {
+      return
+    }
+
+    const parts = content.split('雨')
+    const fragment = document.createDocumentFragment()
+
+    parts.forEach((part, index) => {
+      if (part.length > 0) {
+        fragment.append(document.createTextNode(part))
+      }
+
+      if (index < parts.length - 1) {
+        const marker = document.createElement('span')
+        marker.className = 'rain-char'
+        marker.textContent = '雨'
+        fragment.append(marker)
+      }
+    })
+
+    if (node.parentNode) {
+      node.parentNode.replaceChild(fragment, node)
+    }
+  })
+}
+
 function normalizeText(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
@@ -172,6 +239,8 @@ function renderPoetryLibrary(poems) {
   poems.forEach((poem, index) => {
     poetryLibraryNode.append(createPoemCover(poem, index))
   })
+
+  accentRainCharacters(poetryLibraryNode)
 }
 
 function openPoemModal(index) {
@@ -187,6 +256,9 @@ function openPoemModal(index) {
   poemModalTitleNode.textContent = `《${poem.title}》`
   poemModalMetaNode.textContent = getPoemMeta(poem)
   poemModalBodyNode.textContent = poem.content
+  accentRainCharacters(poemModalTitleNode)
+  accentRainCharacters(poemModalMetaNode)
+  accentRainCharacters(poemModalBodyNode)
 
   poemModalNode.classList.add('open')
   poemModalNode.setAttribute('aria-hidden', 'false')
@@ -255,6 +327,8 @@ function paintHeroQuote(quote, animate = true) {
   if (!animate) {
     heroPoemTextNode.textContent = `“${quote.text}”`
     heroPoemSourceNode.textContent = quote.source
+    accentRainCharacters(heroPoemTextNode)
+    accentRainCharacters(heroPoemSourceNode)
     return
   }
 
@@ -264,6 +338,8 @@ function paintHeroQuote(quote, animate = true) {
   window.setTimeout(() => {
     heroPoemTextNode.textContent = `“${quote.text}”`
     heroPoemSourceNode.textContent = quote.source
+    accentRainCharacters(heroPoemTextNode)
+    accentRainCharacters(heroPoemSourceNode)
     heroPoemTextNode.classList.remove('is-switching')
     heroPoemSourceNode.classList.remove('is-switching')
   }, 160)
@@ -285,6 +361,8 @@ function startHeroQuoteRotation(poems) {
   if (quotePool.length === 0) {
     heroPoemTextNode.textContent = '“诗歌正在生长。”'
     heroPoemSourceNode.textContent = '龙雨'
+    accentRainCharacters(heroPoemTextNode)
+    accentRainCharacters(heroPoemSourceNode)
     return
   }
 
@@ -387,6 +465,7 @@ function renderGitHubProjects(projects) {
   }
 
   projects.forEach((project) => githubProjectsNode.append(createProjectCard(project)))
+  accentRainCharacters(githubProjectsNode)
 }
 
 async function loadGitHubProjects() {
@@ -504,6 +583,8 @@ function renderScheduleList(container, events, teamId, fallbackText) {
     item.append(main, meta)
     container.append(item)
   })
+
+  accentRainCharacters(container)
 }
 
 function pickUpcomingEvents(events) {
@@ -551,3 +632,4 @@ bindPoemModalEvents()
 startHeroQuoteRotation(normalizedPoems)
 loadGitHubProjects()
 SPORTS_TARGETS.forEach((target) => loadTeamSchedule(target))
+accentRainCharacters(document.body)
