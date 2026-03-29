@@ -36,7 +36,7 @@
   Messi follower, Barça culer, Kobe in memory.
 - 📚✍️ 看读库，读新诗，写小诗。  
   A Duku reader and Chinese poetry enthusiast.
-- 🎮💻 玩实况，打黑猴，码 APP。  
+- 🎮💻 踢实况，打黑猴，码 APP。  
   A gamer of eFootball and Black Myth, and an independent app developer.
 
 ## 🌐 Online
