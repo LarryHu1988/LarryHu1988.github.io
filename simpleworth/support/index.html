@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SimpleWorth（简值）技术支持、常见问题与联系方法。"
+    />
+    <link rel="canonical" href="https://larryhu.com/simpleworth/support/" />
+    <link rel="stylesheet" href="../legal.css" />
+    <title>技术支持 | SimpleWorth 简值</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/">Larry Studio</a>
+        <nav class="header-nav" aria-label="页面导航">
+          <a href="/simpleworth/privacy/">隐私政策</a>
+          <a href="#english">English</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <aside class="sidebar">
+        <p class="eyebrow">SimpleWorth 简值</p>
+        <p class="sidebar-title">技术支持</p>
+        <ul class="section-nav">
+          <li><a href="#contact">联系支持</a></li>
+          <li><a href="#icloud">iCloud</a></li>
+          <li><a href="#rates">汇率</a></li>
+          <li><a href="#backup">备份恢复</a></li>
+          <li><a href="#english">English</a></li>
+        </ul>
+      </aside>
+
+      <article class="document">
+        <header class="document-header">
+          <p class="eyebrow">SimpleWorth Support</p>
+          <h1>技术支持</h1>
+          <p class="lede">
+            遇到同步、备份、汇率或记录问题时，可以先查看下面的排查方法，也可以直接联系作者。
+          </p>
+          <p class="updated">支持版本：SimpleWorth V0.7.15 及以后版本</p>
+        </header>
+
+        <section id="contact" class="document-section">
+          <h2>联系支持</h2>
+          <p>
+            请发送邮件至
+            <a href="mailto:simpleworth@larryhu.com">simpleworth@larryhu.com</a>。为了更快定位问题，
+            建议附上 App 版本、iPhone 或 iPad 型号、iOS 版本、操作步骤及必要的截图。
+          </p>
+          <div class="callout">
+            <strong>请保护账单隐私</strong>
+            截图前可遮挡金额、备注、标签或其他敏感内容。除非排查确有需要，请不要发送完整备份文件。
+          </div>
+        </section>
+
+        <section id="icloud" class="document-section">
+          <h2>iCloud 自动备份无法开启</h2>
+          <ul>
+            <li>确认设备已经登录 Apple 账号，并在系统设置中开启 iCloud Drive。</li>
+            <li>确认 SimpleWorth 可以使用 iCloud；受管理设备可能由组织限制此能力。</li>
+            <li>切换到稳定网络后重新打开 App，再进入“设置 → iCloud 同步”。</li>
+            <li>开启后，App 会在本机与 iCloud 中各保存一份新备份，不会改变现有账单。</li>
+          </ul>
+        </section>
+
+        <section id="rates" class="document-section">
+          <h2>汇率没有更新</h2>
+          <p>
+            汇率由 ExchangeRate-API 提供，需要网络连接。请进入“货币选择”并点“刷新”。若服务暂时不可用，
+            App 会继续使用已缓存汇率；稍后重试即可。公开汇率仅用于记账折算参考，不适合外汇交易或结算。
+          </p>
+        </section>
+
+        <section id="backup" class="document-section">
+          <h2>备份、恢复与导入</h2>
+          <ul>
+            <li>“立即备份”会生成新的 JSON 备份；开启 iCloud 后会同时复制到 iCloud Drive。</li>
+            <li>恢复备份会覆盖当前设备上的账单、标签、目标和存入记录，请先备份当前内容。</li>
+            <li>导入文件时，请保持原始列名与日期、金额格式，避免重复导入同一份账单。</li>
+            <li>如果备份记录无法读取，请保留原文件并联系支持，不要反复覆盖它。</li>
+          </ul>
+        </section>
+
+        <section class="document-section">
+          <h2>隐私与数据</h2>
+          <p>
+            SimpleWorth 默认把账单数据保存在设备上。关于 iCloud、汇率请求和数据删除的完整说明，请查看
+            <a href="/simpleworth/privacy/">SimpleWorth 隐私政策</a>。
+          </p>
+          <a class="support-link" href="mailto:simpleworth@larryhu.com">发送支持邮件</a>
+        </section>
+
+        <section id="english" class="document-section english" lang="en">
+          <h2>Support in English</h2>
+          <p>
+            Contact <a href="mailto:simpleworth@larryhu.com">simpleworth@larryhu.com</a> and include
+            the app version, device model, iOS version, reproduction steps, and a redacted screenshot
+            when useful.
+          </p>
+          <p>
+            For iCloud backup issues, confirm that you are signed in to an Apple Account, iCloud Drive
+            is enabled, SimpleWorth has iCloud access, and the network is available. Restoring a backup
+            replaces current ledger data, so create a fresh backup first.
+          </p>
+          <p>
+            Exchange rates require a network connection and are supplied by ExchangeRate-API. If a
+            refresh fails, SimpleWorth continues to use the cached rates and you can retry later.
+            Rates are indicative and are not intended for trading or settlement.
+          </p>
+          <p>
+            Please read the <a href="/simpleworth/privacy/">SimpleWorth Privacy Policy</a> for details
+            about local storage, iCloud backups, network requests, and deletion controls.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">© 2026 Larry Studio · SimpleWorth</footer>
+  </body>
+</html>
