@@ -528,22 +528,49 @@ function createProjectCard(project) {
   return card
 }
 
+function createSimpleWorthCard() {
+  const traditional = currentLang === 'zh-Hant'
+  const card = document.createElement('article')
+  card.className = 'project-card'
+  const title = document.createElement('h3')
+  title.className = 'project-title'
+  const intro = document.createElement('a')
+  intro.href = '/simpleworth/'
+  intro.textContent = traditional ? 'SimpleWorth · 簡值' : 'SimpleWorth · 简值'
+  title.append(intro)
+  const description = document.createElement('p')
+  description.className = 'project-desc'
+  description.textContent = traditional
+    ? '記得簡單，心裡有數。清透輕盈的日常記帳與儲蓄目標 App。'
+    : '记得简单，心里有数。清透轻盈的日常记账与储蓄目标 App。'
+  const meta = document.createElement('div')
+  meta.className = 'project-meta'
+  meta.textContent = traditional ? '1.0 · iPhone / iPad · 免費無廣告' : '1.0 · iPhone / iPad · 免费无广告'
+  const download = document.createElement('a')
+  download.className = 'project-link'
+  download.href = 'https://apps.apple.com/app/id6761478113'
+  download.textContent = traditional ? 'App Store 下載 ↗' : 'App Store 下载 ↗'
+  const details = document.createElement('a')
+  details.className = 'project-link'
+  details.href = '/simpleworth/'
+  details.textContent = traditional ? '產品介紹 ↗' : '产品介绍 ↗'
+  card.append(title, description, meta, download, document.createTextNode(' · '), details)
+  return card
+}
+
 function renderGitHubProjects(projects) {
   if (!githubProjectsNode) {
     return
   }
 
   githubProjectsNode.innerHTML = ''
+  githubProjectsNode.append(createSimpleWorthCard())
 
   if (!Array.isArray(projects) || projects.length === 0) {
-    const empty = document.createElement('p')
-    empty.className = 'project-empty'
-    empty.textContent = t('project_empty')
-    githubProjectsNode.append(empty)
     return
   }
 
-  projects.forEach((project) => githubProjectsNode.append(createProjectCard(project)))
+  projects.filter((project) => project.name !== 'SimpleWorth').forEach((project) => githubProjectsNode.append(createProjectCard(project)))
 }
 
 async function loadGitHubProjects() {

@@ -43,3 +43,10 @@
 
 - Website: [larryhu.com](https://larryhu.com)
 - GitHub: [@LarryHu1988](https://github.com/LarryHu1988)
+
+
+## SimpleWorth 1.0
+
+[产品介绍](https://larryhu.com/simpleworth/) · [App Store](https://apps.apple.com/app/id6761478113) · [技术支持](https://larryhu.com/simpleworth/support/) · [隐私政策](https://larryhu.com/simpleworth/privacy/)
+
+产品页面使用与 App 一致的浅蓝渐变、玻璃卡片与绿橙蓝粉四色，提供中英文切换、真实应用界面预览、移动端和系统深色外观适配。资源与脚本位于 `simpleworth/`，网站无需构建即可由 GitHub Pages 发布。截图为演示数据；页面不使用分析或广告脚本。
