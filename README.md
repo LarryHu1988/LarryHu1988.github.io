@@ -58,3 +58,6 @@
 - [PDF Librarian](https://larryhu.com/PDFLibrarian/)：米白纸张与书房风格，四步交互流程、真实 Mac 截图、元数据来源、隐私与支持。沿用既定大写路径。
 
 两页均为静态 HTML/CSS/JS，不使用分析与广告脚本；截图为演示数据。图标及截图来自各应用本地项目，未使用第三方图标库素材。
+
+
+发布来源：KeepFit 页面由本仓库的 `keepfit/` 发布。PDF Librarian 沿用独立仓库 `LarryHu1988/PDFLibrarian` 的 `main:/docs` GitHub Pages 源；它优先响应 `/PDFLibrarian/` 路径，产品页面、支持与隐私页应在该仓库维护，避免在本站重复同名目录。
