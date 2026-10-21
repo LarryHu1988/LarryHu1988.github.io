@@ -50,3 +50,11 @@
 [产品介绍](https://larryhu.com/simpleworth/) · [App Store](https://apps.apple.com/app/id6761478113) · [技术支持](https://larryhu.com/simpleworth/support/) · [隐私政策](https://larryhu.com/simpleworth/privacy/)
 
 产品页面使用与 App 一致的浅蓝渐变、玻璃卡片与绿橙蓝粉四色，提供中英文切换、真实应用界面预览、移动端和系统深色外观适配。资源与脚本位于 `simpleworth/`，网站无需构建即可由 GitHub Pages 发布。截图为演示数据；页面不使用分析或广告脚本。
+
+
+## KeepFit & PDF Librarian
+
+- [KeepFit](https://larryhu.com/keepfit/)：暖色与绿色的日常健康记录页面，中英文界面、真实应用预览、可选同步说明、隐私与支持。
+- [PDF Librarian](https://larryhu.com/PDFLibrarian/)：米白纸张与书房风格，四步交互流程、真实 Mac 截图、元数据来源、隐私与支持。沿用既定大写路径。
+
+两页均为静态 HTML/CSS/JS，不使用分析与广告脚本；截图为演示数据。图标及截图来自各应用本地项目，未使用第三方图标库素材。

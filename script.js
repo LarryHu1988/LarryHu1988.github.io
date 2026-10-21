@@ -558,6 +558,34 @@ function createSimpleWorthCard() {
   return card
 }
 
+function createProductCard(product) {
+  const traditional = currentLang === 'zh-Hant'
+  const card = document.createElement('article')
+  card.className = 'project-card'
+  const title = document.createElement('h3')
+  title.className = 'project-title'
+  const intro = document.createElement('a')
+  intro.href = product.home
+  intro.textContent = product.name
+  title.append(intro)
+  const description = document.createElement('p')
+  description.className = 'project-desc'
+  description.textContent = traditional ? product.descriptionHant : product.description
+  const meta = document.createElement('div')
+  meta.className = 'project-meta'
+  meta.textContent = product.platform
+  const download = document.createElement('a')
+  download.className = 'project-link'
+  download.href = product.store
+  download.textContent = 'App Store 查看 ↗'
+  const details = document.createElement('a')
+  details.className = 'project-link'
+  details.href = product.home
+  details.textContent = traditional ? '產品介紹 ↗' : '产品介绍 ↗'
+  card.append(title, description, meta, download, document.createTextNode(' · '), details)
+  return card
+}
+
 function renderGitHubProjects(projects) {
   if (!githubProjectsNode) {
     return
@@ -565,6 +593,18 @@ function renderGitHubProjects(projects) {
 
   githubProjectsNode.innerHTML = ''
   githubProjectsNode.append(createSimpleWorthCard())
+  githubProjectsNode.append(createProductCard({
+    name: 'KeepFit', home: '/keepfit/', store: 'https://apps.apple.com/app/id6759662867',
+    platform: 'iPhone / iPad · iOS 17+',
+    description: '管住嘴，迈开腿。记录饮食与运动，看见热量平衡、体重与体脂的长期变化。',
+    descriptionHant: '管住嘴，邁開腿。記錄飲食與運動，看見熱量平衡、體重與體脂的長期變化。'
+  }))
+  githubProjectsNode.append(createProductCard({
+    name: 'PDF Librarian', home: '/PDFLibrarian/', store: 'https://apps.apple.com/us/app/pdf-librarian/id6760351540?mt=12',
+    platform: 'Mac · macOS 13+',
+    description: '给 PDF 一份清楚的书目。检索、核对与写入元数据，规范书籍和论文的文件名。',
+    descriptionHant: '給 PDF 一份清楚的書目。檢索、核對與寫入中繼資料，規範書籍和論文的檔案名稱。'
+  }))
 
   if (!Array.isArray(projects) || projects.length === 0) {
     return
