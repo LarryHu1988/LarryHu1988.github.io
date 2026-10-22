@@ -2,6 +2,7 @@
 
 @font-face { font-family: "Studio Sans"; src: url('/fonts/dm-sans.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Studio Serif"; src: url('/fonts/noto-serif-sc.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Studio Wordmark"; src: url('/fonts/cormorant-sc-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
 
 :root {
   --paper: #f5f3ed;
@@ -13,6 +14,7 @@
   --rust: #a34d32;
   --serif: "Studio Serif", "Songti SC", serif;
   --sans: "Studio Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --wordmark: "Studio Wordmark", "Palatino Linotype", Palatino, serif;
 }
 
 * { box-sizing: border-box; }
@@ -48,9 +50,9 @@ svg { flex-shrink: 0; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: 22px; font-weight: 650; letter-spacing: -.8px; }
 .brand > svg { width: 31px; height: 34px; color: var(--green); }
 .brand-copy { display: flex; flex-direction: column; gap: 5px; }
-.brand-name { line-height: 1.1; white-space: nowrap; font-variant-caps: small-caps; letter-spacing: 0; }
+.brand-name { font-family: var(--wordmark); font-size: 30px; font-weight: 600; line-height: 1; white-space: nowrap; font-variant-caps: normal; font-synthesis: none; letter-spacing: .025em; }
 .brand-chinese { font-size: 9px; font-weight: 400; line-height: 1.4; letter-spacing: .15em; color: var(--muted); }
-.brand-light { font-weight: 450; }
+.brand-light { font-weight: inherit; }
 .brand-period { color: var(--rust); }
 .desktop-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; margin-right: 50px; font-size: 12px; }
 .desktop-nav a { padding-block: 10px; position: relative; }
@@ -182,7 +184,7 @@ svg { flex-shrink: 0; }
 .site-footer { border-top: 1px solid var(--line); padding-top: 39px; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-bottom: 40px; }
 .footer-signature { font-family: var(--serif); font-size: 23px; font-weight: 600; letter-spacing: -.04em; }
-.footer-signature span { display: block; font-family: var(--sans); font-size: 9px; font-weight: 400; font-variant-caps: small-caps; letter-spacing: .1em; margin-top: 5px; }
+.footer-signature span { display: block; font-family: var(--wordmark); font-size: 15px; font-weight: 600; font-variant-caps: normal; font-synthesis: none; line-height: 1.2; letter-spacing: .04em; margin-top: 7px; }
 .footer-top > p { color: var(--muted); font-size: 11px; line-height: 2; }
 .footer-top > p span { font-size: 10px; }
 .back-top { display: flex; align-items: center; gap: 13px; font-size: 8px; letter-spacing: .1em; }
@@ -313,6 +315,7 @@ svg { flex-shrink: 0; }
   .header-inner { height: 70px; }
   .brand { font-size: 20px; }
   .brand > svg { width: 27px; height: 30px; }
+  .brand-name { font-size: 28px; }
   .desktop-nav { display: none; }
   .header-actions { margin-left: auto; gap: 16px; }
   .language-button { font-size: 11px; min-height: 40px; }
@@ -392,6 +395,11 @@ svg { flex-shrink: 0; }
   .reading-meta { font-size: 10px; gap: 15px; flex-wrap: wrap; }
   .poem-full { font-size: 15px; line-height: 2.4; letter-spacing: .02em; }
   .poem-full p + p { margin-top: 30px; }
+}
+@media (max-width: 360px) {
+  .brand-name { font-size: 24px; letter-spacing: .015em; }
+  .header-inner { gap: 12px; }
+  .header-actions { gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

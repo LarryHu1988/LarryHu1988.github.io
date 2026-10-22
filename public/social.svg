@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#f5f3ed"/><circle cx="1000" cy="320" r="280" fill="#e4e9dd"/><path d="M940 130c-30 55-110 120-110 185a110 110 0 0 0 220 0c0-65-80-130-110-185Z" fill="#285a49"/><path d="M850 330c60-40 120 40 180-10M870 360c50-25 90 25 135-5" fill="none" stroke="#e4e9dd" stroke-width="2"/><text x="80" y="110" font-family="sans-serif" font-size="26" fill="#285a49"><tspan font-variant="small-caps">Larry Studio</tspan> · 滴水龙雨工作室</text><text x="80" y="290" font-family="serif" font-size="92" fill="#202c26">写代码，</text><text x="80" y="405" font-family="serif" font-size="92" fill="#285a49">也写小诗。</text><text x="80" y="530" font-family="sans-serif" font-size="26" fill="#657166">滴水龙雨工作室 · Lawrence Hu · larryhu.com</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <style>
+    @font-face { font-family: 'Studio Wordmark'; src: url('/fonts/cormorant-sc-600.woff2') format('woff2'); font-weight: 600; }
+    .wordmark { font-family: 'Studio Wordmark', serif; font-size: 34px; font-weight: 600; letter-spacing: .025em; }
+  </style>
+  <rect width="1200" height="630" fill="#f5f3ed"/>
+  <circle cx="1000" cy="320" r="280" fill="#e4e9dd"/>
+  <path d="M940 130c-30 55-110 120-110 185a110 110 0 0 0 220 0c0-65-80-130-110-185Z" fill="#285a49"/>
+  <path d="M850 330c60-40 120 40 180-10M870 360c50-25 90 25 135-5" fill="none" stroke="#e4e9dd" stroke-width="2"/>
+  <text x="80" y="110" font-family="sans-serif" font-size="26" fill="#285a49"><tspan class="wordmark">Larry Studio</tspan> · 滴水龙雨工作室</text>
+  <text x="80" y="290" font-family="serif" font-size="92" fill="#202c26">写代码，</text>
+  <text x="80" y="405" font-family="serif" font-size="92" fill="#285a49">也写小诗。</text>
+  <text x="80" y="530" font-family="sans-serif" font-size="26" fill="#657166">滴水龙雨工作室 · Lawrence Hu · larryhu.com</text>
+</svg>
