@@ -1,63 +1,62 @@
-<div align="center">
+# 滴水龙雨 · Larry Studio
 
-# 滴水龙雨工作室 🌧️
-### Lawrence Hu · Larry Hu
+Lawrence Hu 的个人网站。[larryhu.com](https://larryhu.com)
 
-> 生于滴水沿，现居滴水湖。  
-> Born by Dishuiyan, now living by Dishui Lake.
+生于滴水沿，现居滴水湖。生肖属龙，生时逢雨。
+半导体行业从业十二年，从产品工程到工艺整合。
+追梅西，忠巴萨，念科比。看读库，读新诗，写小诗。踢实况，打黑猴，码 APP。
 
-<p>
-  <img src="https://img.shields.io/badge/Semiconductor-12_Years-0A66C2?style=for-the-badge&logo=databricks&logoColor=white" alt="Semiconductor 12 Years" />
-  <img src="https://img.shields.io/badge/Product_Engineering-%E2%86%92_Process_Integration-0E7490?style=for-the-badge" alt="Product Engineering to Process Integration" />
-</p>
+## 网站内容
 
-<p>
-  <img src="https://img.shields.io/badge/Messi_Follower-%E2%9A%BD-2563EB?style=flat-square" alt="Messi Follower" />
-  <img src="https://img.shields.io/badge/Bar%C3%A7a_Culer-%F0%9F%94%B4%F0%9F%94%B5-A50044?style=flat-square" alt="Barca Culer" />
-  <img src="https://img.shields.io/badge/Kobe_in_Memory-%F0%9F%8F%80-111827?style=flat-square" alt="Kobe in Memory" />
-  <img src="https://img.shields.io/badge/Poetry-%F0%9F%93%9A%E2%9C%8D%EF%B8%8F-7C3AED?style=flat-square" alt="Poetry" />
-  <img src="https://img.shields.io/badge/Indie_App_Developer-%F0%9F%8E%AE%F0%9F%92%BB-059669?style=flat-square" alt="Indie App Developer" />
-</p>
+- 个人简介：保留中英文原文，支持简繁切换。
+- 数码雨饭：SimpleWorth、KeepFit、PDF Librarian 三个独立作品。
+- 诗情雨意：《二姥爷是个哑巴》《表演》，每首诗有独立阅读地址，保留全文、分行与写作时间。
 
-</div>
+## 开发与发布
 
----
+使用 Next.js App Router、React、TypeScript 和 Tailwind CSS。静态导出后由 GitHub Pages 发布，不需要常驻 Node 服务。
 
-## 👤 关于我 | About Me
+```sh
+npm ci
+npm run dev
+```
 
-| 中文 | English |
-| --- | --- |
-| 我是 **Lawrence Hu（Larry）**。生肖属龙，生时逢雨。🐉☔️ | I’m **Lawrence Hu (Larry)**, a dragon by zodiac, born in the rain. 🐉☔️ |
-| 半导体行业从业十二年，从产品工程到工艺整合。🔬 | 12 years in semiconductors, from product engineering to process integration. 🔬 |
+构建和验证：
 
-## ❤️ 兴趣 | Interests
+```sh
+npm run build
+npm run typecheck
+npm test
+npm run preview
+```
 
-- ⚽🏀 追梅西，忠巴萨，念科比。  
-  Messi follower, Barça culer, Kobe in memory.
-- 📚✍️ 看读库，读新诗，写小诗。  
-  A Duku reader and Chinese poetry enthusiast.
-- 🎮💻 踢实况，打黑猴，码 APP。  
-  A gamer of eFootball and Black Myth, and an independent app developer.
+浏览器测试使用本机 Google Chrome，检查手机与桌面布局、诗歌全文、简繁切换、旧产品链接和 WCAG AA 可访问性。
 
-## 🌐 Online
+`main` 保存源代码，`gh-pages` 保存生成的网站。首次配置 GitHub Pages 发布源为 `gh-pages:/`，后续运行：
 
-- Website: [larryhu.com](https://larryhu.com)
-- GitHub: [@LarryHu1988](https://github.com/LarryHu1988)
+```sh
+npm run deploy
+```
 
+发布脚本在临时目录里创建部署分支的独立副本，并正常提交和推送，不改动源代码工作区，也不强推。域名文件与 `.nojekyll` 会自动带入发布产物。
 
-## SimpleWorth 1.0
+## 内容维护
 
-[产品介绍](https://larryhu.com/simpleworth/) · [App Store](https://apps.apple.com/app/id6761478113) · [技术支持](https://larryhu.com/simpleworth/support/) · [隐私政策](https://larryhu.com/simpleworth/privacy/)
+- 首页与布局：`components/home.tsx`、`app/globals.css`。
+- App 名称、介绍、主页和下载链接：`content/apps.ts`。
+- 诗歌全文：`content/poems.json`。新增诗歌会自动生成阅读页和网站地图。
+- 字体为本站托管的 DM Sans 与 Noto Serif SC 子集；许可位于 `public/fonts/`。如新增的汉字不在子集中，会使用系统宋体后备字体。
 
-产品页面使用与 App 一致的浅蓝渐变、玻璃卡片与绿橙蓝粉四色，提供中英文切换、真实应用界面预览、移动端和系统深色外观适配。资源与脚本位于 `simpleworth/`，网站无需构建即可由 GitHub Pages 发布。截图为演示数据；页面不使用分析或广告脚本。
+## App 主页
 
+| App | 主页 | 下载 | 帮助 |
+| --- | --- | --- | --- |
+| SimpleWorth · 简值 | [/simpleworth/](https://larryhu.com/simpleworth/) | [App Store](https://apps.apple.com/app/id6761478113) | [技术支持](https://larryhu.com/simpleworth/support/) · [隐私政策](https://larryhu.com/simpleworth/privacy/) |
+| KeepFit | [/keepfit/](https://larryhu.com/keepfit/) | [App Store](https://apps.apple.com/app/id6759662867) | [技术支持](https://larryhu.com/keepfit/support/) · [隐私政策](https://larryhu.com/keepfit/privacy/) |
+| PDF Librarian | [/PDFLibrarian/](https://larryhu.com/PDFLibrarian/) | [App Store](https://apps.apple.com/us/app/pdf-librarian/id6760351540?mt=12) | [技术支持](https://larryhu.com/PDFLibrarian/support/) · [隐私政策](https://larryhu.com/PDFLibrarian/privacy-policy/) |
 
-## KeepFit & PDF Librarian
+SimpleWorth 和 KeepFit 的既有静态页面在构建时复制到发布目录，保留其主页、支持、隐私和所有资源。直接编辑根目录下的 `simpleworth/` 与 `keepfit/`，不要编辑自动生成的 `public/simpleworth/` 与 `public/keepfit/`。
 
-- [KeepFit](https://larryhu.com/keepfit/)：暖色与绿色的日常健康记录页面，中英文界面、真实应用预览、可选同步说明、隐私与支持。
-- [PDF Librarian](https://larryhu.com/PDFLibrarian/)：米白纸张与书房风格，四步交互流程、真实 Mac 截图、元数据来源、隐私与支持。沿用既定大写路径。
+PDF Librarian 保留独立仓库 `LarryHu1988/PDFLibrarian` 的 `main:/docs` Pages 发布源，继续使用原来的大写路径。其主页、支持与隐私页在该仓库维护。本站只保留用于作品预览的真实图标和截图。
 
-两页均为静态 HTML/CSS/JS，不使用分析与广告脚本；截图为演示数据。图标及截图来自各应用本地项目，未使用第三方图标库素材。
-
-
-发布来源：KeepFit 页面由本仓库的 `keepfit/` 发布。PDF Librarian 沿用独立仓库 `LarryHu1988/PDFLibrarian` 的 `main:/docs` GitHub Pages 源；它优先响应 `/PDFLibrarian/` 路径，产品页面、支持与隐私页应在该仓库维护，避免在本站重复同名目录。
+没有分析或广告脚本。应用截图为演示数据。

@@ -17,6 +17,13 @@ id_ed25519
 
 # Build / cache artifacts
 node_modules/
+out/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+.test-artifacts/
+public/simpleworth/
+public/keepfit/
 dist/
 build/
 .cache/
