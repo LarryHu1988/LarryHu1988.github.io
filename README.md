@@ -1,4 +1,4 @@
-# 滴水龙雨工作室 · Larry Studio
+# 滴水龙雨工作室 · LARRY STUDIO
 
 Lawrence Hu 的个人网站。[larryhu.com](https://larryhu.com)
 
@@ -45,7 +45,7 @@ npm run deploy
 - 首页与布局：`components/home.tsx`、`app/globals.css`。
 - App 名称、介绍、主页和下载链接：`content/apps.ts`。
 - 诗歌全文：`content/poems.json`。新增诗歌会自动生成阅读页和网站地图。
-- 字标使用 Cormorant SC 的原生小型大写字形，正文使用 DM Sans 与 Noto Serif SC 子集，均由本站托管；许可位于 `public/fonts/`。如新增的汉字不在子集中，会使用系统宋体后备字体。
+- 字标使用 Cormorant SC 的全大写字形，正文使用 DM Sans 与 Noto Serif SC 子集，均由本站托管；许可位于 `public/fonts/`。如新增的汉字不在子集中，会使用系统宋体后备字体。
 
 ## App 主页
 

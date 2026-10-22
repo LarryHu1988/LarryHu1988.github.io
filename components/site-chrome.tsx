@@ -25,7 +25,7 @@ export function SiteHeader() {
   ];
   return <header className="site-header">
     <div className="shell header-inner">
-      <Link className="brand" href="/" aria-label={traditional ? 'Larry Studio · 滴水龍雨工作室首頁' : 'Larry Studio · 滴水龙雨工作室首页'} onClick={() => setMenuOpen(false)}><Mark /><span className="brand-copy"><span className="brand-name">Larry<span className="brand-light"> Studio</span><span className="brand-period">.</span></span><span className="brand-chinese">{traditional ? '滴水龍雨工作室' : '滴水龙雨工作室'}</span></span></Link>
+      <Link className="brand" href="/" aria-label={traditional ? 'LARRY STUDIO · 滴水龍雨工作室首頁' : 'LARRY STUDIO · 滴水龙雨工作室首页'} onClick={() => setMenuOpen(false)}><Mark /><span className="brand-copy"><span className="brand-name">LARRY<span className="brand-light"> STUDIO</span><span className="brand-period">.</span></span><span className="brand-chinese">{traditional ? '滴水龍雨工作室' : '滴水龙雨工作室'}</span></span></Link>
       <nav className="desktop-nav" aria-label={traditional ? '主要導覽' : '主要导航'}>{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
       <div className="header-actions">
         <button className="language-button" onClick={toggle} aria-label={traditional ? '切换为简体中文' : '切換為繁體中文'}>{traditional ? '简' : '繁'}<span aria-hidden="true"> / {traditional ? '繁' : '简'}</span></button>
@@ -40,7 +40,7 @@ export function SiteHeader() {
 export function SiteFooter() {
   const { traditional } = useLanguage();
   return <footer className="site-footer shell">
-    <div className="footer-top"><Link className="footer-signature" href="/">{traditional ? '滴水龍雨工作室' : '滴水龙雨工作室'}<span>Larry Studio</span></Link><p>{traditional ? '生活有跡，創作有聲。' : '生活有迹，创作有声。'}<br /><span>A little code. A little poetry.</span></p><a className="back-top" href="#main" aria-label="回到顶部"><Arrow /><span>BACK TO TOP</span></a></div>
+    <div className="footer-top"><Link className="footer-signature" href="/">{traditional ? '滴水龍雨工作室' : '滴水龙雨工作室'}<span>LARRY STUDIO</span></Link><p>{traditional ? '生活有跡，創作有聲。' : '生活有迹，创作有声。'}<br /><span>A little code. A little poetry.</span></p><a className="back-top" href="#main" aria-label="回到顶部"><Arrow /><span>BACK TO TOP</span></a></div>
     <div className="footer-bottom"><span>© {new Date().getFullYear()} Lawrence Hu</span><span>{traditional ? '寫於生活，做於熱愛。' : '写于生活，做于热爱。'}</span><a href="https://github.com/LarryHu1988" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a></div>
   </footer>;
 }

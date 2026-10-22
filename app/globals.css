@@ -315,7 +315,7 @@ svg { flex-shrink: 0; }
   .header-inner { height: 70px; }
   .brand { font-size: 20px; }
   .brand > svg { width: 27px; height: 30px; }
-  .brand-name { font-size: 28px; }
+  .brand-name { font-size: 26px; }
   .desktop-nav { display: none; }
   .header-actions { margin-left: auto; gap: 16px; }
   .language-button { font-size: 11px; min-height: 40px; }
@@ -397,7 +397,7 @@ svg { flex-shrink: 0; }
   .poem-full p + p { margin-top: 30px; }
 }
 @media (max-width: 360px) {
-  .brand-name { font-size: 24px; letter-spacing: .015em; }
+  .brand-name { font-size: 21px; letter-spacing: .01em; }
   .header-inner { gap: 12px; }
   .header-actions { gap: 10px; }
 }
