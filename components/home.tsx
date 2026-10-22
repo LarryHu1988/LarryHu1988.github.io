@@ -10,7 +10,6 @@ import { Arrow } from './site-chrome';
 function RainStudy() {
   return <div className="rain-study" aria-label="抽象雨滴与水面涟漪插画" role="img">
     <div className="study-grid" />
-    <div className="study-meta"><span>FIELD NOTES / 001</span><span>雨的形状</span></div>
     <svg className="rain-drawing" viewBox="0 0 480 480" fill="none" aria-hidden="true">
       <defs><linearGradient id="drop" x1="170" y1="90" x2="310" y2="320" gradientUnits="userSpaceOnUse"><stop stopColor="#6e9c8d"/><stop offset="1" stopColor="#234f43"/></linearGradient><linearGradient id="reflection" x1="240" y1="340" x2="240" y2="430" gradientUnits="userSpaceOnUse"><stop stopColor="#285a49" stopOpacity=".14"/><stop offset="1" stopColor="#285a49" stopOpacity="0"/></linearGradient></defs>
       <g className="ripples" stroke="#527a68" strokeWidth=".8"><ellipse cx="240" cy="347" rx="175" ry="57" opacity=".2"/><ellipse cx="240" cy="347" rx="144" ry="45" opacity=".3"/><ellipse cx="240" cy="347" rx="110" ry="32" opacity=".4"/><ellipse cx="240" cy="347" rx="73" ry="20" opacity=".5"/><ellipse cx="240" cy="347" rx="34" ry="9" opacity=".6"/></g>

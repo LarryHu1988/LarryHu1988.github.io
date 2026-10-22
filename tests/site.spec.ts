@@ -7,6 +7,10 @@ test('home keeps the selected content and real product images', async ({ page },
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
   await expect(page.locator('h1')).toContainText('写代码');
+  await expect(page.locator('.rain-drawing')).toBeVisible();
+  await expect(page.getByText('雨的形状', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('FIELD NOTES / 001', { exact: true })).toHaveCount(0);
+  await expect(page.locator('.study-caption')).toContainText('一滴水，一个小小的世界。');
   await expect(page.locator('.app-card')).toHaveCount(3);
   await expect(page.locator('.poem-card')).toHaveCount(2);
   await expect(page.locator('#sports, #insight, #notes, #melody, #cinema')).toHaveCount(0);
