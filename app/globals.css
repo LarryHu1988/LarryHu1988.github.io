@@ -48,7 +48,7 @@ svg { flex-shrink: 0; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: 22px; font-weight: 650; letter-spacing: -.8px; }
 .brand > svg { width: 31px; height: 34px; color: var(--green); }
 .brand-copy { display: flex; flex-direction: column; gap: 5px; }
-.brand-name { line-height: 1.1; white-space: nowrap; }
+.brand-name { line-height: 1.1; white-space: nowrap; font-variant-caps: small-caps; letter-spacing: 0; }
 .brand-chinese { font-size: 9px; font-weight: 400; line-height: 1.4; letter-spacing: .15em; color: var(--muted); }
 .brand-light { font-weight: 450; }
 .brand-period { color: var(--rust); }
@@ -182,7 +182,7 @@ svg { flex-shrink: 0; }
 .site-footer { border-top: 1px solid var(--line); padding-top: 39px; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-bottom: 40px; }
 .footer-signature { font-family: var(--serif); font-size: 23px; font-weight: 600; letter-spacing: -.04em; }
-.footer-signature span { display: block; font-family: var(--sans); font-size: 9px; font-weight: 400; letter-spacing: .1em; margin-top: 5px; }
+.footer-signature span { display: block; font-family: var(--sans); font-size: 9px; font-weight: 400; font-variant-caps: small-caps; letter-spacing: .1em; margin-top: 5px; }
 .footer-top > p { color: var(--muted); font-size: 11px; line-height: 2; }
 .footer-top > p span { font-size: 10px; }
 .back-top { display: flex; align-items: center; gap: 13px; font-size: 8px; letter-spacing: .1em; }
