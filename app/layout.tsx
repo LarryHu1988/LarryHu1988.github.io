@@ -5,12 +5,12 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://larryhu.com'),
-  title: { default: '滴水龙雨 · Larry Studio', template: '%s · 滴水龙雨' },
+  title: { default: '滴水龙雨工作室 · Larry Studio', template: '%s · 滴水龙雨工作室' },
   description: '生于滴水沿，现居滴水湖。Lawrence Hu 的个人网站，记录诗歌与独立开发的 App：SimpleWorth、KeepFit 和 PDF Librarian。',
   alternates: { canonical: '/' },
   icons: { icon: '/favicon.svg' },
   openGraph: {
-    title: '滴水龙雨 · Larry Studio',
+    title: '滴水龙雨工作室 · Larry Studio',
     description: '写代码，也写小诗。一个半导体工程师的个人创作空间。',
     locale: 'zh_CN',
     type: 'website',

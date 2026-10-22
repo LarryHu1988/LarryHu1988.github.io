@@ -47,6 +47,9 @@ svg { flex-shrink: 0; }
 .header-inner { height: 83px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: 22px; font-weight: 650; letter-spacing: -.8px; }
 .brand > svg { width: 31px; height: 34px; color: var(--green); }
+.brand-copy { display: flex; flex-direction: column; gap: 5px; }
+.brand-name { line-height: 1.1; white-space: nowrap; }
+.brand-chinese { font-size: 9px; font-weight: 400; line-height: 1.4; letter-spacing: .15em; color: var(--muted); }
 .brand-light { font-weight: 450; }
 .brand-period { color: var(--rust); }
 .desktop-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; margin-right: 50px; font-size: 12px; }
@@ -99,7 +102,6 @@ svg { flex-shrink: 0; }
 .bio-chinese p + p { margin-top: 15px; }
 .bio-english { padding-top: 3px; font-size: 13px; line-height: 2; color: var(--muted); }
 .bio-english p + p { margin-top: 17px; }
-.bio-english .text-link { margin-top: 22px; font-size: 11px; color: var(--green); }
 .engineering-line { display: inline-block; }
 
 .apps-section { background: #eeeee6; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }

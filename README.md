@@ -1,4 +1,4 @@
-# 滴水龙雨 · Larry Studio
+# 滴水龙雨工作室 · Larry Studio
 
 Lawrence Hu 的个人网站。[larryhu.com](https://larryhu.com)
 
