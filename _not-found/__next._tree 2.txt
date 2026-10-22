@@ -1,0 +1,6 @@
+:HL["/_next/static/chunks/1ct6518y2b3en.css","style"]
+:HL["/fonts/dm-sans.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/noto-serif-sc.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
+0:{"b":"_i_tbLH1e3LgbS1cl_h4A","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
