@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <style>
-    @font-face { font-family: 'Studio Wordmark'; src: url('/fonts/cormorant-sc-600.woff2') format('woff2'); font-weight: 600; }
-    .wordmark { font-family: 'Studio Wordmark', serif; font-size: 34px; font-weight: 600; letter-spacing: .025em; }
+    @font-face { font-family: 'Studio Wordmark'; src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2'); font-weight: 500; }
+    .wordmark { font-family: 'Studio Wordmark', monospace; font-size: 30px; font-weight: 500; letter-spacing: .025em; }
   </style>
   <rect width="1200" height="630" fill="#f5f3ed"/>
   <circle cx="1000" cy="320" r="280" fill="#e4e9dd"/>
