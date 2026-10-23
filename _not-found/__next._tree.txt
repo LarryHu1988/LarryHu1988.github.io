@@ -4,4 +4,4 @@
 :HL["/fonts/noto-serif-sc.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"AX6hKlrj5zVeQGVieiuAK","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"O8AkYpkAse0PlaA-6iR6X","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
