@@ -22,8 +22,10 @@ out/
 next-env.d.ts
 *.tsbuildinfo
 .test-artifacts/
-public/simpleworth/
-public/keepfit/
+110_Site/public/simpleworth/
+110_Site/public/keepfit/
+115_Local/
+119_Build/
 dist/
 build/
 .cache/
@@ -44,3 +46,7 @@ Thumbs.db
 # Python cache
 __pycache__/
 *.pyc
+
+# iCloud conflict copies and placeholders
+* [0-9].*
+*.icloud

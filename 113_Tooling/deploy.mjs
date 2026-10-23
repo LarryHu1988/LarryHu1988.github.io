@@ -2,10 +2,9 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { cpSync, mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { root, output, publishable } from './paths.mjs';
 
-const root = fileURLToPath(new URL('../', import.meta.url));
-const git = (args, cwd = root) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
+const git = (args, cwd = root) => execFileSync('git', args, { cwd, encoding: 'utf8', timeout: 90000 }).trim();
 const remote = git(['remote', 'get-url', 'origin']);
 const source = git(['rev-parse', '--short', 'HEAD']);
 const probe = spawnSync('git', ['ls-remote', '--exit-code', '--heads', remote, 'gh-pages'], { cwd: root });
@@ -24,7 +23,7 @@ try {
     git(['init', '--initial-branch=gh-pages'], temp);
     git(['remote', 'add', 'origin', remote], temp);
   }
-  cpSync(join(root, 'out'), temp, { recursive: true });
+  cpSync(output, temp, { recursive: true, filter: path => publishable(path) || path === join(output, '.nojekyll') });
   git(['add', '--all'], temp);
   const changed = spawnSync('git', ['diff', '--cached', '--quiet'], { cwd: temp });
   if (changed.status === 0) {

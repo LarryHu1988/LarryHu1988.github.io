@@ -3,14 +3,16 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/prepare-static.mjs",
-    "dev": "next dev",
-    "prebuild": "node scripts/prepare-static.mjs",
-    "build": "next build && node scripts/export-static.mjs",
-    "preview": "node scripts/preview.mjs",
-    "typecheck": "tsc --noEmit",
-    "test": "playwright test",
-    "deploy": "npm run build && node scripts/deploy.mjs"
+    "predev": "node 113_Tooling/prepare-static.mjs",
+    "dev": "next dev 110_Site",
+    "prebuild": "node 113_Tooling/prepare-static.mjs --clean",
+    "build": "next build 110_Site && node 113_Tooling/export-static.mjs",
+    "preview": "node 113_Tooling/preview.mjs",
+    "typecheck": "tsc --noEmit -p 110_Site/tsconfig.json",
+    "test": "playwright test --config 114_Tests/playwright.config.ts",
+    "test:tooling": "node --test 114_Tests/tooling.test.mjs",
+    "check:repository": "node 113_Tooling/check-repository.mjs",
+    "deploy": "npm run build && node 113_Tooling/deploy.mjs"
   },
   "dependencies": {
     "next": "16.4.2",
