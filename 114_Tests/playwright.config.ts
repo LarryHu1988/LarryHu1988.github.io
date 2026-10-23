@@ -5,6 +5,7 @@ const root = resolve(__dirname, '..');
 
 export default defineConfig({
   testDir: '.',
+  testMatch: '**/*.spec.ts',
   outputDir: '../119_Build/test-results',
   reporter: 'list',
   fullyParallel: true,

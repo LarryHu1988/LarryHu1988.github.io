@@ -9,7 +9,7 @@ export const output = resolve(root, '119_Build/site');
 export function publishable(path) {
   const name = basename(path);
   return !name.startsWith('.')
-    && !/ [0-9]+\.[^.]+$/.test(name)
+    && !/ [0-9]+(?:\.[^.]+)?$/.test(name)
     && !/^(?:credentials|secrets?)(?:\.|$)/i.test(name)
     && !/\.(?:icloud|map|env|pem|key|p12|pfx|log|sql|sqlite|db|md)$/i.test(name);
 }

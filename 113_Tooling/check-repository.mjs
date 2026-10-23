@@ -24,6 +24,7 @@ for (const [, asset] of readme.matchAll(/(?:src="|\]\()(112_Brand\/[^"\s)]+)/g))
 function inspect(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const path = resolve(directory, entry.name);
+    if (/ [0-9]+(?:\.[^.]+)?$/.test(entry.name) || entry.name === '.DS_Store') continue;
     if (entry.isDirectory()) inspect(path);
     else assert(publishable(path) || entry.name === '.nojekyll', `Internal or unsafe published file: ${entry.name}`);
   }
