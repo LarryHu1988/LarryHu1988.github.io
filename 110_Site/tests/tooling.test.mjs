@@ -1,6 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { publishable } from '../113_Tooling/paths.mjs';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { root, publishable } from '../tooling/paths.mjs';
+
+test('entry files live in folders without breaking repository discovery', () => {
+  for (const path of ['.github/README.md', '110_Site/package.json', '110_Site/package-lock.json']) {
+    assert(existsSync(resolve(root, path)), path);
+  }
+  for (const path of ['README.md', 'package.json', 'package-lock.json']) {
+    assert.equal(existsSync(resolve(root, path)), false, path);
+  }
+});
 
 test('publishing retains site assets and license files', () => {
   for (const path of ['site/index.html', 'site/_next/chunks/app.js', 'site/fonts/OFL.txt', 'site/assets/screen.png', 'site/CNAME']) {

@@ -1,0 +1,32 @@
+{
+  "name": "larry-studio",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "predev": "node tooling/prepare-static.mjs",
+    "dev": "next dev",
+    "prebuild": "node tooling/prepare-static.mjs --clean",
+    "build": "next build && node tooling/export-static.mjs",
+    "preview": "node tooling/preview.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test --config tests/playwright.config.ts",
+    "test:tooling": "node --test tests/tooling.test.mjs",
+    "check:repository": "node tooling/check-repository.mjs",
+    "deploy": "npm run build && node tooling/deploy.mjs"
+  },
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5.9.0"
+  }
+}

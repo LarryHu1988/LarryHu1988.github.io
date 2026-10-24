@@ -6,7 +6,7 @@ const root = resolve(__dirname, '..');
 export default defineConfig({
   testDir: '.',
   testMatch: '**/*.spec.ts',
-  outputDir: '../119_Build/test-results',
+  outputDir: '../../119_Build/test-results',
   reporter: 'list',
   fullyParallel: true,
   use: { baseURL: 'http://127.0.0.1:4173', channel: 'chrome', trace: 'retain-on-failure' },

@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import poems from '../110_Site/content/poems.json';
+import { resolve } from 'node:path';
+import poems from '../content/poems.json';
 
 test('home keeps the selected content and real product images', async ({ page }, testInfo) => {
   const errors: string[] = [];
@@ -23,7 +24,7 @@ test('home keeps the selected content and real product images', async ({ page },
   await page.locator('.site-footer').scrollIntoViewIfNeeded();
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => window.scrollTo(0, 0));
-  await page.screenshot({ path: `119_Build/checks/${testInfo.project.name}-home.png`, fullPage: true, animations: 'disabled' });
+  await page.screenshot({ path: resolve(__dirname, '../../119_Build/checks', `${testInfo.project.name}-home.png`), fullPage: true, animations: 'disabled' });
   expect(errors).toEqual([]);
 });
 

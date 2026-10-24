@@ -8,7 +8,7 @@ from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "112_Brand"
 FONTS = ROOT / "110_Site/public/fonts"
 PAPER, INK, GREEN, MUTED, RUST = "#f5f3ed", "#263b30", "#2e5b48", "#616b5d", "#a34d32"
