@@ -1,7 +1,7 @@
-:HL["/_next/static/chunks/1nzj6wstl4x7t.css","style"]
+:HL["/_next/static/chunks/2itytz8ra4clc.css","style"]
 :HL["/fonts/ibm-plex-mono-500.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/dm-sans.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/noto-serif-sc.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"yPDeLWw-zw4hhWnBfAjyC","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"JZBSQsKx7KSIRJnYf5wqD","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
