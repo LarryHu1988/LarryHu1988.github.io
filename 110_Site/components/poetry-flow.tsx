@@ -58,7 +58,9 @@ export function PoetryFlow({ issues, headingLevel = 3 }: { issues: PoetrySleeve[
             if (offset === 0) window.location.assign(`/poetry-picture/${item.date}/`);
             else setActive(index);
           }}>
-          <span className="album-art"><img src={item.cover} alt="" width="940" height="1672" loading={distance <= 2 ? 'eager' : 'lazy'} draggable={false} /></span>
+          <span className="album-art"><img src={item.cover} alt="" width="940" height="1672" loading={distance <= 2 ? 'eager' : 'lazy'} draggable={false} />
+            <span className="album-label" aria-hidden="true"><strong>{item.title}</strong><small>{item.author}</small></span>
+          </span>
           <span className="album-reflection" aria-hidden="true" style={{ backgroundImage: `url("${item.cover}")` }} />
         </button>;
       })}

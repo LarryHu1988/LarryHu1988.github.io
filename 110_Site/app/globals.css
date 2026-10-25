@@ -419,6 +419,9 @@ svg { flex-shrink: 0; }
 .album-art { display: block; position: relative; height: 100%; width: 100%; overflow: hidden; border: 1px solid #fff9; border-radius: 3px; background: #293c31; box-shadow: -5px 8px 18px #10261929, 0 0 0 1px #263b3014; }
 .album-art::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 2px 0 3px #fff4, inset -3px 0 3px #0002; background: linear-gradient(125deg, #fff1, transparent 45%); }
 .album-art img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.album-label { position: absolute; inset: auto 0 0; padding: 44px 18px 18px; color: #fffdf4; background: linear-gradient(transparent, #091b208c 42%, #091b20db); text-align: left; text-shadow: 0 1px 6px #0009; pointer-events: none; }
+.album-label strong { display: block; font-family: var(--serif); font-size: 20px; line-height: 1.55; font-weight: 500; overflow-wrap: anywhere; text-wrap: balance; }
+.album-label small { display: block; margin-top: 7px; font-family: var(--serif); font-size: 12px; line-height: 1.7; letter-spacing: .08em; }
 .album-reflection { display: block; position: absolute; top: calc(100% + 5px); left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transform: scaleY(-1); opacity: .19; mask-image: linear-gradient(to top, #0008 0, transparent 27%); pointer-events: none; }
 .flow-caption { position: relative; z-index: 21; margin: 0 auto; width: min(90%, 650px); text-align: center; }
 .flow-date { font-family: var(--wordmark); letter-spacing: .13em; font-size: 9px; color: var(--muted); }
@@ -490,6 +493,9 @@ svg { flex-shrink: 0; }
   .flow-topline i { width: 12px; }
   .cover-flow { height: calc(var(--sleeve-height) + 103px); perspective: 800px; }
   .album-sleeve { top: 32px; }
+  .album-label { padding: 36px 13px 13px; }
+  .album-label strong { font-size: 16px; }
+  .album-label small { font-size: 10px; margin-top: 5px; }
   .flow-horizon { bottom: 44px; }
   .flow-caption :is(h2, h3) { font-size: 23px; margin-top: 12px; }
   .flow-date { font-size: 8px; }
