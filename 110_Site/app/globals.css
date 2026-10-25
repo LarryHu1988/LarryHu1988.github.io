@@ -402,3 +402,123 @@ svg { flex-shrink: 0; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .motion-ready [data-reveal] { opacity: 1; transform: none; }
 }
+
+/* A daily poetry collection, with the quiet depth of a record shelf. */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.picture-section { background: #eae8df; border-top: 1px solid var(--line); }
+.picture-collection-link { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 30px; color: var(--muted); font-size: 12px; }
+.poetry-player { --sleeve: 240px; --sleeve-height: calc(var(--sleeve) * 16 / 9); position: relative; overflow: hidden; border: 1px solid #d6d8cb; border-radius: 10px; background: radial-gradient(ellipse at 50% 20%, #faf9f3 0, #eeeee5 56%, #e2e5d8 100%); box-shadow: 0 2px 3px #22302403, 0 20px 65px #263b3008; }
+.flow-topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 25px 32px 0; color: #626d5b; font-family: var(--wordmark); font-size: 9px; letter-spacing: .08em; }
+.flow-topline > span:last-child { display: inline-flex; align-items: center; gap: 12px; }
+.flow-topline i { width: 22px; height: 1px; background: #98a28b; }
+.cover-flow { position: relative; height: calc(var(--sleeve-height) + 104px); perspective: 1000px; perspective-origin: 50% 38%; touch-action: pan-y; outline-offset: -5px; user-select: none; }
+.cover-flow:focus-visible { outline: 2px solid var(--rust); }
+.flow-horizon { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, #acb6a05c 25%, #acb6a05c 75%, transparent); bottom: 63px; width: 100%; }
+.album-sleeve { position: absolute; top: 36px; left: 50%; width: var(--sleeve); height: var(--sleeve-height); padding: 0; background: transparent; transform-style: preserve-3d; transform: translateX(calc(-50% + var(--side) * (var(--sleeve) * .79 + (var(--distance) - 1) * var(--sleeve) * .35))) translateZ(-115px) rotateY(calc(var(--side) * -59deg)); transition: transform .52s cubic-bezier(.22,.7,.2,1), filter .52s; filter: brightness(.76) saturate(.85); cursor: pointer; }
+.album-sleeve.is-active { transform: translateX(-50%) translateZ(30px) rotateY(0); filter: none; }
+.album-art { display: block; position: relative; height: 100%; width: 100%; overflow: hidden; border: 1px solid #fff9; border-radius: 3px; background: #293c31; box-shadow: -5px 8px 18px #10261929, 0 0 0 1px #263b3014; }
+.album-art::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 2px 0 3px #fff4, inset -3px 0 3px #0002; background: linear-gradient(125deg, #fff1, transparent 45%); }
+.album-art img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.album-reflection { display: block; position: absolute; top: calc(100% + 5px); left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transform: scaleY(-1); opacity: .19; mask-image: linear-gradient(to top, #0008 0, transparent 27%); pointer-events: none; }
+.flow-caption { position: relative; z-index: 21; margin: 0 auto; width: min(90%, 650px); text-align: center; }
+.flow-date { font-family: var(--wordmark); letter-spacing: .13em; font-size: 9px; color: var(--muted); }
+.flow-caption :is(h2, h3) { font-family: var(--serif); font-size: clamp(22px, 3.2vw, 31px); line-height: 1.5; font-weight: 500; margin-top: 10px; text-wrap: balance; }
+.flow-author { color: var(--muted); font-family: var(--serif); font-size: 13px; margin-top: 9px; }
+.flow-read { display: inline-flex; align-items: center; gap: 16px; font-size: 12px; border-bottom: 1px solid #9ca78e; padding-block: 7px; margin-top: 16px; }
+.flow-read svg { width: 16px; }
+.flow-controls { display: flex; align-items: center; gap: 17px; position: relative; z-index: 22; margin: 28px auto 0; max-width: 430px; padding-inline: 25px; }
+.flow-controls > button { height: 42px; width: 42px; border-radius: 50%; display: grid; place-items: center; background: #fafaf36b; border: 1px solid #adb89b; flex-shrink: 0; }
+.flow-controls > button:hover:not(:disabled) { color: white; background: var(--green); }
+.flow-controls > button:disabled { opacity: .35; cursor: default; }
+.flow-controls svg { width: 17px; }
+.flow-seek { flex: 1; min-width: 0; }
+.flow-seek input { display: block; width: 100%; height: 30px; margin: 0; accent-color: #41634d; cursor: ew-resize; }
+.flow-count { white-space: nowrap; font-family: var(--wordmark); font-size: 11px; }
+.flow-count > span { color: var(--muted); font-size: 10px; }
+.flow-hint { font-size: 10px; color: var(--muted); text-align: center; margin: 16px 20px 25px; letter-spacing: .07em; }
+.poetry-collection { padding-block: 56px 90px; }
+.collection-heading { text-align: center; margin-bottom: 38px; }
+.collection-heading .eyebrow { justify-content: center; }
+.collection-heading h1 { font-family: var(--serif); font-size: clamp(42px, 6vw, 64px); font-weight: 500; letter-spacing: .04em; margin-block: 17px; }
+.collection-heading > p:last-child { color: var(--muted); font-family: var(--serif); font-size: 14px; letter-spacing: .1em; }
+.poetry-tracklist { max-width: 760px; margin: 70px auto 0; }
+.tracklist-heading { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 23px; }
+.tracklist-heading h2 { font-family: var(--serif); font-size: 22px; font-weight: 500; }
+.tracklist-heading > span { color: var(--muted); font-family: var(--wordmark); font-size: 9px; letter-spacing: .07em; }
+.poetry-tracklist > a { display: flex; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding: 15px 8px; transition: background .2s; }
+.poetry-tracklist > a:last-child { border-bottom: 1px solid var(--line); }
+.poetry-tracklist > a:hover { background: #e9ecde; }
+.track-number { color: var(--muted); font-family: var(--wordmark); font-size: 10px; }
+.poetry-tracklist img { width: 36px; height: 64px; object-fit: contain; border-radius: 2px; }
+.track-name { font-family: var(--serif); font-size: 16px; flex: 1; }
+.track-name small { display: block; color: var(--muted); font-family: var(--sans); font-size: 10px; margin-top: 5px; }
+.poetry-tracklist time { color: var(--muted); font-family: var(--wordmark); font-size: 10px; }
+.poetry-tracklist > a > span:last-child { font-size: 18px; }
+.daily-poetry { padding-top: 38px; padding-bottom: 80px; }
+.daily-heading { padding: 55px 0 45px; text-align: center; }
+.daily-heading .eyebrow { justify-content: center; flex-wrap: wrap; }
+.daily-heading h1 { font-family: var(--serif); font-size: clamp(29px, 4.2vw, 47px); line-height: 1.7; font-weight: 500; text-wrap: balance; margin: 17px auto 10px; }
+.daily-heading > p:last-child { color: var(--muted); font-family: var(--serif); font-size: 15px; }
+.daily-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(35px, 5vw, 80px); align-items: start; }
+.daily-illustration { margin: 0; position: sticky; top: 115px; }
+.daily-illustration img { width: 100%; height: auto; border-radius: 3px; box-shadow: 0 15px 45px #172e2514; }
+.daily-illustration figcaption { display: flex; justify-content: space-between; align-items: center; font-family: var(--serif); font-size: 10px; color: var(--muted); margin-top: 19px; }
+.daily-illustration figcaption span { font-family: var(--wordmark); font-size: 8px; letter-spacing: .08em; }
+.daily-text { min-width: 0; }
+.daily-poem { font-family: var(--serif); font-size: 16px; line-height: 2.3; letter-spacing: .015em; padding: 2px 0 34px; }
+.daily-poem p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.daily-poem p + p { margin-top: 28px; }
+.daily-analysis { border-top: 1px solid var(--line); padding-top: 32px; }
+.daily-analysis h2 { display: flex; align-items: center; gap: 18px; font-family: var(--serif); font-size: 22px; font-weight: 500; margin-bottom: 25px; }
+.daily-analysis h2 span { color: var(--muted); font-family: var(--wordmark); font-size: 8px; letter-spacing: .08em; }
+.daily-analysis > p { font-family: var(--serif); font-size: 15px; line-height: 2.2; text-indent: 2em; color: #44503f; }
+.daily-analysis > p + p { margin-top: 19px; }
+.daily-occasion { border-top: 1px solid var(--line); margin-top: 35px; padding-top: 25px; }
+.daily-occasion h2 { font-size: 11px; letter-spacing: .15em; font-weight: 500; color: var(--rust); margin-bottom: 13px; }
+.daily-occasion p { color: var(--muted); font-family: var(--serif); font-size: 13px; line-height: 2.1; }
+.daily-next { display: flex; justify-content: space-between; gap: 30px; margin-top: 65px; padding-top: 30px; border-top: 1px solid var(--line); }
+.daily-next > * { max-width: 48%; }
+.daily-next > :last-child { text-align: right; }
+.daily-next small { display: block; font-size: 9px; color: var(--muted); margin-bottom: 12px; }
+.daily-next a > span { font-family: var(--serif); font-size: 17px; line-height: 1.8; }
+@media (max-width: 1100px) { .desktop-nav { gap: 20px; margin-right: 5px; } .header-inner { gap: 18px; } }
+@media (max-width: 850px) { .desktop-nav { gap: 14px; font-size: 10px; } .daily-layout { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 28px; } .daily-poem { font-size: 14px; } .daily-analysis > p { font-size: 14px; } }
+@media (max-width: 700px) {
+  .poetry-player { --sleeve: min(48vw, 220px); border-radius: 6px; }
+  .flow-topline { font-size: 7px; padding: 22px 20px 0; }
+  .flow-topline > span:last-child { gap: 7px; }
+  .flow-topline i { width: 12px; }
+  .cover-flow { height: calc(var(--sleeve-height) + 103px); perspective: 800px; }
+  .album-sleeve { top: 32px; }
+  .flow-horizon { bottom: 44px; }
+  .flow-caption :is(h2, h3) { font-size: 23px; margin-top: 12px; }
+  .flow-date { font-size: 8px; }
+  .flow-author { font-size: 12px; }
+  .flow-controls { gap: 11px; margin-top: 22px; }
+  .flow-controls > button { width: 38px; height: 38px; }
+  .flow-count { font-size: 10px; }
+  .picture-collection-link { align-items: start; font-size: 10px; padding-top: 23px; }
+  .picture-collection-link .text-link { font-size: 11px; }
+  .poetry-collection { padding-block: 37px 60px; }
+  .collection-heading { margin-bottom: 27px; }
+  .collection-heading h1 { font-size: 44px; }
+  .collection-heading > p:last-child { font-size: 12px; letter-spacing: .02em; }
+  .poetry-tracklist { margin-top: 42px; }
+  .tracklist-heading h2 { font-size: 19px; }
+  .tracklist-heading > span { font-size: 7px; }
+  .poetry-tracklist > a { gap: 11px; padding-inline: 0; }
+  .poetry-tracklist img { width: 28px; height: 50px; }
+  .track-name { font-size: 14px; }
+  .track-number { font-size: 8px; }
+  .poetry-tracklist time { font-size: 8px; }
+  .daily-poetry { padding-top: 25px; padding-bottom: 50px; }
+  .daily-heading { padding-block: 35px 30px; }
+  .daily-layout { grid-template-columns: 1fr; gap: 38px; }
+  .daily-illustration { position: static; max-width: 480px; width: 100%; margin-inline: auto; }
+  .daily-text { max-width: 540px; width: 100%; margin-inline: auto; }
+  .daily-poem { font-size: 16px; line-height: 2.25; letter-spacing: 0; }
+  .daily-analysis > p { font-size: 15px; }
+  .daily-heading .eyebrow { font-size: 8px; }
+  .daily-next { gap: 18px; margin-top: 40px; }
+  .daily-next a > span { font-size: 15px; }
+}

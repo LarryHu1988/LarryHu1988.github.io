@@ -22,6 +22,7 @@ export function SiteHeader() {
     { href: `${home}#about`, label: traditional ? '關於我' : '关于我' },
     { href: `${home}#apps`, label: traditional ? '數碼雨飯' : '数码雨饭' },
     { href: `${home}#poetry`, label: traditional ? '詩情雨意' : '诗情雨意' },
+    { href: '/poetry-picture/', label: traditional ? '詩情畫意' : '诗情画意' },
   ];
   return <header className="site-header">
     <div className="shell header-inner">

@@ -4,7 +4,8 @@
   <a href="https://larryhu.com">访问个人网站 ↗</a>&nbsp;&nbsp; · &nbsp;&nbsp;
   <a href="https://larryhu.com/#about">滴水龙雨</a>&nbsp;&nbsp; · &nbsp;&nbsp;
   <a href="https://larryhu.com/#apps">数码雨饭</a>&nbsp;&nbsp; · &nbsp;&nbsp;
-  <a href="https://larryhu.com/#poetry">诗情雨意</a>
+  <a href="https://larryhu.com/#poetry">诗情雨意</a>&nbsp;&nbsp; · &nbsp;&nbsp;
+  <a href="https://larryhu.com/poetry-picture/">诗情画意</a>
 </p>
 
 ## 滴水龙雨
@@ -31,5 +32,11 @@
   <a href="https://larryhu.com/poems/second-granduncle/"><img src="../112_Brand/second-granduncle.svg" width="400" alt="读《二姥爷是个哑巴》：在正月的日子里，我回忆起了他。" /></a>
   <a href="https://larryhu.com/poems/performance/"><img src="../112_Brand/performance.svg" width="400" alt="读《表演》：这是一个无尽的舞台，所有人都在刻意不刻意地表演。" /></a>
 </p>
+
+## 诗情画意
+
+[把日子，翻成一张张诗的封面。](https://larryhu.com/poetry-picture/)
+
+每天一首诗、一幅画。左右翻阅封面，读原诗、解析与刊发缘起。
 
 [![日子慢慢过，文字慢慢写。](../112_Brand/signature.svg)](https://larryhu.com)

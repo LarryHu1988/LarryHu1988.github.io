@@ -9,6 +9,7 @@
     "build": "next build && node tooling/export-static.mjs",
     "preview": "node tooling/preview.mjs",
     "typecheck": "tsc --noEmit",
+    "sync:poetry": "python3 tooling/sync-poetry-picture.py",
     "test": "playwright test --config tests/playwright.config.ts",
     "test:tooling": "node --test tests/tooling.test.mjs",
     "check:repository": "node tooling/check-repository.mjs",

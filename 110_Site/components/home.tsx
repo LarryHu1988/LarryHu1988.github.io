@@ -6,6 +6,7 @@ import { apps } from '@/content/apps';
 import poems from '@/content/poems.json';
 import { useLanguage } from './language';
 import { Arrow } from './site-chrome';
+import { PoetryFlow, type PoetrySleeve } from './poetry-flow';
 
 function RainStudy() {
   return <div className="rain-study" aria-label="抽象雨滴与水面涟漪插画" role="img">
@@ -25,7 +26,7 @@ function SectionHeading({ id, number, english, title, detail }: { id: string; nu
   return <div className="section-heading"><div><p className="eyebrow"><span>{number}</span> / {english}</p><h2 id={id}>{title}<span className="heading-dot">.</span></h2></div><p className="section-detail">{detail}</p></div>;
 }
 
-export function Home() {
+export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
   const { traditional: t } = useLanguage();
   useEffect(() => {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -85,6 +86,12 @@ export function Home() {
           <div className="poem-card-bottom"><span>{t ? '讀完整首詩' : '读完整首诗'}</span><span className="poem-arrow"><Arrow /></span></div>
         </Link>)}</div>
         <div className="poetry-end" data-reveal><span className="end-flower" aria-hidden="true">✳</span><p>{t ? '日子慢慢過，文字慢慢寫。' : '日子慢慢过，文字慢慢写。'}</p><span>TO BE CONTINUED</span></div>
+      </div>
+    </section>
+    <section id="poetry-picture" className="picture-section section-space" aria-labelledby="picture-title">
+      <div className="shell"><SectionHeading id="picture-title" number="04" english="A POEM FOR EVERY DAY" title={t ? '詩情畫意' : '诗情画意'} detail={t ? '從一幅畫，走進一首詩。' : '从一幅画，走进一首诗。'} />
+        <PoetryFlow issues={dailyPoems} />
+        <div className="picture-collection-link"><span>{t ? '每天一首，慢慢收藏。' : '每天一首，慢慢收藏。'}</span><Link className="text-link" href="/poetry-picture/">{t ? '翻閱整本詩集' : '翻阅整本诗集'}<Arrow /></Link></div>
       </div>
     </section>
   </main>;
