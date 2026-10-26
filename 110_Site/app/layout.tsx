@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: '写代码，也写小诗。一个半导体工程师的个人创作空间。',
     locale: 'zh_CN',
     type: 'website',
-    images: [{ url: '/social.png', width: 1200, height: 630 }],
+    images: [{ url: '/social.png?v=native-vector', width: 3840, height: 2016 }],
   },
   twitter: { card: 'summary_large_image' },
 };

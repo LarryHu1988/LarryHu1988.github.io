@@ -28,7 +28,7 @@ test('home keeps the selected content and real product images', async ({ page },
   expect(errors).toEqual([]);
 });
 
-test('PDF Librarian shows the complete native screenshot centered at every breakpoint', async ({ page }) => {
+test('PDF Librarian centers a computer window with the complete native screenshot at every breakpoint', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   const visual = page.locator('.pdflibrarian .app-visual');
@@ -38,7 +38,7 @@ test('PDF Librarian shows the complete native screenshot centered at every break
   await expect(image).toHaveJSProperty('naturalWidth', 2880);
   await expect(image).toHaveJSProperty('naturalHeight', 1800);
   await expect(image).toHaveAttribute('src', '/images/pdf-workspace-1.5.0.png');
-  await expect(visual.locator('.mac-titlebar')).toHaveCount(0);
+  await expect(visual.locator('.mac-titlebar')).toHaveCount(1);
   for (const width of [320, 375, 390, 600, 768, 850, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     for (const hover of [false, true]) {
@@ -47,12 +47,14 @@ test('PDF Librarian shows the complete native screenshot centered at every break
       const geometry = await image.evaluate(element => {
         const parent = element.closest('.app-visual')!;
         const bounds = parent.getBoundingClientRect();
-        const rect = element.getBoundingClientRect();
+        const image = element.getBoundingClientRect();
+        const rect = element.closest('.mac-window')!.getBoundingClientRect();
+        const titlebar = parent.querySelector('.mac-titlebar')!.getBoundingClientRect();
         return {
           x: Math.abs(rect.x + rect.width / 2 - bounds.x - bounds.width / 2),
           y: Math.abs(rect.y + rect.height / 2 - bounds.y - bounds.height / 2),
-          ratio: rect.width / rect.height,
-          contained: rect.x >= bounds.x && rect.y >= bounds.y && rect.right <= bounds.right && rect.bottom <= bounds.bottom,
+          ratio: image.width / image.height,
+          contained: rect.x >= bounds.x && rect.y >= bounds.y && rect.right <= bounds.right && rect.bottom <= bounds.bottom && image.x >= rect.x && image.right <= rect.right && image.y >= titlebar.bottom && image.bottom <= rect.bottom,
           fit: getComputedStyle(element).objectFit,
           transform: getComputedStyle(element.parentElement!).transform,
         };

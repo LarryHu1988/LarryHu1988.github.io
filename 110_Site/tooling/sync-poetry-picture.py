@@ -112,16 +112,15 @@ def main():
             image = ImageOps.exif_transpose(original).convert('RGB')
             width, height = image.size
             full = target / f'{day}.webp'
-            # Retain native resolution and lossless pixels for the reading view.
+            # Covers and reading images both retain the native, lossless source.
             if not full.exists() or not (target / f'{day}-cover.webp').exists() or illustration.stat().st_mtime > full.stat().st_mtime:
-                image.save(full, 'WEBP', lossless=True, method=6)
-                sleeve = image.copy()
-                sleeve.thumbnail((1200, 1600))
-                sleeve.save(target / f'{day}-cover.webp', 'WEBP', quality=95, method=6)
+                profile = {'icc_profile': original.info['icc_profile']} if original.info.get('icc_profile') else {}
+                image.save(full, 'WEBP', lossless=True, exact=True, method=6, **profile)
+                image.save(target / f'{day}-cover.webp', 'WEBP', lossless=True, exact=True, method=6, **profile)
         items_by_day[day] = {
             'date': day, 'title': title, 'author': author,
             'image': f'/poetry-picture/{day}.webp',
-            'cover': f'/poetry-picture/{day}-cover.webp',
+            'cover': f'/poetry-picture/{day}-cover.webp?v=native-lossless',
             'width': width, 'height': height,
             'poem': parsed.parts['poem'], 'analysis': parsed.parts['analysis'],
             'occasion': parsed.parts['editorial-lead'],

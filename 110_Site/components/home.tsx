@@ -63,7 +63,7 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
           <a className="app-visual" href={app.home} aria-label={`${app.name} ${t ? '產品主頁' : '产品主页'}`}>
             <div className="app-visual-top"><span>{app.category}</span><span>{app.number}</span></div>
             <div className="visual-orbit" aria-hidden="true" />
-            <div className={app.id === 'pdflibrarian' ? 'mac-preview' : 'phone-preview'}><img src={app.screen} alt={app.screenAlt} width={app.id === 'pdflibrarian' ? 2880 : 720} height={app.id === 'pdflibrarian' ? 1800 : 1564} loading="lazy" /></div>
+            <div className={app.id === 'pdflibrarian' ? 'mac-preview' : 'phone-preview'}>{app.id === 'pdflibrarian' ? <div className="mac-window"><div className="mac-titlebar" aria-hidden="true"><i /><i /><i /><span>PDF Librarian</span></div><img src={app.screen} alt={app.screenAlt} width="2880" height="1800" loading="lazy" /></div> : <img src={app.screen} alt={app.screenAlt} width="720" height="1564" loading="lazy" />}</div>
             <span className="visual-open"><Arrow diagonal /></span>
           </a>
           <div className="app-information"><div className="app-title-row"><img className="app-icon" src={app.icon} alt="" width="48" height="48" loading="lazy" /><div><h3><a href={app.home}>{app.name}{app.chinese && <small>{t ? app.traditional : app.chinese}</small>}</a></h3><span className="app-platform">{app.platform}</span></div></div>

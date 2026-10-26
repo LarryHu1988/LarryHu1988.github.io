@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "sync:poetry": "python3 tooling/sync-poetry-picture.py",
     "test": "playwright test --config tests/playwright.config.ts",
-    "test:tooling": "node --test tests/tooling.test.mjs",
+    "test:tooling": "node --test tests/*.test.mjs",
     "check:repository": "node tooling/check-repository.mjs",
     "deploy": "npm run build && node tooling/deploy.mjs"
   },

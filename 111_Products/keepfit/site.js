@@ -18,7 +18,7 @@
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     document.querySelectorAll('[data-zh]').forEach(node => { node.textContent = node.dataset[lang]; });
     document.querySelectorAll('[data-image]').forEach(node => {
-      const next = `assets/${lang}-${node.dataset.image}.webp`;
+      const next = `assets/${lang}-${node.dataset.image}.webp?v=native-lossless`;
       if (node.getAttribute('src') !== next) node.src = next;
       if (node.dataset.altZh) node.alt = lang === 'zh' ? node.dataset.altZh : node.dataset.altEn;
     });
