@@ -114,7 +114,7 @@ svg { flex-shrink: 0; }
 .app-visual { height: 303px; position: relative; overflow: hidden; display: block; isolation: isolate; border-bottom: 1px solid #d9ddd060; }
 .simpleworth .app-visual { background: #dee9e9; }
 .keepfit .app-visual { background: #e4e8d9; }
-.pdflibrarian .app-visual { background: #e8ded1; }
+.pdflibrarian .app-visual { background: #e8ded1; display: flex; align-items: center; justify-content: center; padding: 48px 18px; }
 .app-visual-top { position: absolute; top: 19px; left: 19px; right: 19px; display: flex; justify-content: space-between; font-size: 7px; letter-spacing: .12em; color: #4e625a; z-index: 2; }
 .visual-orbit { position: absolute; width: 250px; height: 250px; border: 1px solid #fff8; border-radius: 50%; left: 50%; top: 48%; transform: translate(-50%, -50%); z-index: -1; }
 .visual-orbit::after { content: ""; position: absolute; inset: -31px; border: 1px solid #fff5; border-radius: 50%; }
@@ -123,12 +123,8 @@ svg { flex-shrink: 0; }
 .keepfit .phone-preview { transform: rotate(7deg); margin-top: 60px; }
 .app-visual:hover .phone-preview { transform: rotate(-2deg) translateY(-8px); }
 .keepfit .app-visual:hover .phone-preview { transform: rotate(2deg) translateY(-8px); }
-.mac-preview { width: 90%; margin: 89px 0 0 7%; border-radius: 6px; background: #fffdf8; border: 3px solid #5a5d50; box-shadow: 7px 15px 25px #4c372128; transform: rotate(-6deg); overflow: hidden; transition: transform .5s; }
-.mac-preview img { aspect-ratio: 1.54; width: 100%; object-fit: cover; object-position: top; }
-.mac-titlebar { height: 15px; display: flex; gap: 3px; padding: 5px 6px; align-items: center; background: #e8e7e0; position: relative; }
-.mac-titlebar i { width: 4px; height: 4px; background: #b7b9aa; border-radius: 50%; }
-.mac-titlebar span { position: absolute; left: 40%; font-size: 4px; }
-.app-visual:hover .mac-preview { transform: rotate(-2deg) translateY(-5px); }
+.mac-preview { width: 100%; height: 100%; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.mac-preview img { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 8px 24px #4c37211c, 0 0 0 1px #4c37211a; }
 .visual-open { position: absolute; right: 15px; bottom: 15px; width: 31px; height: 31px; border-radius: 50%; background: #ffffff80; border: 1px solid #fff9; display: grid; place-items: center; }
 .visual-open svg { width: 14px; }
 .app-information { padding: 24px 23px 17px; display: flex; flex-direction: column; flex: 1; }
@@ -289,7 +285,6 @@ svg { flex-shrink: 0; }
   .app-primary-links a { font-size: 11px; }
   .app-primary-links .store-link { font-size: 10px; }
   .app-tags { margin-bottom: 22px; }
-  .mac-preview { width: 105%; margin-top: 110px; margin-left: 4%; }
   .section-heading h2 { font-size: 36px; }
   .section-detail { font-size: 11px; }
   .poem-grid { gap: 18px; }
@@ -353,7 +348,6 @@ svg { flex-shrink: 0; }
   .app-visual-top { top: 20px; left: 21px; right: 21px; font-size: 8px; }
   .phone-preview { width: 166px; margin-top: 55px; }
   .keepfit .phone-preview { margin-top: 55px; }
-  .mac-preview { width: 90%; margin-top: 86px; margin-left: 7%; }
   .app-information { padding: 25px 23px 19px; }
   .app-title-row h3 { font-size: 21px; }
   .app-icon { width: 45px; height: 45px; }
