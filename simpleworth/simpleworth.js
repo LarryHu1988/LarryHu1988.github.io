@@ -1,4 +1,21 @@
 (() => {
+  const revealed = new WeakSet();
+  const observer = typeof IntersectionObserver === 'undefined' ? null : new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      revealed.add(entry.target);
+      observer.unobserve(entry.target);
+      setImage(entry.target, entry.target.dataset.source);
+    });
+  }, { rootMargin: '240px' });
+  function setImage(node, source) {
+    node.dataset.source = source;
+    node.decoding = 'async';
+    if (node.loading !== 'lazy' || revealed.has(node) || !observer) {
+      node.loading = 'eager';
+      if (node.getAttribute('src') !== source) node.src = source;
+    } else observer.observe(node);
+  }
   const toggle = document.querySelector('.language-toggle');
   const tabs = [...document.querySelectorAll('[data-preview]')];
   const image = document.getElementById('preview-image');
@@ -17,7 +34,7 @@
   function renderPreview() {
     const p = previews[active], copy = p[language];
     image.dataset.screen = active;
-    image.src = `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${active}.webp?v=native-lossless`;
+    setImage(image, `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${active}.webp?v=native-lossless`);
     image.alt = `SimpleWorth ${copy[2]}`;
     title.textContent = copy[0]; description.textContent = copy[1];
     symbol.textContent = p.icon; symbol.className = `feature-symbol ${p.color}`;
@@ -28,7 +45,7 @@
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
     document.querySelectorAll('[data-zh][data-en]').forEach(node => { node.textContent = node.dataset[language]; });
     document.querySelectorAll('img[data-screen]').forEach(node => {
-      node.src = `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${node.dataset.screen}.webp?v=native-lossless`;
+      setImage(node, `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${node.dataset.screen}.webp?v=native-lossless`);
       node.alt = language === 'en' ? `SimpleWorth ${node.dataset.screen === '02-overview' ? 'overview and monthly trends' : 'expense categories and entries'}` : node.dataset.screen === '02-overview' ? '统计页：收支概览与月度趋势' : '支出页：分类圆环与账目记录';
     });
     toggle.textContent = language === 'en' ? '中文' : 'EN';
@@ -50,7 +67,5 @@
       if (next !== undefined) { event.preventDefault(); active = tabs[next].dataset.preview; renderPreview(); tabs[next].focus(); }
     });
   });
-  let preferred;
-  try { preferred = localStorage.getItem('simpleworth-language'); } catch {}
-  setLanguage(preferred === 'en' || preferred === 'zh' ? preferred : navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en');
+  setLanguage(document.documentElement.dataset.productLanguage || 'zh');
 })();
