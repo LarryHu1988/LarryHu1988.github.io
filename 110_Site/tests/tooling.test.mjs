@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { root, publishable } from '../tooling/paths.mjs';
+import { root, output, publishable } from '../tooling/paths.mjs';
+
+test('numbered workspace folders retain the consecutive source/private/build contract', () => {
+  for (const path of ['110_Site', '111_Products', '112_Brand']) assert(existsSync(resolve(root, path)), path);
+  assert.equal(output, resolve(root, '114_Build/site'));
+  const ignore = readFileSync(resolve(root, '.gitignore'), 'utf8');
+  for (const path of ['113_Local/', '114_Build/']) assert(ignore.split('\n').includes(path), path);
+});
 
 test('entry files live in folders without breaking repository discovery', () => {
   for (const path of ['.github/README.md', '110_Site/package.json', '110_Site/package-lock.json']) {

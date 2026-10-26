@@ -10,7 +10,7 @@ const privatePath = /(?:\/Users\/[A-Za-z0-9_.-]+\/|[A-Za-z]:\\Users\\[A-Za-z0-9_
 const textTypes = new Set(['.md', '.mjs', '.json', '.ts', '.tsx', '.css', '.html', '.svg', '.txt', '.py']);
 
 for (const file of files) {
-  assert(!/^(?:115_Local|119_Build)\/|(?:^|\/)(?:node_modules|\.next)\//.test(file), `Local-only file is tracked: ${file}`);
+  assert(!/^(?:113_Local|114_Build)\/|(?:^|\/)(?:node_modules|\.next)\//.test(file), `Local-only file is tracked: ${file}`);
   assert(!/(?:^|\/)(?:\.env(?:\..*)?|id_rsa|id_ed25519)$|\.(?:pem|key|p12|pfx|sqlite|db|log)$/i.test(file), `Sensitive file name: ${file}`);
   if (textTypes.has(extname(file)) && existsSync(resolve(root, file))) {
     assert(!privatePath.test(readFileSync(resolve(root, file), 'utf8')), `Personal filesystem path: ${file}`);

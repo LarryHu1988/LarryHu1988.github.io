@@ -30,7 +30,7 @@ test('home keeps the selected content and real product images', async ({ page },
   await page.locator('.site-footer').scrollIntoViewIfNeeded();
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => window.scrollTo(0, 0));
-  await page.screenshot({ path: resolve(__dirname, '../../119_Build/checks', `${testInfo.project.name}-home.png`), fullPage: true, animations: 'disabled' });
+  await page.screenshot({ path: resolve(__dirname, '../../114_Build/checks', `${testInfo.project.name}-home.png`), fullPage: true, animations: 'disabled' });
   expect(errors).toEqual([]);
 });
 
@@ -43,7 +43,7 @@ test('PDF Librarian centers a computer window with the complete native screensho
   await expect(image).toHaveJSProperty('complete', true);
   await expect(image).toHaveJSProperty('naturalWidth', 2880);
   await expect(image).toHaveJSProperty('naturalHeight', 1800);
-  await expect(image).toHaveAttribute('src', '/images/pdf-workspace-1.5.0.png');
+  await expect(image).toHaveAttribute('src', '/images/pdf-workspace-1.5.0.optimized.png');
   await expect(visual.locator('.mac-titlebar')).toHaveCount(1);
   for (const width of [320, 375, 390, 600, 768, 850, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
@@ -58,7 +58,7 @@ test('PDF Librarian centers a computer window with the complete native screensho
         const titlebar = parent.querySelector('.mac-titlebar')!.getBoundingClientRect();
         return {
           x: Math.abs(rect.x + rect.width / 2 - bounds.x - bounds.width / 2),
-          y: Math.abs(rect.y + rect.height / 2 - bounds.y - bounds.height / 2),
+          y: rect.y + rect.height / 2 - bounds.y - bounds.height / 2,
           ratio: image.width / image.height,
           contained: rect.x >= bounds.x && rect.y >= bounds.y && rect.right <= bounds.right && rect.bottom <= bounds.bottom && image.x >= rect.x && image.right <= rect.right && image.y >= titlebar.bottom && image.bottom <= rect.bottom,
           fit: getComputedStyle(element).objectFit,
@@ -66,12 +66,26 @@ test('PDF Librarian centers a computer window with the complete native screensho
         };
       });
       expect(geometry.x, `horizontal center at ${width}px`).toBeLessThan(1);
-      expect(geometry.y, `vertical center at ${width}px`).toBeLessThan(1);
+      expect(Math.abs(geometry.y + (hover ? 8 : 0)), `centered, with an 8px hover lift at ${width}px`).toBeLessThan(1);
       expect(geometry.ratio, `native screenshot ratio at ${width}px`).toBeCloseTo(1.6, 2);
       expect(geometry.contained, `uncropped screenshot at ${width}px`).toBe(true);
       expect(geometry.fit).toBe('contain');
-      expect(geometry.transform).toBe('none');
+      expect(geometry.transform).toBe(hover ? 'matrix(1, 0, 0, 1, 0, -8)' : 'none');
     }
+  }
+});
+
+test('all three product mockups animate upward on hover and return to their resting layout', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/#apps');
+  for (const id of ['simpleworth', 'keepfit', 'pdflibrarian']) {
+    const visual = page.locator(`.${id} .app-visual`);
+    const mockup = visual.locator(id === 'pdflibrarian' ? '.mac-window' : '.phone-preview');
+    await visual.hover();
+    await expect.poll(() => mockup.evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m42)).toBeLessThan(-7);
+    expect(await mockup.evaluate(el => getComputedStyle(el).transitionDuration)).toBe('0.5s');
+    await page.mouse.move(0, 0);
+    await expect.poll(() => mockup.evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m42)).toBe(0);
   }
 });
 

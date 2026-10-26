@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 from PIL import Image, ImageOps
 
 SITE = Path(__file__).resolve().parents[1]
-CONFIG = SITE.parent / '115_Local' / 'poetry-picture.json'
+CONFIG = SITE.parent / '113_Local' / 'config' / 'poetry-picture.json'
 START = '2026-10-08'
 PUBLISHED_BASES = {'official-published-list', 'completed-scheduled-today-absent-from-full-draft-box', 'completed-scheduled-past-absent-from-full-draft-box'}
 

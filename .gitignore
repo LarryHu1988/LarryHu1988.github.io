@@ -24,8 +24,8 @@ next-env.d.ts
 .test-artifacts/
 110_Site/public/simpleworth/
 110_Site/public/keepfit/
-115_Local/
-119_Build/
+113_Local/
+114_Build/
 dist/
 build/
 .cache/

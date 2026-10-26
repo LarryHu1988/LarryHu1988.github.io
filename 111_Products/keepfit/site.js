@@ -1,5 +1,22 @@
 (() => {
   'use strict';
+  const revealed = new WeakSet();
+  const observer = typeof IntersectionObserver === 'undefined' ? null : new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      revealed.add(entry.target);
+      observer.unobserve(entry.target);
+      setImage(entry.target, entry.target.dataset.source);
+    });
+  }, { rootMargin: '240px' });
+  function setImage(node, source) {
+    node.dataset.source = source;
+    node.decoding = 'async';
+    if (node.loading !== 'lazy' || revealed.has(node) || !observer) {
+      node.loading = 'eager';
+      if (node.getAttribute('src') !== source) node.src = source;
+    } else observer.observe(node);
+  }
   const pdf = document.title.startsWith('PDF Librarian');
   const captions = pdf ? {
     overview: ['01 / 选择文件', '01 / Select your files'],
@@ -11,15 +28,14 @@
     'move-overview': ['KeepFit 运动记录界面', 'KeepFit exercise overview'],
     'lose-overview': ['KeepFit 热量平衡与身体记录界面', 'KeepFit calorie balance and body records']
   };
-  let lang = 'zh';
-  try { lang = localStorage.getItem('larry-product-language') === 'en' ? 'en' : 'zh'; } catch {}
+  let lang = document.documentElement.dataset.productLanguage || 'zh';
   const toggle = document.querySelector('.language');
   function render() {
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     document.querySelectorAll('[data-zh]').forEach(node => { node.textContent = node.dataset[lang]; });
     document.querySelectorAll('[data-image]').forEach(node => {
       const next = `assets/${lang}-${node.dataset.image}.webp?v=native-lossless`;
-      if (node.getAttribute('src') !== next) node.src = next;
+      setImage(node, next);
       if (node.dataset.altZh) node.alt = lang === 'zh' ? node.dataset.altZh : node.dataset.altEn;
     });
     const preview = document.querySelector('#preview-image');

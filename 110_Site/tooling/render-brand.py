@@ -54,7 +54,7 @@ def svg(name, width, height, title, body):
 <rect width="{width}" height="{height}" fill="{PAPER}"/>
 {body}
 </svg>'''
-    target = ROOT / "119_Build/brand" if name in {"simpleworth", "keepfit", "pdflibrarian"} else OUT
+    target = ROOT / "114_Build/brand" if name in {"simpleworth", "keepfit", "pdflibrarian"} else OUT
     target.mkdir(parents=True, exist_ok=True)
     (target / f"{name}.svg").write_text(content)
 

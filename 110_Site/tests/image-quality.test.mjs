@@ -32,7 +32,7 @@ test('all phone screenshots retain native 1320 by 2868 lossless pixels', () => {
   let count = 0;
   for (const product of ['simpleworth', 'keepfit']) {
     const dir = `111_Products/${product}/assets`;
-    for (const name of readdirSync(resolve(root, dir)).filter(name => name.endsWith('.webp'))) {
+    for (const name of readdirSync(resolve(root, dir)).filter(name => name.endsWith('.webp') && name !== 'icon.webp')) {
       assert.deepEqual(losslessWebpSize(`${dir}/${name}`), [1320, 2868], name);
       count++;
     }
@@ -50,6 +50,10 @@ test('app icons and hosted README screenshots retain native PNG resolution', () 
   for (const name of names) assert.deepEqual(pngSize(`${dir}/${name}`), [1320, 2868], name);
   assert.deepEqual(pngSize('110_Site/public/images/pdf-workspace-1.5.0.png'), [2880, 1800]);
   assert.deepEqual(losslessWebpSize('110_Site/public/images/pdf-overview.webp'), [2880, 1800]);
+  assert.deepEqual(pngSize('110_Site/public/images/pdf-workspace-1.5.0.optimized.png'), [2880, 1800]);
+  for (const path of ['111_Products/simpleworth/assets/icon.webp', '111_Products/keepfit/assets/icon.webp']) {
+    assert.deepEqual(losslessWebpSize(path), [1024, 1024], path);
+  }
 });
 
 test('poetry covers use the exact full-resolution approved illustration', () => {
