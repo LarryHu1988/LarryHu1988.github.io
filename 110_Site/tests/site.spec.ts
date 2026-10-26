@@ -16,11 +16,17 @@ test('home keeps the selected content and real product images', async ({ page },
   await expect(page.locator('.poem-card')).toHaveCount(2);
   await expect(page.locator('#sports, #insight, #notes, #melody, #cinema')).toHaveCount(0);
   await page.locator('#apps').scrollIntoViewIfNeeded();
-  for (const image of await page.locator('.app-card img').all()) {
-    await expect(image).toHaveJSProperty('complete', true);
-    expect(await image.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+  for (const card of await page.locator('.app-card').all()) {
+    await card.scrollIntoViewIfNeeded();
+    for (const image of await card.locator('img').all()) {
+      await expect.poll(() => image.getAttribute('src')).toBe(await image.getAttribute('data-deferred-src'));
+      await expect(image).toHaveJSProperty('complete', true);
+      expect(await image.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    }
   }
   await page.locator('#poetry').scrollIntoViewIfNeeded();
+  await page.locator('.poetry-player').scrollIntoViewIfNeeded();
+  await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(5);
   await page.locator('.site-footer').scrollIntoViewIfNeeded();
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => window.scrollTo(0, 0));

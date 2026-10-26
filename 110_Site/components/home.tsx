@@ -7,6 +7,7 @@ import poems from '@/content/poems.json';
 import { useLanguage } from './language';
 import { Arrow } from './site-chrome';
 import { PoetryFlow, type PoetrySleeve } from './poetry-flow';
+import { DeferredImage } from './deferred-image';
 
 function RainStudy() {
   return <div className="rain-study" aria-label="抽象雨滴与水面涟漪插画" role="img">
@@ -63,10 +64,10 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
           <a className="app-visual" href={app.home} aria-label={`${app.name} ${t ? '產品主頁' : '产品主页'}`}>
             <div className="app-visual-top"><span>{app.category}</span><span>{app.number}</span></div>
             <div className="visual-orbit" aria-hidden="true" />
-            <div className={app.id === 'pdflibrarian' ? 'mac-preview' : 'phone-preview'}>{app.id === 'pdflibrarian' ? <div className="mac-window"><div className="mac-titlebar" aria-hidden="true"><i /><i /><i /><span>PDF Librarian</span></div><img src={app.screen} alt={app.screenAlt} width="2880" height="1800" loading="lazy" /></div> : <img src={app.screen} alt={app.screenAlt} width="720" height="1564" loading="lazy" />}</div>
+            <div className={app.id === 'pdflibrarian' ? 'mac-preview' : 'phone-preview'}>{app.id === 'pdflibrarian' ? <div className="mac-window"><div className="mac-titlebar" aria-hidden="true"><i /><i /><i /><span>PDF Librarian</span></div><DeferredImage src={app.screen} alt={app.screenAlt} width={2880} height={1800} /></div> : <DeferredImage src={app.screen} alt={app.screenAlt} width={1320} height={2868} />}</div>
             <span className="visual-open"><Arrow diagonal /></span>
           </a>
-          <div className="app-information"><div className="app-title-row"><img className="app-icon" src={app.icon} alt="" width="48" height="48" loading="lazy" /><div><h3><a href={app.home}>{app.name}{app.chinese && <small>{t ? app.traditional : app.chinese}</small>}</a></h3><span className="app-platform">{app.platform}</span></div></div>
+          <div className="app-information"><div className="app-title-row"><DeferredImage className="app-icon" src={app.icon} alt="" width={48} height={48} /><div><h3><a href={app.home}>{app.name}{app.chinese && <small>{t ? app.traditional : app.chinese}</small>}</a></h3><span className="app-platform">{app.platform}</span></div></div>
             <h4>{t ? app.taglineHant : app.tagline}</h4><p className="app-description">{t ? app.descriptionHant : app.description}</p>
             <ul className="app-tags" aria-label="主要功能">{(t ? app.featuresHant : app.features).map(feature => <li key={feature}>{feature}</li>)}</ul>
             <div className="app-primary-links"><a href={app.home}>{t ? '探索這個 App' : '探索这个 App'}<Arrow /></a><a className="store-link" href={app.store} target="_blank" rel="noreferrer" aria-label={`${app.name} App Store`}>App Store <Arrow diagonal /></a></div>
