@@ -17,7 +17,7 @@
   function renderPreview() {
     const p = previews[active], copy = p[language];
     image.dataset.screen = active;
-    image.src = `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${active}.webp`;
+    image.src = `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${active}.webp?v=native-lossless`;
     image.alt = `SimpleWorth ${copy[2]}`;
     title.textContent = copy[0]; description.textContent = copy[1];
     symbol.textContent = p.icon; symbol.className = `feature-symbol ${p.color}`;
@@ -28,7 +28,7 @@
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
     document.querySelectorAll('[data-zh][data-en]').forEach(node => { node.textContent = node.dataset[language]; });
     document.querySelectorAll('img[data-screen]').forEach(node => {
-      node.src = `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${node.dataset.screen}.webp`;
+      node.src = `assets/${language === 'en' ? 'en-US' : 'zh-Hans'}-${node.dataset.screen}.webp?v=native-lossless`;
       node.alt = language === 'en' ? `SimpleWorth ${node.dataset.screen === '02-overview' ? 'overview and monthly trends' : 'expense categories and entries'}` : node.dataset.screen === '02-overview' ? '统计页：收支概览与月度趋势' : '支出页：分类圆环与账目记录';
     });
     toggle.textContent = language === 'en' ? '中文' : 'EN';
