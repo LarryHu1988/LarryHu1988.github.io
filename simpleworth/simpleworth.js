@@ -1,4 +1,6 @@
+import { loadProgressiveImage, previewFor } from "/scripts/progressive-images.js?v=clear-1";
 (() => {
+  const imagePreviews = JSON.parse(document.getElementById('image-previews')?.textContent || '{}');
   const revealed = new WeakSet();
   const observer = typeof IntersectionObserver === 'undefined' ? null : new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -13,7 +15,7 @@
     node.decoding = 'async';
     if (node.loading !== 'lazy' || revealed.has(node) || !observer) {
       node.loading = 'eager';
-      if (node.getAttribute('src') !== source) node.src = source;
+      loadProgressiveImage(node, source, previewFor(source, imagePreviews), { priority: node.fetchPriority });
     } else observer.observe(node);
   }
   const toggle = document.querySelector('.language-toggle');
@@ -41,6 +43,7 @@
     tabs.forEach(tab => { const selected = tab.dataset.preview === active; tab.setAttribute('aria-selected', String(selected)); tab.tabIndex = selected ? 0 : -1; if (selected) panel.setAttribute('aria-labelledby', tab.id); });
   }
   function setLanguage(value) {
+    document.querySelectorAll('img[data-icon-progressive]').forEach(node => setImage(node, node.dataset.source));
     language = value;
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
     document.querySelectorAll('[data-zh][data-en]').forEach(node => { node.textContent = node.dataset[language]; });

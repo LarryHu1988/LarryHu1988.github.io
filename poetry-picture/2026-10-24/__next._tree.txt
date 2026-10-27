@@ -2,8 +2,7 @@
 :HL["/fonts/ibm-plex-mono-500.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/dm-sans.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/noto-serif-sc.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
-:HL["/poetry-picture/2026-10-24-cover.webp?v=native-lossless","image",{"fetchPriority":"high"}]
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"date","t":"d","k":"2026-10-24","s":[]},"h":65632,"c":"$Q3"}]]
 1:[["children",{"s":"poetry-picture","h":131168,"c":"$Q2"}]]
-0:{"b":"g654pGR1NEDgpZbNT6sWC","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"eP6aUiC-T6W-ibrQOUoC5","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
