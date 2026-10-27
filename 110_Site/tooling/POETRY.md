@@ -10,7 +10,7 @@ The importer reads only the poem, analysis and editorial-lead paragraphs from th
 
 Reading images are lossless WebP at their delivered native resolution. The portrait sleeves show the complete composition with `object-fit: contain`; their smaller image variants are derived directly from the original. No upscaling or square crop is used.
 
-After importing, run the normal website build and checks, commit the new content and images, and publish with the existing GitHub Pages deployment tool. Importing alone does not publish or establish WeChat publication status.
+After importing, run `python3 tooling/generate-image-previews.py` with Pillow available, then the normal website build and checks. The generator preserves native originals, creates high-quality previews, and fingerprints their URLs to avoid stale cached previews. Commit the new content, preview manifest and images, and publish with the existing GitHub Pages deployment tool. Importing alone does not publish or establish WeChat publication status.
 
 The existing local heartbeat runs at 08:30 and 23:30 Asia/Shanghai. The morning run synchronizes the prior day's newly confirmed publications; the evening run retains the dashboard inspection and retries any pending website synchronization. Publish only when reader content or its images changed. After deployment, confirm Pages completed and read back the changed public URLs.
 

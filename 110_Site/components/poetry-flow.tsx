@@ -5,16 +5,17 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from './language';
 import { Arrow } from './site-chrome';
 import { useNearViewport } from './use-near-viewport';
+import { DeferredImage } from './deferred-image';
 
 export type PoetrySleeve = { date: string; title: string; author: string; cover: string };
 
-export function PoetryFlow({ issues, headingLevel = 3 }: { issues: PoetrySleeve[]; headingLevel?: 2 | 3 }) {
+export function PoetryFlow({ issues, headingLevel = 3, eager = false }: { issues: PoetrySleeve[]; headingLevel?: 2 | 3; eager?: boolean }) {
   const { traditional: t } = useLanguage();
   const [active, setActive] = useState(issues.length - 1);
   const [selectionReady, setSelectionReady] = useState(false);
   const { ref, near } = useNearViewport<HTMLDivElement>('400px');
-  const [requested, setRequested] = useState<ReadonlySet<string>>(() => new Set());
-  const [loaded, setLoaded] = useState<ReadonlySet<string>>(() => new Set());
+  const [requested, setRequested] = useState<ReadonlySet<string>>(() => new Set(eager && issues.length ? [issues[issues.length - 1].cover] : []));
+  const [displayed, setDisplayed] = useState<ReadonlyMap<string, string>>(() => new Map());
   const [failed, setFailed] = useState<ReadonlySet<string>>(() => new Set());
   const start = useRef<{ x: number; y: number } | null>(null);
   const dragged = useRef(false);
@@ -32,11 +33,11 @@ export function PoetryFlow({ issues, headingLevel = 3 }: { issues: PoetrySleeve[
 
   useEffect(() => {
     if (!near || !selectionReady || !issue) return;
-    // Let the selected cover finish before fetching the other visible sleeves.
-    const radius = loaded.has(issue.cover) || failed.has(issue.cover) ? 4 : 0;
+    // Clear previews reveal the neighboring sleeves without waiting for multi-MB originals.
+    const radius = displayed.has(issue.cover) || failed.has(issue.cover) ? 4 : 0;
     const covers = issues.slice(Math.max(0, active - radius), active + radius + 1).map(item => item.cover);
     setRequested(previous => covers.every(cover => previous.has(cover)) ? previous : new Set([...previous, ...covers]));
-  }, [near, selectionReady, active, issue, issues, loaded, failed]);
+  }, [near, selectionReady, active, issue, issues, displayed, failed]);
 
   if (!issue) return null;
   return <div ref={ref} className="poetry-player" role="region" aria-roledescription="轮播图" aria-label="诗情画意封面流">
@@ -73,12 +74,12 @@ export function PoetryFlow({ issues, headingLevel = 3 }: { issues: PoetrySleeve[
             if (offset === 0) window.location.assign(`/poetry-picture/${item.date}/`);
             else setActive(index);
           }}>
-          <span className="album-art">{requested.has(item.cover) && <img src={item.cover} alt="" width="940" height="1672" loading="eager" decoding="async" fetchPriority={offset === 0 ? 'high' : 'low'} draggable={false}
-            onLoad={() => setLoaded(previous => previous.has(item.cover) ? previous : new Set([...previous, item.cover]))}
-            onError={() => setFailed(previous => previous.has(item.cover) ? previous : new Set([...previous, item.cover]))} />}
+          <span className="album-art">{requested.has(item.cover) && distance <= 4 && <DeferredImage src={item.cover} alt="" width={940} height={1672} eager fetchPriority={offset === 0 ? 'high' : 'auto'} draggable={false}
+            onReady={url => setDisplayed(previous => previous.get(item.cover) === url ? previous : new Map([...previous, [item.cover, url]]))}
+            onFailure={() => setFailed(previous => previous.has(item.cover) ? previous : new Set([...previous, item.cover]))} />}
             <span className="album-label" aria-hidden="true"><strong>{item.title}</strong><small>{item.author}</small></span>
           </span>
-          <span className="album-reflection" aria-hidden="true" style={{ backgroundImage: loaded.has(item.cover) ? `url("${item.cover}")` : undefined }} />
+          <span className="album-reflection" aria-hidden="true" style={{ backgroundImage: distance <= 4 && displayed.has(item.cover) ? `url("${displayed.get(item.cover)}")` : undefined }} />
         </button>;
       })}
     </div>

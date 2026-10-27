@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import issues from '@/content/poetry-picture.json';
 import { Arrow } from '@/components/site-chrome';
+import { DeferredImage } from '@/components/deferred-image';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return issues.map(issue => ({ date: issue.date })); }
@@ -23,7 +24,7 @@ export default async function DailyPoetry({ params }: { params: Promise<{ date: 
       <header className="daily-heading"><p className="eyebrow">POETRY–PICTURE <span>/</span><time dateTime={date}>{date.replaceAll('-', ' · ')}</time></p><h1>{issue.title}</h1><p>{issue.author}</p></header>
       <div className="daily-layout">
         {/* The cover is the same native lossless image; reuse its cache key when opening a poem. */}
-        <figure className="daily-illustration"><a href={issue.cover} target="_blank" rel="noreferrer" aria-label={`${issue.title}，查看原尺寸插图`}><img src={issue.cover} alt={`《${issue.title}》诗意插图`} width={issue.width} height={issue.height} fetchPriority="high" decoding="async" /></a><figcaption>一首诗，一幅画。<span>POETRY–PICTURE</span></figcaption></figure>
+        <figure className="daily-illustration"><a href={issue.cover} target="_blank" rel="noreferrer" aria-label={`${issue.title}，查看原尺寸插图`}><DeferredImage src={issue.cover} alt={`《${issue.title}》诗意插图`} width={issue.width} height={issue.height} eager fetchPriority="high" /></a><figcaption>一首诗，一幅画。<span>POETRY–PICTURE</span></figcaption></figure>
         <div className="daily-text"><section className="daily-poem" aria-label="诗歌原文">{issue.poem.map((stanza, i) => <p key={i}>{stanza}</p>)}</section>
           <section className="daily-analysis" aria-labelledby="analysis-title"><h2 id="analysis-title">读诗<span>READING THE POEM</span></h2>{issue.analysis.map((paragraph, i) => <p key={i}>{paragraph}</p>)}</section>
           <aside className="daily-occasion" aria-labelledby="occasion-title"><h2 id="occasion-title">刊发缘起</h2>{issue.occasion.map((paragraph, i) => <p key={i}>{paragraph}</p>)}</aside>

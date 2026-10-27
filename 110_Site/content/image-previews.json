@@ -1,0 +1,485 @@
+{
+  "/simpleworth/assets/en-US-01-expenses.webp": {
+    "src": "/simpleworth/assets/previews/en-US-01-expenses.5a9d018f38d9.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 98974,
+    "nativeBytes": 3020492
+  },
+  "/simpleworth/assets/en-US-02-overview.webp": {
+    "src": "/simpleworth/assets/previews/en-US-02-overview.f90e21c3f764.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 70114,
+    "nativeBytes": 2910340
+  },
+  "/simpleworth/assets/en-US-03-breakdown.webp": {
+    "src": "/simpleworth/assets/previews/en-US-03-breakdown.c096ab33b7be.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 74900,
+    "nativeBytes": 2768398
+  },
+  "/simpleworth/assets/en-US-04-income.webp": {
+    "src": "/simpleworth/assets/previews/en-US-04-income.ab24d9c68b94.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 89646,
+    "nativeBytes": 2974090
+  },
+  "/simpleworth/assets/en-US-05-savings.webp": {
+    "src": "/simpleworth/assets/previews/en-US-05-savings.f3fef7b95881.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 89304,
+    "nativeBytes": 2994132
+  },
+  "/simpleworth/assets/en-US-06-calculator.webp": {
+    "src": "/simpleworth/assets/previews/en-US-06-calculator.f718c104d7a8.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 57422,
+    "nativeBytes": 1993116
+  },
+  "/simpleworth/assets/icon.webp": {
+    "src": "/simpleworth/assets/previews/icon.6a62f63b8047.webp",
+    "width": 192,
+    "height": 192,
+    "nativeWidth": 1024,
+    "nativeHeight": 1024,
+    "bytes": 5298,
+    "nativeBytes": 642260
+  },
+  "/simpleworth/assets/zh-Hans-01-expenses.webp": {
+    "src": "/simpleworth/assets/previews/zh-Hans-01-expenses.03906dbf4649.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 85002,
+    "nativeBytes": 2997702
+  },
+  "/simpleworth/assets/zh-Hans-02-overview.webp": {
+    "src": "/simpleworth/assets/previews/zh-Hans-02-overview.d2341937dfde.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 66732,
+    "nativeBytes": 2902352
+  },
+  "/simpleworth/assets/zh-Hans-03-breakdown.webp": {
+    "src": "/simpleworth/assets/previews/zh-Hans-03-breakdown.67ee3bb1bf81.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 66488,
+    "nativeBytes": 2751126
+  },
+  "/simpleworth/assets/zh-Hans-04-income.webp": {
+    "src": "/simpleworth/assets/previews/zh-Hans-04-income.e83695943e41.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 77628,
+    "nativeBytes": 2960728
+  },
+  "/simpleworth/assets/zh-Hans-05-savings.webp": {
+    "src": "/simpleworth/assets/previews/zh-Hans-05-savings.ea1877c80ad0.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 78310,
+    "nativeBytes": 2971042
+  },
+  "/simpleworth/assets/zh-Hans-06-calculator.webp": {
+    "src": "/simpleworth/assets/previews/zh-Hans-06-calculator.d8efc0c81166.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 57894,
+    "nativeBytes": 2003376
+  },
+  "/keepfit/assets/en-eat-overview.webp": {
+    "src": "/keepfit/assets/previews/en-eat-overview.5a5a1873bc9f.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 81318,
+    "nativeBytes": 2150390
+  },
+  "/keepfit/assets/en-lose-overview.webp": {
+    "src": "/keepfit/assets/previews/en-lose-overview.139edd6dc819.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 86980,
+    "nativeBytes": 1931952
+  },
+  "/keepfit/assets/en-move-overview.webp": {
+    "src": "/keepfit/assets/previews/en-move-overview.818cf38ffa47.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 83074,
+    "nativeBytes": 2212428
+  },
+  "/keepfit/assets/icon.webp": {
+    "src": "/keepfit/assets/previews/icon.1c437b588eb7.webp",
+    "width": 192,
+    "height": 192,
+    "nativeWidth": 1024,
+    "nativeHeight": 1024,
+    "bytes": 4012,
+    "nativeBytes": 193148
+  },
+  "/keepfit/assets/zh-eat-overview.webp": {
+    "src": "/keepfit/assets/previews/zh-eat-overview.a2dd562166e1.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 82662,
+    "nativeBytes": 2167210
+  },
+  "/keepfit/assets/zh-lose-overview.webp": {
+    "src": "/keepfit/assets/previews/zh-lose-overview.c2b8c244cce4.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 79704,
+    "nativeBytes": 1908766
+  },
+  "/keepfit/assets/zh-move-overview.webp": {
+    "src": "/keepfit/assets/previews/zh-move-overview.9869dd327cf3.webp",
+    "width": 880,
+    "height": 1912,
+    "nativeWidth": 1320,
+    "nativeHeight": 2868,
+    "bytes": 80998,
+    "nativeBytes": 2205574
+  },
+  "/poetry-picture/2026-10-08-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-08-cover.b0c5d582dc4b.webp",
+    "width": 940,
+    "height": 1672,
+    "nativeWidth": 940,
+    "nativeHeight": 1672,
+    "bytes": 357606,
+    "nativeBytes": 1786268,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-08-cover.thumb.8e32d0315674.webp",
+      "width": 192,
+      "height": 342,
+      "bytes": 22606
+    }
+  },
+  "/poetry-picture/2026-10-09-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-09-cover.c9879bc8e83e.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 359250,
+    "nativeBytes": 1781548,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-09-cover.thumb.db7163623653.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 24254
+    }
+  },
+  "/poetry-picture/2026-10-10-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-10-cover.3bf23d05643e.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 232706,
+    "nativeBytes": 1505212,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-10-cover.thumb.d586a6aa22e0.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 19836
+    }
+  },
+  "/poetry-picture/2026-10-11-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-11-cover.bcde3d93758c.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 273718,
+    "nativeBytes": 1544026,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-11-cover.thumb.044bc558b89d.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 24692
+    }
+  },
+  "/poetry-picture/2026-10-12-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-12-cover.c2f0bb8aefcb.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 427628,
+    "nativeBytes": 1969636,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-12-cover.thumb.5bce85f08662.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 24276
+    }
+  },
+  "/poetry-picture/2026-10-13-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-13-cover.2db89110d772.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 345380,
+    "nativeBytes": 1698818,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-13-cover.thumb.1c48487bcd2e.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 22886
+    }
+  },
+  "/poetry-picture/2026-10-14-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-14-cover.3c9bf97b42cf.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 315708,
+    "nativeBytes": 1675588,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-14-cover.thumb.52741e95896e.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 27734
+    }
+  },
+  "/poetry-picture/2026-10-15-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-15-cover.6b680b2d1cda.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 379840,
+    "nativeBytes": 1773212,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-15-cover.thumb.bcb0b64513c4.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 27348
+    }
+  },
+  "/poetry-picture/2026-10-16-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-16-cover.7c31eefc5910.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 373672,
+    "nativeBytes": 1741832,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-16-cover.thumb.67098f570a4b.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 29572
+    }
+  },
+  "/poetry-picture/2026-10-17-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-17-cover.9f6d26da4e0b.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 398782,
+    "nativeBytes": 1773648,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-17-cover.thumb.79c71967a1fb.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 19844
+    }
+  },
+  "/poetry-picture/2026-10-18-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-18-cover.5a6bdcf4baaa.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 402676,
+    "nativeBytes": 1925844,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-18-cover.thumb.10def1b6b015.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 23298
+    }
+  },
+  "/poetry-picture/2026-10-19-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-19-cover.f870dac20264.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 121560,
+    "nativeBytes": 1328720,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-19-cover.thumb.c0c8386937e7.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 7912
+    }
+  },
+  "/poetry-picture/2026-10-20-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-20-cover.7ff11bd6bf46.webp",
+    "width": 940,
+    "height": 1672,
+    "nativeWidth": 940,
+    "nativeHeight": 1672,
+    "bytes": 265422,
+    "nativeBytes": 1600120,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-20-cover.thumb.4727d8f5d97f.webp",
+      "width": 192,
+      "height": 342,
+      "bytes": 18730
+    }
+  },
+  "/poetry-picture/2026-10-21-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-21-cover.842b14730958.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 238360,
+    "nativeBytes": 1496684,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-21-cover.thumb.62958b3e1052.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 18612
+    }
+  },
+  "/poetry-picture/2026-10-22-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-22-cover.043e51969f3f.webp",
+    "width": 940,
+    "height": 1672,
+    "nativeWidth": 940,
+    "nativeHeight": 1672,
+    "bytes": 297246,
+    "nativeBytes": 1603236,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-22-cover.thumb.c446154543a3.webp",
+      "width": 192,
+      "height": 342,
+      "bytes": 21426
+    }
+  },
+  "/poetry-picture/2026-10-23-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-23-cover.213c2b007352.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 364508,
+    "nativeBytes": 1854644,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-23-cover.thumb.291b22f7ef1a.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 20186
+    }
+  },
+  "/poetry-picture/2026-10-24-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-24-cover.c87c24c62ce4.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 508272,
+    "nativeBytes": 2159548,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-24-cover.thumb.3313ecf6aa7d.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 29260
+    }
+  },
+  "/poetry-picture/2026-10-25-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-25-cover.8e44097926db.webp",
+    "width": 940,
+    "height": 1672,
+    "nativeWidth": 940,
+    "nativeHeight": 1672,
+    "bytes": 590554,
+    "nativeBytes": 2218004,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-25-cover.thumb.74cfe5fca000.webp",
+      "width": 192,
+      "height": 342,
+      "bytes": 30316
+    }
+  },
+  "/poetry-picture/2026-10-26-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-26-cover.778d60e15d09.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 407852,
+    "nativeBytes": 1894320,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-26-cover.thumb.43c1882b26b1.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 21258
+    }
+  },
+  "/images/pdf-icon.png": {
+    "src": "/images/previews/pdf-icon.be0a3e51c5c6.webp",
+    "width": 192,
+    "height": 192,
+    "nativeWidth": 1024,
+    "nativeHeight": 1024,
+    "bytes": 5016,
+    "nativeBytes": 250509
+  },
+  "/images/pdf-workspace-1.5.0.optimized.png": {
+    "src": "/images/previews/pdf-workspace-1.5.0.optimized.1f9a153117b3.webp",
+    "width": 1600,
+    "height": 1000,
+    "nativeWidth": 2880,
+    "nativeHeight": 1800,
+    "bytes": 73864,
+    "nativeBytes": 447155
+  }
+}

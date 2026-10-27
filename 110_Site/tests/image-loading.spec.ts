@@ -15,7 +15,7 @@ test('home defers offscreen app images, covers and reflections until approached'
   expect(covers.size).toBe(0);
   await expect(page.locator('.album-art img')).toHaveCount(0);
   await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(0);
-  await expect(page.locator('.app-card img').first()).toHaveAttribute('src', /^data:image\/svg\+xml,/);
+  await expect(page.locator('.app-card img').first()).toHaveAttribute('src', /\/previews\//);
 
   await page.locator('#apps').scrollIntoViewIfNeeded();
   const preview = page.locator('.simpleworth .phone-preview img');
@@ -26,29 +26,32 @@ test('home defers offscreen app images, covers and reflections until approached'
 
   await page.locator('.poetry-player').scrollIntoViewIfNeeded();
   await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(5);
-  expect(covers.size).toBe(5);
+  await expect(page.locator('.is-active img')).toHaveAttribute('data-image-stage', 'full');
+  expect(covers.size).toBeGreaterThan(0);
+  expect(covers.size).toBeLessThanOrEqual(5);
 });
 
-test('the current cover loads first and reflections cannot trigger early downloads', async ({ page }) => {
+test('clear previews and reflections display while at most two native covers are downloading', async ({ page }) => {
   const covers = new Set<string>();
   let release!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   await page.route('**/poetry-picture/*-cover.webp*', async route => {
     covers.add(new URL(route.request().url()).pathname);
-    if (route.request().url().includes(latest.cover)) await gate;
+    await gate;
     await route.continue();
   });
   try {
     await page.goto('/#poetry-picture', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('.album-art img')).toHaveCount(1);
-    await expect.poll(() => covers.size).toBe(1);
-    expect([...covers]).toEqual([latest.cover.split('?')[0]]);
-    await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(0);
+    await expect(page.locator('.album-art img')).toHaveCount(5);
+    await expect(page.locator('.album-reflection[style*="previews/"]')).toHaveCount(5);
+    await expect(page.locator('.is-active img')).toHaveAttribute('data-image-stage', 'preview');
+    await expect.poll(() => covers.size).toBe(2);
   } finally {
     release();
   }
   await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(5);
-  expect(covers.size).toBe(5);
+  await expect(page.locator('.is-active img')).toHaveAttribute('data-image-stage', 'full');
+  expect(covers.size).toBeLessThanOrEqual(5);
   await expect(page.locator('.is-active .album-art img')).toHaveJSProperty('naturalWidth', latest.width);
 });
 
@@ -59,18 +62,20 @@ test('deep links, keyboard navigation, slider jumps and revisits load only nearb
   await page.goto(`/?day=${issues[0].date}#poetry-picture`);
   const player = page.locator('.poetry-player');
   await expect(player.locator('.flow-caption h3')).toHaveText(issues[0].title);
-  await expect(player.locator('.album-reflection[style*="url("]')).toHaveCount(5);
-  expect(new Set(requests)).toEqual(new Set(issues.slice(0, 5).map(item => item.cover.split('?')[0])));
+  await expect(player.locator('.is-active img')).toHaveAttribute('data-image-stage', 'full');
+  const nearby = new Set(issues.slice(0, 5).map(item => item.cover.split('?')[0]));
+  expect(requests.every(source => nearby.has(source))).toBe(true);
 
   const flow = player.locator('.cover-flow');
   await flow.focus();
   await flow.press('ArrowRight');
   await expect(player.locator('.flow-caption h3')).toHaveText(issues[1].title);
   await expect(player.locator('.album-reflection[style*="url("]')).toHaveCount(6);
-  const before = requests.length;
+  await expect(player.locator('.is-active img')).toHaveAttribute('data-image-stage', 'full');
+  const before = requests.filter(source => source === issues[0].cover.split('?')[0]).length;
   await flow.press('Home');
   await expect(player.locator('.flow-caption h3')).toHaveText(issues[0].title);
-  expect(requests.length).toBe(before);
+  expect(requests.filter(source => source === issues[0].cover.split('?')[0]).length).toBe(before);
 
   const seek = player.locator('input[type="range"]');
   await seek.fill('10');
@@ -97,9 +102,11 @@ test('tracklist thumbnails remain deferred and reading reuses the full-quality c
   await expect(page.locator('.daily-illustration a')).toHaveAttribute('href', issues[0].cover);
 });
 
-test('a failed current image does not prevent nearby images from loading', async ({ page }) => {
+test('a failed native image keeps its clear preview and does not block nearby covers', async ({ page }) => {
   await page.route(`**${latest.cover}`, route => route.abort());
   await page.goto('/#poetry-picture');
   await expect(page.locator('.album-art img')).toHaveCount(5);
-  await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(4);
+  await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(5);
+  await expect(page.locator('.is-active img')).toHaveAttribute('data-image-stage', 'preview');
+  await expect(page.locator('.is-active img')).toHaveAttribute('data-original-error', 'true');
 });

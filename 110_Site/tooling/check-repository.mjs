@@ -7,7 +7,7 @@ import { root, output, publishable } from './paths.mjs';
 const git = args => execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
 const files = git(['ls-files', '-z']).split('\0').filter(Boolean);
 const privatePath = /(?:\/Users\/[A-Za-z0-9_.-]+\/|[A-Za-z]:\\Users\\[A-Za-z0-9_.-]+\\)/;
-const textTypes = new Set(['.md', '.mjs', '.json', '.ts', '.tsx', '.css', '.html', '.svg', '.txt', '.py']);
+const textTypes = new Set(['.md', '.js', '.mjs', '.json', '.ts', '.tsx', '.css', '.html', '.svg', '.txt', '.py']);
 
 for (const file of files) {
   assert(!/^(?:113_Local|114_Build)\/|(?:^|\/)(?:node_modules|\.next)\//.test(file), `Local-only file is tracked: ${file}`);

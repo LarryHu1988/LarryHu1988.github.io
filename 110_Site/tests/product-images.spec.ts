@@ -7,6 +7,8 @@ const products = [
 
 for (const product of products) {
   test(`${product.id} downloads only the preferred-language hero screens and defers the preview`, async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
     const screens = new Set<string>();
     page.on('request', request => {
       if (/\/assets\/(?:zh|en)[^/]*\.webp/.test(request.url())) screens.add(new URL(request.url()).pathname);
@@ -22,10 +24,13 @@ for (const product of products) {
     await page.locator('#preview-image').evaluate(img => img.parentElement!.scrollIntoView({ block: 'center' }));
     await expect(page.locator('#preview-image')).toHaveAttribute('src', `assets/${product.locale}-${product.screen}.webp?v=native-lossless`);
     await expect(page.locator('#preview-image')).toHaveJSProperty('naturalWidth', 1320);
+    expect(errors).toEqual([]);
     await page.locator('[data-preview]').nth(1).click();
     await expect(page.locator('#preview-image')).toHaveJSProperty('naturalHeight', 2868);
     await page.locator('.language, .language-toggle').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
+    await expect(page.locator('#preview-image')).toHaveAttribute('data-original-src', /^assets\/zh/);
+    await page.locator('#preview-image').evaluate(img => img.parentElement!.scrollIntoView({ block: 'center' }));
     await expect(page.locator('#preview-image')).toHaveAttribute('src', /^assets\/zh/);
     await expect(page.locator('#preview-image')).toHaveJSProperty('naturalWidth', 1320);
   });
@@ -49,7 +54,7 @@ test('product pages fall back to eager originals without IntersectionObserver', 
     await page.goto(`/${product.id}/`);
     for (const image of await page.locator('img[data-source]').all()) {
       await expect(image).not.toHaveAttribute('src', /^data:/);
-      await expect(image).toHaveJSProperty('naturalWidth', 1320);
+      await expect(image).toHaveJSProperty('naturalWidth', await image.getAttribute('data-icon-progressive') ? 1024 : 1320);
     }
   }
 });
