@@ -109,7 +109,7 @@ test('the shared queue starts the foreground first and holds background concurre
   const keys = Object.keys(previews).filter(source => source.includes('/poetry-picture/')).slice(0, 3) as (keyof typeof previews)[];
   const starts: string[] = [];
   const releases = new Map<string, () => void>();
-  await page.route('**/poetry-picture/previews/*-cover.w*.*.webp', async route => {
+  await page.route('**/poetry-picture/previews/*-cover.w*.*.webp?queue-fixture=1', async route => {
     const path = new URL(route.request().url()).pathname;
     starts.push(path);
     await new Promise<void>(resolve => releases.set(path, resolve));
@@ -127,7 +127,7 @@ test('the shared queue starts the foreground first and holds background concurre
         document.body.append(image);
         loadDisplayImage(image, item.source, { [item.source]: item.info }, { priority: index === 1 ? 'high' : 'low' });
       }
-    }, keys.map(source => ({ source, info: previews[source] })));
+    }, keys.map(source => ({ source, info: { ...previews[source], variants: previews[source].variants.map(variant => ({ ...variant, src: variant.src + '?queue-fixture=1' })) } })));
     await expect.poll(() => starts.length).toBe(2);
     expect(starts[0]).toContain(keys[1].split('/').at(-1)!.replace('.webp', '.w'));
     for (const release of releases.values()) release();

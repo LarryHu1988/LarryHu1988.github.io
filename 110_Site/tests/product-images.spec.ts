@@ -7,7 +7,7 @@ const products = [
 ];
 
 for (const product of products) {
-  test(`${product.id} downloads only the preferred-language hero screens and defers the preview`, async ({ page }) => {
+  test(`${product.id} enhances preferred-language screens with native lazy-loading fallback`, async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
     const screens = new Set<string>();
@@ -18,9 +18,8 @@ for (const product of products) {
     await page.goto(`/${product.id}/`);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expectDisplay(page.locator(product.hero));
-    expect([...screens].some(url => /\/zh(?:-|\.)/.test(url))).toBe(false);
-    expect(screens.size).toBe(2);
-    await expect(page.locator('#preview-image')).toHaveAttribute('src', /^data:image\/svg\+xml,/);
+    await expect(page.locator(product.hero)).toHaveAttribute('data-original-src', /^assets\/en/);
+    await expect(page.locator('#preview-image')).toHaveAttribute('src', /^assets\/previews\//);
 
     await page.locator('#preview-image').evaluate(img => img.parentElement!.scrollIntoView({ block: 'center' }));
     await expectDisplay(page.locator('#preview-image'));

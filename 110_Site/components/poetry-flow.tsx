@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from './language';
 import { Arrow } from './site-chrome';
-import { useNearViewport } from './use-near-viewport';
 import { DeferredImage } from './deferred-image';
 
 export type PoetrySleeve = { date: string; title: string; author: string; cover: string };
@@ -12,11 +11,7 @@ export type PoetrySleeve = { date: string; title: string; author: string; cover:
 export function PoetryFlow({ issues, headingLevel = 3, eager = false }: { issues: PoetrySleeve[]; headingLevel?: 2 | 3; eager?: boolean }) {
   const { traditional: t } = useLanguage();
   const [active, setActive] = useState(issues.length - 1);
-  const [selectionReady, setSelectionReady] = useState(false);
-  const { ref, near } = useNearViewport<HTMLDivElement>('400px');
-  const [requested, setRequested] = useState<ReadonlySet<string>>(() => new Set(eager && issues.length ? [issues[issues.length - 1].cover] : []));
   const [displayed, setDisplayed] = useState<ReadonlyMap<string, string>>(() => new Map());
-  const [failed, setFailed] = useState<ReadonlySet<string>>(() => new Set());
   const start = useRef<{ x: number; y: number } | null>(null);
   const dragged = useRef(false);
   const latestWheel = useRef(0);
@@ -28,25 +23,10 @@ export function PoetryFlow({ issues, headingLevel = 3, eager = false }: { issues
     const selected = new URLSearchParams(window.location.search).get('day');
     const index = issues.findIndex(item => item.date === selected);
     if (index >= 0) setActive(index);
-    setSelectionReady(true);
   }, [issues]);
 
-  useEffect(() => {
-    if (!near || !selectionReady || !issue) return;
-    const reveal = (radius: number) => {
-      const covers = issues.slice(Math.max(0, active - radius), active + radius + 1).map(item => item.cover);
-      setRequested(previous => covers.every(cover => previous.has(cover)) ? previous : new Set([...previous, ...covers]));
-    };
-    reveal(0);
-    if (!displayed.has(issue.cover) && !failed.has(issue.cover)) return;
-    // The selected sleeve wins; reveal its neighbors in two small background batches.
-    const close = window.setTimeout(() => reveal(1), 80);
-    const far = window.setTimeout(() => reveal(4), 260);
-    return () => { clearTimeout(close); clearTimeout(far); };
-  }, [near, selectionReady, active, issue, issues, displayed, failed]);
-
   if (!issue) return null;
-  return <div ref={ref} className="poetry-player" role="region" aria-roledescription="轮播图" aria-label="诗情画意封面流">
+  return <div className="poetry-player" role="region" aria-roledescription="轮播图" aria-label="诗情画意封面流">
     <div className="flow-topline"><span>POETRY, IN PICTURES</span><span>VOL. 01 <i /> 2026</span></div>
     <div className="cover-flow" role="group" aria-label="左右滑动选择诗歌" tabIndex={0}
       onKeyDown={event => {
@@ -80,9 +60,8 @@ export function PoetryFlow({ issues, headingLevel = 3, eager = false }: { issues
             if (offset === 0) window.location.assign(`/poetry-picture/${item.date}/`);
             else setActive(index);
           }}>
-          <span className="album-art">{requested.has(item.cover) && distance <= 4 && <DeferredImage src={item.cover} alt="" width={940} height={1672} eager={offset === 0} earlyPreview={eager && offset === 0} sizes="(max-width:458px) 50vw, (max-width:700px) 227px, 248px" fetchPriority={offset === 0 ? 'high' : 'low'} draggable={false}
-            onReady={url => setDisplayed(previous => previous.get(item.cover) === url ? previous : new Map([...previous, [item.cover, url]]))}
-            onFailure={() => setFailed(previous => previous.has(item.cover) ? previous : new Set([...previous, item.cover]))} />}
+          <span className="album-art">{distance <= 4 && <DeferredImage src={item.cover} alt="" width={940} height={1672} eager={eager && offset === 0} sizes="(max-width:458px) 50vw, (max-width:700px) 227px, 248px" fetchPriority={offset === 0 ? 'high' : 'low'} draggable={false}
+            onReady={url => setDisplayed(previous => previous.get(item.cover) === url ? previous : new Map([...previous, [item.cover, url]]))} />}
             <span className="album-label" aria-hidden="true"><strong>{item.title}</strong><small>{item.author}</small></span>
           </span>
           <span className="album-reflection" aria-hidden="true" style={{ backgroundImage: distance <= 4 && displayed.has(item.cover) ? `url("${displayed.get(item.cover)}")` : undefined }} />

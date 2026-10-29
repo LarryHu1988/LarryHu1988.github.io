@@ -11,18 +11,18 @@ test('home defers offscreen covers and never downloads native covers while brows
   await page.goto('/');
   await page.locator('.language-button').click();
   await page.locator('.language-button').click();
-  await expect(page.locator('.album-art img')).toHaveCount(0);
+  await expect(page.locator('.album-art img')).toHaveCount(5);
   await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(0);
   await page.locator('.app-card.simpleworth').scrollIntoViewIfNeeded();
   await expectDisplay(page.locator('.simpleworth .phone-preview img'));
-  await expect(page.locator('.album-art img')).toHaveCount(0);
+  await expect(page.locator('.album-art img')).toHaveCount(5);
   await page.locator('.poetry-player').scrollIntoViewIfNeeded();
   await expectDisplay(page.locator('.is-active img'));
   await expect(page.locator('.is-active .album-reflection')).toHaveAttribute('style', /previews\//);
   expect(covers).toEqual([]);
 });
 
-test('the selected sleeve loads before any neighboring covers and reflections reuse the selected derivative', async ({ page }) => {
+test('the selected sleeve has native high priority and neighbors do not depend on its decoder', async ({ page }) => {
   let release!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const covers = new Set<string>();
@@ -30,9 +30,11 @@ test('the selected sleeve loads before any neighboring covers and reflections re
   await page.route(`**/poetry-picture/previews/${latest.date}-cover.w*.webp`, async route => { await gate; await route.continue(); });
   try {
     await page.goto('/#poetry-picture', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('.album-art img')).toHaveCount(1);
+    await expect(page.locator('.album-art img')).toHaveCount(5);
+    await expect(page.locator('.is-active img')).toHaveAttribute('fetchpriority', 'high');
+    await expect(page.locator('.album-sleeve:not(.is-active) img').first()).toHaveAttribute('fetchpriority', 'low');
     await expect.poll(() => covers.size).toBeGreaterThan(0);
-    expect([...covers].every(url => url.includes(latest.date))).toBe(true);
+    await expect(page.locator('.is-active img')).not.toHaveAttribute('src', /^data:/);
   } finally { release(); }
   const selected = page.locator('.is-active img');
   await expectDisplay(selected);
@@ -68,7 +70,8 @@ test('deep links, keyboard navigation and slider changes retain adequate resolut
 test('tracklist thumbnails stay small while opening a reading page retains its full native illustration', async ({ page }) => {
   await page.goto('/poetry-picture/');
   const tracks = page.locator('.poetry-tracklist');
-  await expect(tracks.locator('img').last()).toHaveAttribute('src', /^data:image\/svg\+xml,/);
+  await expect(tracks.locator('img').last()).toHaveAttribute('src', /\/previews\//);
+  await expect(tracks.locator('img').last()).toHaveAttribute('loading', 'lazy');
   const first = tracks.locator('a').first();
   await first.scrollIntoViewIfNeeded();
   await expectDisplay(first.locator('img'));

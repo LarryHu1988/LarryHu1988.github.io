@@ -12,17 +12,15 @@ type Props = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'width' | 'height
   height: number;
   rootMargin?: string;
   eager?: boolean;
-  earlyPreview?: boolean;
   original?: boolean;
   onReady?: (url: string, stage: string) => void;
   onFailure?: () => void;
 };
 
-export function DeferredImage({ src, width, height, rootMargin, eager = false, earlyPreview = false, original = false, sizes = 'auto, 100vw', onReady, onFailure, ...props }: Props) {
+export function DeferredImage({ src, width, height, rootMargin, eager = false, original = false, sizes = 'auto, 100vw', onReady, onFailure, ...props }: Props) {
   const { ref, near } = useNearViewport<HTMLImageElement>(rootMargin);
   const preview = previewFor(src, manifest, width <= 96);
   const sources: Pick<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'sizes'> = original ? { src: preview } : responsiveFor(src, manifest, sizes);
-  const placeholder = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"/>`)}`;
   const reportReady = useEffectEvent((url: string, stage: string) => onReady?.(url, stage));
   const reportFailure = useEffectEvent(() => onFailure?.());
   const priority = props.fetchPriority;
@@ -33,8 +31,8 @@ export function DeferredImage({ src, width, height, rootMargin, eager = false, e
     };
     return original ? loadProgressiveImage(ref.current, src, preview, options) : loadDisplayImage(ref.current, src, manifest, options);
   }, [src, preview, near, eager, priority, original]);
-  const early = earlyPreview || eager;
-  return <><img {...props} ref={ref} src={early ? sources.src : placeholder} srcSet={early ? sources.srcSet : undefined} sizes={early ? sources.sizes : undefined} width={width} height={height} data-responsive-managed="true"
+  // Real HTML image sources must work even if hydration or enhancement scripts fail.
+  return <><img {...props} ref={ref} src={sources.src} srcSet={sources.srcSet} sizes={sources.sizes} width={width} height={height} data-responsive-managed="true"
     loading={eager ? 'eager' : 'lazy'} decoding="async" data-deferred-src={src}
     data-original-src={src} data-preview-src={preview} /><noscript><img {...props} src={src} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" /></noscript></>;
 }

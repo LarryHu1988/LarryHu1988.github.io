@@ -62,10 +62,10 @@ def generate(source, public_path, manifest):
     assert source.read_bytes() == original, source
 
 
-def inject_manifest(html, manifest, helper='/scripts/progressive-images.js?v=display-2'):
+def inject_manifest(html, manifest, helper='/scripts/progressive-images.js?v=display-3'):
     block = '<!-- image-previews:start --><script id="image-previews" type="application/json">' + json.dumps(manifest, ensure_ascii=True, separators=(',', ':')) + '</script><link rel="modulepreload" href="' + helper + '"><!-- image-previews:end -->'
     text = html.read_text()
-    text = text.replace('?v=clear-1', '?v=display-2')
+    text = text.replace('?v=clear-1', '?v=display-3').replace('?v=display-2', '?v=display-3')
     icon = manifest.get('assets/icon.webp') or manifest.get('assets/icon.png')
     if icon:
         favicon = next(variant for variant in icon['variants'] if variant['width'] == 192)
@@ -79,6 +79,22 @@ def inject_manifest(html, manifest, helper='/scripts/progressive-images.js?v=dis
         sizes = '(max-width:700px) 220px, 248px'
     else:
         sizes = '(max-width:700px) 90vw, 640px'
+    def real_image(match):
+        tag = match.group(0)
+        source = re.search(r'\bdata-source="([^"]+)"', tag)
+        item = manifest.get(source[1].split('?')[0]) if source else None
+        if not item:
+            return tag
+        hint = sizes
+        if item['nativeWidth'] == item['nativeHeight']:
+            width = re.search(r'\bwidth="(\d+)"', tag)
+            hint = (width[1] if width else '96') + 'px'
+        elif 'loading="lazy"' in tag:
+            hint = 'auto, ' + sizes
+        tag = re.sub(r'\s(?:src|srcset|sizes)="[^"]*"', '', tag)
+        candidates = ', '.join(f'{variant["src"]} {variant["width"]}w' for variant in item['variants'])
+        return tag[:-1] + f' src="{item["src"]}" srcset="{candidates}" sizes="{hint}">'
+    text = re.sub(r'<img\b[^>]*>', real_image, text)
     text = text.replace(old, new + json.dumps(sizes) + ';}')
     text = re.sub(r'<!-- image-previews:start -->.*?<!-- image-previews:end -->', '', text, flags=re.S)
     charset = re.search(r'<meta\s+charset=[^>]+>', text, flags=re.I)
@@ -119,7 +135,7 @@ def main():
                 continue
             generate(source, 'assets/' + source.name, local)
         generate(args.pdf_site / 'assets/icon.png', 'assets/icon.png', local)
-        inject_manifest(args.pdf_site / 'index.html', local, 'scripts/progressive-images.js?v=display-2')
+        inject_manifest(args.pdf_site / 'index.html', local, 'scripts/progressive-images.js?v=display-3')
         (args.pdf_site / 'scripts').mkdir(exist_ok=True)
         shutil.copy2(public / 'scripts/progressive-images.js', args.pdf_site / 'scripts/progressive-images.js')
         print(f'PDF previews: {len(local)}')
