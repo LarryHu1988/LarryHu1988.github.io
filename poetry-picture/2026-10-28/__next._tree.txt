@@ -1,8 +1,10 @@
-:HL["/_next/static/chunks/396qs2zil5n8o.css","style"]
+:HL["/_next/static/chunks/0gmklc6cvv-w3.css","style"]
 :HL["/fonts/ibm-plex-mono-500.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/dm-sans.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/noto-serif-sc.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/serif/serif-7c61a1920ef9.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/serif/serif-b26f4a173204.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"date","t":"d","k":"2026-10-28","s":[]},"h":65632,"c":"$Q3"}]]
 1:[["children",{"s":"poetry-picture","h":131168,"c":"$Q2"}]]
-0:{"b":"5QrhxJx2hboJkqvpXf4H5","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"6Vxrdozoj5t8hauTy8RzK","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
