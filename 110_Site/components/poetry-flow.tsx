@@ -33,10 +33,16 @@ export function PoetryFlow({ issues, headingLevel = 3, eager = false }: { issues
 
   useEffect(() => {
     if (!near || !selectionReady || !issue) return;
-    // Clear previews reveal the neighboring sleeves without waiting for multi-MB originals.
-    const radius = displayed.has(issue.cover) || failed.has(issue.cover) ? 4 : 0;
-    const covers = issues.slice(Math.max(0, active - radius), active + radius + 1).map(item => item.cover);
-    setRequested(previous => covers.every(cover => previous.has(cover)) ? previous : new Set([...previous, ...covers]));
+    const reveal = (radius: number) => {
+      const covers = issues.slice(Math.max(0, active - radius), active + radius + 1).map(item => item.cover);
+      setRequested(previous => covers.every(cover => previous.has(cover)) ? previous : new Set([...previous, ...covers]));
+    };
+    reveal(0);
+    if (!displayed.has(issue.cover) && !failed.has(issue.cover)) return;
+    // The selected sleeve wins; reveal its neighbors in two small background batches.
+    const close = window.setTimeout(() => reveal(1), 80);
+    const far = window.setTimeout(() => reveal(4), 260);
+    return () => { clearTimeout(close); clearTimeout(far); };
   }, [near, selectionReady, active, issue, issues, displayed, failed]);
 
   if (!issue) return null;
@@ -74,7 +80,7 @@ export function PoetryFlow({ issues, headingLevel = 3, eager = false }: { issues
             if (offset === 0) window.location.assign(`/poetry-picture/${item.date}/`);
             else setActive(index);
           }}>
-          <span className="album-art">{requested.has(item.cover) && distance <= 4 && <DeferredImage src={item.cover} alt="" width={940} height={1672} eager fetchPriority={offset === 0 ? 'high' : 'auto'} draggable={false}
+          <span className="album-art">{requested.has(item.cover) && distance <= 4 && <DeferredImage src={item.cover} alt="" width={940} height={1672} eager={offset === 0} earlyPreview={eager && offset === 0} sizes="(max-width:458px) 50vw, (max-width:700px) 227px, 248px" fetchPriority={offset === 0 ? 'high' : 'low'} draggable={false}
             onReady={url => setDisplayed(previous => previous.get(item.cover) === url ? previous : new Map([...previous, [item.cover, url]]))}
             onFailure={() => setFailed(previous => previous.has(item.cover) ? previous : new Set([...previous, item.cover]))} />}
             <span className="album-label" aria-hidden="true"><strong>{item.title}</strong><small>{item.author}</small></span>

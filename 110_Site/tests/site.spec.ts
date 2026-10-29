@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { resolve } from 'node:path';
 import poems from '../content/poems.json';
+import { expectDisplay } from './image-assertions';
 
 test('home keeps the selected content and real product images', async ({ page }, testInfo) => {
   const errors: string[] = [];
@@ -19,14 +20,14 @@ test('home keeps the selected content and real product images', async ({ page },
   for (const card of await page.locator('.app-card').all()) {
     await card.scrollIntoViewIfNeeded();
     for (const image of await card.locator('img').all()) {
-      await expect.poll(() => image.getAttribute('src')).toBe(await image.getAttribute('data-deferred-src'));
+      await expectDisplay(image);
       await expect(image).toHaveJSProperty('complete', true);
       expect(await image.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
     }
   }
   await page.locator('#poetry').scrollIntoViewIfNeeded();
   await page.locator('.poetry-player').scrollIntoViewIfNeeded();
-  await expect(page.locator('.album-reflection[style*="url("]')).toHaveCount(5);
+  await expect(page.locator('.is-active img')).toHaveAttribute('data-image-stage', 'display');
   await page.locator('.site-footer').scrollIntoViewIfNeeded();
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => window.scrollTo(0, 0));
@@ -34,19 +35,19 @@ test('home keeps the selected content and real product images', async ({ page },
   expect(errors).toEqual([]);
 });
 
-test('PDF Librarian centers a computer window with the complete native screenshot at every breakpoint', async ({ page }) => {
+test('PDF Librarian centers an uncropped, screen-density-matched screenshot at every breakpoint', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   const visual = page.locator('.pdflibrarian .app-visual');
   const image = visual.locator('img');
   await visual.scrollIntoViewIfNeeded();
   await expect(image).toHaveJSProperty('complete', true);
-  await expect(image).toHaveJSProperty('naturalWidth', 2880);
-  await expect(image).toHaveJSProperty('naturalHeight', 1800);
-  await expect(image).toHaveAttribute('src', '/images/pdf-workspace-1.5.0.optimized.png');
+  await expectDisplay(image);
   await expect(visual.locator('.mac-titlebar')).toHaveCount(1);
   for (const width of [320, 375, 390, 600, 768, 850, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
+    await visual.scrollIntoViewIfNeeded();
+    await expectDisplay(image);
     for (const hover of [false, true]) {
       if (hover) await visual.hover();
       else await page.mouse.move(0, 0);

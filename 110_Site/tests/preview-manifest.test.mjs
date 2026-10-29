@@ -19,5 +19,15 @@ test('clear previews are content-addressed, much smaller, and retain useful high
     } else if (image.nativeWidth === image.nativeHeight) assert(image.width >= 192, source);
     else if (image.nativeHeight > image.nativeWidth * 2) assert(image.width >= 880, source);
     else assert(image.width >= 1600, source);
+    assert(image.variants.length >= 5, source);
+    assert.equal(image.variants.at(-1).width, image.nativeWidth, source);
+    let previous = 0;
+    for (const variant of image.variants) {
+      assert(variant.width > previous && variant.width <= image.nativeWidth, source);
+      assert(variant.height <= image.nativeHeight, source);
+      assert.match(variant.src, /\/previews\/.*\.w\d+\.[a-f0-9]{12}\.webp$/);
+      assert.equal(statSync(resolve(root, local + variant.src)).size, variant.bytes, source);
+      previous = variant.width;
+    }
   }
 });

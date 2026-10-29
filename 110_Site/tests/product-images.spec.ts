@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { expectDisplay } from './image-assertions';
 
 const products = [
   { id: 'simpleworth', key: 'simpleworth-language', hero: '.phone-primary img', locale: 'en-US', screen: '01-expenses' },
@@ -11,28 +12,29 @@ for (const product of products) {
     page.on('pageerror', error => errors.push(error.message));
     const screens = new Set<string>();
     page.on('request', request => {
-      if (/\/assets\/(?:zh|en)[^/]*\.webp/.test(request.url())) screens.add(new URL(request.url()).pathname);
+      if (/\/assets\/previews\/(?:zh|en)[^/]*\.w\d+\./.test(request.url())) screens.add(new URL(request.url()).pathname.replace(/\.w\d+\..*$/, ''));
     });
     await page.addInitScript(key => localStorage.setItem(key, 'en'), product.key);
     await page.goto(`/${product.id}/`);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.locator(product.hero)).toHaveJSProperty('naturalWidth', 1320);
+    await expectDisplay(page.locator(product.hero));
     expect([...screens].some(url => /\/zh(?:-|\.)/.test(url))).toBe(false);
     expect(screens.size).toBe(2);
     await expect(page.locator('#preview-image')).toHaveAttribute('src', /^data:image\/svg\+xml,/);
 
     await page.locator('#preview-image').evaluate(img => img.parentElement!.scrollIntoView({ block: 'center' }));
-    await expect(page.locator('#preview-image')).toHaveAttribute('src', `assets/${product.locale}-${product.screen}.webp?v=native-lossless`);
-    await expect(page.locator('#preview-image')).toHaveJSProperty('naturalWidth', 1320);
+    await expectDisplay(page.locator('#preview-image'));
+    await expect(page.locator('#preview-image')).toHaveAttribute('data-original-src', `assets/${product.locale}-${product.screen}.webp?v=native-lossless`);
     expect(errors).toEqual([]);
     await page.locator('[data-preview]').nth(1).click();
-    await expect(page.locator('#preview-image')).toHaveJSProperty('naturalHeight', 2868);
+    await page.locator('#preview-image').scrollIntoViewIfNeeded();
+    await expectDisplay(page.locator('#preview-image'));
     await page.locator('.language, .language-toggle').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
     await expect(page.locator('#preview-image')).toHaveAttribute('data-original-src', /^assets\/zh/);
     await page.locator('#preview-image').evaluate(img => img.parentElement!.scrollIntoView({ block: 'center' }));
-    await expect(page.locator('#preview-image')).toHaveAttribute('src', /^assets\/zh/);
-    await expect(page.locator('#preview-image')).toHaveJSProperty('naturalWidth', 1320);
+    await expect(page.locator('#preview-image')).toHaveAttribute('src', /^assets\/previews\/zh/);
+    await expectDisplay(page.locator('#preview-image'));
   });
 }
 
@@ -45,16 +47,20 @@ test('product pages retain native images when JavaScript is disabled', async ({ 
       await expect(fallback.locator(`${product.hero}:visible`)).toHaveJSProperty('naturalWidth', 1320);
       for (const image of await fallback.locator('img[data-source]').all()) await expect(image).toBeHidden();
     }
+    await fallback.goto('http://127.0.0.1:4173/#apps');
+    const homeImage = fallback.locator('.simpleworth .phone-preview img:visible');
+    await homeImage.scrollIntoViewIfNeeded();
+    await expect(homeImage).toHaveJSProperty('naturalWidth', 1320);
   } finally { await context.close(); }
 });
 
-test('product pages fall back to eager originals without IntersectionObserver', async ({ page }) => {
+test('product pages retain density-matched images without IntersectionObserver', async ({ page }) => {
   await page.addInitScript(() => { Object.defineProperty(window, 'IntersectionObserver', { value: undefined }); });
   for (const product of products) {
     await page.goto(`/${product.id}/`);
     for (const image of await page.locator('img[data-source]').all()) {
       await expect(image).not.toHaveAttribute('src', /^data:/);
-      await expect(image).toHaveJSProperty('naturalWidth', await image.getAttribute('data-icon-progressive') ? 1024 : 1320);
+      await expectDisplay(image);
     }
   }
 });
