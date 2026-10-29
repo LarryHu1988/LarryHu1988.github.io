@@ -1,4 +1,4 @@
-import { loadProgressiveImage, previewFor } from "/scripts/progressive-images.js?v=clear-1";
+import { loadDisplayImage } from "/scripts/progressive-images.js?v=display-2";
 (() => {
   const imagePreviews = JSON.parse(document.getElementById('image-previews')?.textContent || '{}');
   const revealed = new WeakSet();
@@ -15,7 +15,7 @@ import { loadProgressiveImage, previewFor } from "/scripts/progressive-images.js
     node.decoding = 'async';
     if (node.loading !== 'lazy' || revealed.has(node) || !observer) {
       node.loading = 'eager';
-      loadProgressiveImage(node, source, previewFor(source, imagePreviews), { priority: node.fetchPriority });
+      loadDisplayImage(node, source, imagePreviews, { priority: node.fetchPriority, zoom: true });
     } else observer.observe(node);
   }
   const toggle = document.querySelector('.language-toggle');
