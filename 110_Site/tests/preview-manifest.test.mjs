@@ -31,3 +31,10 @@ test('clear previews are content-addressed, much smaller, and retain useful high
     }
   }
 });
+
+test('product favicons use a high-density lossless icon instead of the large native app icon', () => {
+  for (const product of ['simpleworth', 'keepfit']) {
+    const html = readFileSync(resolve(root, `111_Products/${product}/index.html`), 'utf8');
+    assert.match(html, /<link rel="icon" type="image\/webp" sizes="192x192" href="assets\/previews\/icon\.w192\.[a-f0-9]{12}\.webp">/);
+  }
+});

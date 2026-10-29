@@ -66,6 +66,11 @@ def inject_manifest(html, manifest, helper='/scripts/progressive-images.js?v=dis
     block = '<!-- image-previews:start --><script id="image-previews" type="application/json">' + json.dumps(manifest, ensure_ascii=True, separators=(',', ':')) + '</script><link rel="modulepreload" href="' + helper + '"><!-- image-previews:end -->'
     text = html.read_text()
     text = text.replace('?v=clear-1', '?v=display-2')
+    icon = manifest.get('assets/icon.webp') or manifest.get('assets/icon.png')
+    if icon:
+        favicon = next(variant for variant in icon['variants'] if variant['width'] == 192)
+        text = re.sub(r'<link\b[^>]*\brel="icon"[^>]*>',
+                      f'<link rel="icon" type="image/webp" sizes="192x192" href="{favicon["src"]}">', text)
     old = "image.href=previews[image.getAttribute('href').split('?')[0]]?.src||image.href;"
     new = "const candidates=previews[image.getAttribute('href').split('?')[0]]?.variants;if(candidates?.length){image.href=candidates[0].src;image.imageSrcset=candidates.map(v=>v.src+' '+v.width+'w').join(', ');image.imageSizes="
     if html.parent.name == 'simpleworth':
