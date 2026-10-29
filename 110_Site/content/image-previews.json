@@ -479,6 +479,21 @@
       "bytes": 13732
     }
   },
+  "/poetry-picture/2026-10-28-cover.webp": {
+    "src": "/poetry-picture/previews/2026-10-28-cover.7217ab5d570f.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 472822,
+    "nativeBytes": 2076228,
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-10-28-cover.thumb.d6a2447c1809.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 28474
+    }
+  },
   "/images/pdf-icon.png": {
     "src": "/images/previews/pdf-icon.be0a3e51c5c6.webp",
     "width": 192,
