@@ -1,7 +1,7 @@
 @import "tailwindcss";
+@import "./generated-fonts.css";
 
 @font-face { font-family: "Studio Sans"; src: url('/fonts/dm-sans.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Studio Serif"; src: url('/fonts/noto-serif-sc.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Studio Wordmark"; src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
 
 :root {

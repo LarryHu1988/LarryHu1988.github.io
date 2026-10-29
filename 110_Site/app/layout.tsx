@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { LanguageProvider } from '@/components/language';
 import { SiteHeader, SiteFooter } from '@/components/site-chrome';
+import fontSubsets from '@/content/font-subsets.json';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="preload" href="/fonts/ibm-plex-mono-500.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/noto-serif-sc.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        {fontSubsets.subsets.filter(subset => subset.critical).map(subset => <link key={subset.path} rel="preload" href={subset.path} as="font" type="font/woff2" crossOrigin="anonymous" />)}
         <meta name="theme-color" content="#f5f3ed" />
         <noscript><style>{'img[data-responsive-managed]{display:none}'}</style></noscript>
       </head>
