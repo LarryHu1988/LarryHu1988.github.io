@@ -21,6 +21,9 @@ if (process.argv.includes('--uninstall')) {
   const npm = execFileSync('/usr/bin/which', ['npm'], { encoding: 'utf8' }).trim();
   const gh = execFileSync('/usr/bin/which', ['gh'], { encoding: 'utf8' }).trim();
   const node = execFileSync('/usr/bin/which', ['node'], { encoding: 'utf8' }).trim();
+  const network = Object.fromEntries(Object.entries(process.env).filter(([key, value]) => /^(?:https?_proxy|all_proxy|no_proxy)$/i.test(key) && value));
+  // launchd does not inherit shell proxy settings. Keep them local, never in the public source or plist.
+  writeFileSync(join(local, 'network.json'), JSON.stringify(network, null, 2) + '\n', { mode: 0o600 });
   const path = [...new Set([dirname(process.execPath), dirname(npm), dirname(gh), '/opt/homebrew/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/sbin', '/sbin'])].join(':');
   const contents = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

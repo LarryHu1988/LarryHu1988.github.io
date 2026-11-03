@@ -9,6 +9,12 @@ import { deployPages, github, verifyPages } from './deploy-pages-api.mjs';
 const local = join(root, '113_Local/photo-sync');
 const lock = join(local, 'publishing.lock');
 const stateFile = join(local, 'watcher.json');
+const networkFile = join(local, 'network.json');
+function restoreNetwork() {
+  if (existsSync(networkFile)) for (const [key, value] of Object.entries(JSON.parse(readFileSync(networkFile, 'utf8')))) {
+    if (/^(?:https?_proxy|all_proxy|no_proxy)$/i.test(key) && typeof value === 'string') process.env[key] = value;
+  }
+}
 const allowed = /^(?:110_Site\/content\/photography\.json|110_Site\/public\/photography\/assets\/[a-f0-9]{24}\.webp)$/;
 const git = args => execFileSync('git', args, { cwd: root, encoding: 'utf8', timeout: 120000 }).trim();
 const run = args => execFileSync(process.execPath, args, { cwd: site, stdio: 'inherit', timeout: 600000 });
@@ -23,6 +29,7 @@ export function safePhotoPaths(status) {
 }
 
 async function checkOnce() {
+  restoreNetwork();
   mkdirSync(photoInbox, { recursive: true }); mkdirSync(local, { recursive: true });
   if (existsSync(join(local, 'PAUSED'))) return;
   try { mkdirSync(lock); }
