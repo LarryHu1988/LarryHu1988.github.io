@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/0sifq29ufjpep.css","style"]
+:HL["/_next/static/chunks/3v2r2bnthcowv.css","style"]
 :HL["/fonts/ibm-plex-mono-500.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/dm-sans.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/fonts/noto-serif-sc.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
@@ -13,4 +13,4 @@
 :HL["/fonts/serif/serif-5d45a6b4d010.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"poetry-picture","h":96,"c":"$Q2"}]]
-0:{"b":"AnhFcGGKB0Mdz56a4pevp","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"CQZ3UieJZm6sIS8ecLDbP","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
