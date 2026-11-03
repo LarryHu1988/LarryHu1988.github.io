@@ -1,6 +1,25 @@
 @import "tailwindcss";
 @import "./generated-fonts.css";
 
+.photo-section { border-top: 1px solid var(--line); background: #f0eee5; }
+.photo-invitation { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; min-height: 480px; padding: 60px 70px; border: 1px solid #b6beaa; border-radius: 8px; background: radial-gradient(ellipse at 80% 40%, #f8f7f0 0%, transparent 65%), repeating-linear-gradient(0deg,#75856604 0px,#75856604 1px,transparent 1px,transparent 4px); overflow: hidden; }
+.photo-invitation-copy h3 { font: 500 clamp(28px,3.5vw,48px)/1.55 var(--serif); margin: 22px 0; letter-spacing: -.04em; }
+.photo-invitation-copy > p:not(.eyebrow) { font: 14px/2 var(--serif); color: var(--muted); white-space: pre-line; }
+.photo-invitation-copy > .text-link { display: inline-flex; margin-top: 28px; }
+.photo-book-still { position: relative; width: 230px; height: 310px; justify-self: center; transform: perspective(900px) rotateY(-16deg) rotateZ(8deg); transition: transform .6s; }
+.photo-invitation:hover .photo-book-still { transform: perspective(900px) rotateY(-7deg) rotateZ(4deg) translateY(-7px); }
+.photo-book-cover { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 34px 16px; border: 1px solid #4f6550; border-left: 8px solid #243e31; border-radius: 3px; color: #e0d7b6; background: repeating-linear-gradient(90deg,#ffffff04 0px,#ffffff04 1px,transparent 1px,transparent 3px),#294a3d; box-shadow: 5px 12px 30px #24342a25; }
+.photo-book-cover > span { font: 8px/1.5 var(--mono); letter-spacing: .13em; }
+.photo-book-cover > span:last-child { margin-top: auto; font-size: 6px; }
+.photo-book-cover strong { font: 500 30px var(--serif); letter-spacing: .12em; margin-top: 53px; }
+.photo-book-cover > i { display: block; width: 20px; height: 1px; background: currentColor; margin: 20px 0; }
+.photo-book-cover small { font: 10px var(--serif); letter-spacing: .1em; }
+.photo-book-pages { position: absolute; inset: 8px -9px -6px 10px; border-radius: 3px; border: 1px solid #b6b3a2; background: repeating-linear-gradient(0deg,#e1ddd0 0px,#e1ddd0 1px,#f8f5e9 1px,#f8f5e9 3px); }
+.photo-invitation-index { position: absolute; right: 28px; bottom: 22px; display: flex; gap: 20px; align-items: center; color: var(--muted); font: 8px var(--mono); letter-spacing: .1em; }
+@media(max-width:1100px) { .photo-invitation { padding: 45px; gap: 30px; } }
+@media(max-width:700px) { .photo-invitation { grid-template-columns: 1fr; gap: 50px; padding: 35px 28px 65px; } .photo-invitation-copy h3 br { display: none; } .photo-book-still { width: 200px; height: 270px; } .photo-book-cover strong { margin-top: 35px; font-size: 26px; } .photo-book-cover small { font-size: 8px; } .photo-invitation-index { right: 20px; bottom: 17px; } }
+@media(prefers-reduced-motion:reduce) { .photo-book-still { transition: none; } }
+
 @font-face { font-family: "Studio Sans"; src: url('/fonts/dm-sans.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Studio Wordmark"; src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
 
@@ -15,6 +34,7 @@
   --serif: "Studio Serif", "Songti SC", serif;
   --sans: "Studio Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
   --wordmark: "Studio Wordmark", "SFMono-Regular", Consolas, monospace;
+  --mono: var(--wordmark);
 }
 
 * { box-sizing: border-box; }

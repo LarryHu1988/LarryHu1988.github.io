@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import fontManifest from '../content/font-subsets.json';
 
 const sample = '跳跃者翻张封雪国土啊深诗情画意。';
 
@@ -23,7 +24,13 @@ test('Chinese serif text loads locally at real weights without changing the sele
   expect(foreign).toEqual([]);
   const requests = await page.evaluate(() => performance.getEntriesByType('resource').filter(entry => /\/fonts\/serif\//.test(entry.name)).map(entry => entry.name));
   expect(requests.length).toBeGreaterThan(0);
-  expect(requests.length).toBeLessThanOrEqual(4);
+  const rendered = await page.locator('body').innerText();
+  for (const request of requests) {
+    const subset = fontManifest.subsets.find(subset => subset.path === new URL(request).pathname)!;
+    expect(subset).toBeTruthy();
+    expect(subset.critical || [...subset.characters].some(char => rendered.includes(char)), 'Only a global preload or a pack needed by actual page text may load').toBe(true);
+  }
+  expect(requests.length).toBeLessThan(fontManifest.subsets.length);
 });
 
 test('previously missing Chinese characters are actually rendered with Noto, not a system fallback', async ({ page, browserName }) => {

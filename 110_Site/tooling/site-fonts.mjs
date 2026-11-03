@@ -25,7 +25,7 @@ export function fontNeeds(directory = site) {
       if (/ [0-9]+\./.test(entry.name)) continue;
       const path = resolve(folder, entry.name);
       if (entry.isDirectory()) walk(path, important);
-      else if (/\.(?:tsx?|json)$/.test(entry.name) && !['image-previews.json', 'font-subsets.json'].includes(entry.name)) {
+      else if (/\.(?:[cm]?[jt]sx?|json)$/.test(entry.name) && !['image-previews.json', 'font-subsets.json'].includes(entry.name)) {
         const text = readFileSync(path, 'utf8');
         add(entry.name.endsWith('.json') ? JSON.stringify(JSON.parse(text)) : text, important || entry.name !== 'poetry-picture.json');
       }

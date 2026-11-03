@@ -113,6 +113,38 @@
       "bytes": 20840,
       "critical": true,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOENxFJNf01RZNiwS-E9afHWh2yc3X-tW387d6-WIlUnG0JDCxRrZpMPEk6NY1y_lyAUPvcjrQ1sqo_BwwN0FmE1x3OdtD8NU4PbcOfl0FhRiXETskyagVtZKdFbNZz&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-db9d760238f0.woff2",
+      "characters": "JQ",
+      "sha256": "db9d760238f080cdc5da46fbb48e8169258dfade5b242d13f280745a428f2d3d",
+      "bytes": 1712,
+      "critical": true,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEaXo6&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-09abb5e811c5.woff2",
+      "characters": "備冊册卞圖尋拖拾汪準琳盡聽製觀觸謝選邊鋪鍵键閉間風鳴",
+      "sha256": "09abb5e811c5a33be97406ff65105d06b4d0a3c6b95aecaec923956b998f14f9",
+      "bytes": 16004,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEJdXpjzyW6VHMZOAiR29148gzyqBBFr1AawE1yVPTNLXZ_omJSDeLxunQwymYMPt3ukAkRgvjUhrn1rnbJdBoAJc-vV8N1M7zlUZQUceigw&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-4764ca96fe8e.woff2",
+      "characters": "㳽丛丢临京仇伐伶傍傲僧兀冈剩华吵哎唐商喇喻圈奈奥妙寺射峦徊徘怆恍恢惋惚慌懒扩拔拢捏揉敞斜旋晴暮枕沟涯渗渺溅炊煎率瑟略畴皆碌碧秀竿纱绘缕耐致舍芦苇苍萎衍褶讨设费迢逊邱郊镜陇陶顷鸭鹉鹦",
+      "sha256": "4764ca96fe8ebaeaf18ecd79561a0c69c97eee8a9bd8c1134347bf7d79c65b62",
+      "bytes": 45240,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOE5TKIpWT02y-uUKdLYT4Nz4Fn-sEuPMsvaVFh4TiMIOCszsn3bF_v_YmW92jaPZ01kh1tSGyHfmOAyda1Gb4AI8VPjz5--K-AowoXX7f0mO1SijihrtvxoFbcr4wi5aXmTOJpbk7sd1gTROIQ2WdyPGlMdF5WiaDV3OZNy1C-ZidOnmmLaXT65AUGS-g3z1392ME5qR6yW40SELqDu7C2gvWRl2V_DvvaqV-O0hEpeUiEDVdQjoMCg2Y1sTxK1IwxJbokX8rnG8aPWIFTTH8ITUEVKW_XzqvXDybq72xT2SBPi6t5jJGw_OsoTrbwSDfsZhQpeI8vbE3LXil_RHcjFIfe7M2-IgYBtM1YG4GodH0&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-f5a47cdcc930.woff2",
+      "characters": "組",
+      "sha256": "f5a47cdcc9309c26bd02fc66f9c1a01b73161cdbc9e81cd6153dc200ec52dd94",
+      "bytes": 1820,
+      "critical": true,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEaNfekg&skey=37fe335b8fd815cc&v=v36"
     }
   ]
 }

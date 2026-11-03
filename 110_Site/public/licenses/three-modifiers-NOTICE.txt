@@ -1,0 +1,12 @@
+three.modifiers 2.5.7
+Author: drawcall
+Source: https://github.com/drawcall/threejs-mesh-modifiers
+
+The npm package declares the BSD license. The upstream README identifies
+BSD-3-Clause: https://opensource.org/licenses/BSD-3-Clause
+
+The upstream README also credits the ActionScript AS3Dmod engine:
+https://code.google.com/archive/p/as3dmod/
+
+This dependency supplies page deformation to Quick FlipBook. No third-party
+sample photographs, videos, or generated Death Valley pages are included.

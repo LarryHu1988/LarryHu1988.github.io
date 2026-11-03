@@ -3,24 +3,33 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "predev": "node tooling/sync-fonts.mjs --check && node tooling/prepare-static.mjs",
+    "predev": "node tooling/sync-photos.mjs && node tooling/sync-fonts.mjs --check && node tooling/prepare-static.mjs",
     "dev": "next dev",
-    "prebuild": "node tooling/sync-fonts.mjs --check && node tooling/prepare-static.mjs --clean",
+    "prebuild": "node tooling/sync-photos.mjs && node tooling/sync-fonts.mjs --check && node tooling/prepare-static.mjs --clean",
     "build": "next build && node tooling/export-static.mjs",
     "preview": "node tooling/preview.mjs",
     "typecheck": "tsc --noEmit",
     "sync:poetry": "python3 tooling/sync-poetry-picture.py",
+    "photos:sync": "node tooling/sync-photos.mjs",
+    "photos:check": "node tooling/sync-photos.mjs --check",
+    "photos:watch": "node tooling/watch-photos.mjs",
+    "photos:watch:install": "node tooling/install-photo-watcher.mjs",
+    "photos:watch:remove": "node tooling/install-photo-watcher.mjs --uninstall",
+    "test:photos": "playwright test --config tests/playwright.config.ts photography.spec.ts",
     "fonts:sync": "node tooling/sync-fonts.mjs",
     "fonts:check": "node tooling/sync-fonts.mjs --check",
     "test": "playwright test --config tests/playwright.config.ts",
     "test:tooling": "node --test tests/*.test.mjs",
     "check:repository": "node tooling/check-repository.mjs",
-    "deploy": "npm run build && node tooling/deploy.mjs"
+    "deploy": "npm run build && node tooling/deploy-pages-api.mjs --verify"
   },
   "dependencies": {
     "next": "16.4.2",
+    "quick_flipbook": "1.1.3",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "sharp": "0.35.5",
+    "three": "0.185.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

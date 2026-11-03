@@ -8,6 +8,7 @@ import { useLanguage } from './language';
 import { Arrow } from './site-chrome';
 import { PoetryFlow, type PoetrySleeve } from './poetry-flow';
 import { DeferredImage } from './deferred-image';
+import photos from '@/content/photography.json';
 
 function RainStudy() {
   return <div className="rain-study" aria-label="抽象雨滴与水面涟漪插画" role="img">
@@ -59,7 +60,7 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
 
     <section id="apps" className="apps-section section-space" aria-labelledby="apps-title">
       <div className="shell">
-        <div data-reveal><SectionHeading id="apps-title" number="02" english="THINGS I BUILD" title={t ? '數碼雨飯' : '数码雨饭'} detail={t ? '從自己的日常出發，做一點有用的東西。' : '从自己的日常出发，做一点有用的东西。'} /></div>
+        <div data-reveal><SectionHeading id="apps-title" number="02" english="THINGS I BUILD" title={t ? '碼上有雨' : '码上有雨'} detail={t ? '一碼之間 盡是風雨' : '一码之间 尽是风雨'} /></div>
         <div className="apps-grid">{apps.map(app => <article className={`app-card ${app.id}`} key={app.id} data-reveal>
           <a className="app-visual" href={app.home} aria-label={`${app.name} ${t ? '產品主頁' : '产品主页'}`}>
             <div className="app-visual-top"><span>{app.category}</span><span>{app.number}</span></div>
@@ -79,7 +80,7 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
     </section>
 
     <section id="poetry" className="poetry-section section-space" aria-labelledby="poetry-title">
-      <div className="shell"><div data-reveal><SectionHeading id="poetry-title" number="03" english="WORDS I KEEP" title={t ? '詩情雨意' : '诗情雨意'} detail={t ? '有些話，留給詩來說。' : '有些话，留给诗来说。'} /></div>
+      <div className="shell"><div data-reveal><SectionHeading id="poetry-title" number="03" english="WORDS I KEEP" title={t ? '詩情雨意' : '诗情雨意'} detail={t ? '以詩入雨 以意觀心' : '以诗入雨 以意观心'} /></div>
         <div className="poem-grid">{poems.map((poem, i) => <Link className={`poem-card poem-${i}`} href={`/poems/${poem.slug}/`} key={poem.slug} data-reveal>
           <div className="poem-card-top"><span>POEM / 00{i + 1}</span><span>{poem.author}</span></div>
           <div className="poem-art" aria-hidden="true">{i === 0 ? <><span className="hill hill-back" /><span className="hill hill-front" /><span className="poem-sun" /></> : <><span className="stage-frame stage-1" /><span className="stage-frame stage-2" /><span className="stage-frame stage-3" /><span className="stage-circle" /></>}</div>
@@ -93,6 +94,16 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
       <div className="shell"><SectionHeading id="picture-title" number="04" english="A POEM FOR EVERY DAY" title={t ? '詩情畫意' : '诗情画意'} detail={t ? '從一幅畫，走進一首詩。' : '从一幅画，走进一首诗。'} />
         <PoetryFlow issues={dailyPoems} />
         <div className="picture-collection-link"><span>{t ? '每天一首，慢慢收藏。' : '每天一首，慢慢收藏。'}</span><Link className="text-link" href="/poetry-picture/">{t ? '翻閱整本詩集' : '翻阅整本诗集'}<Arrow /></Link></div>
+      </div>
+    </section>
+    <section id="photos" className="photo-section section-space" aria-labelledby="photos-title">
+      <div className="shell">
+        <SectionHeading id="photos-title" number="05" english="LIGHT, COLLECTED" title={t ? '拾光聽雨' : '拾光听雨'} detail={t ? '拾光成冊 聽雨成詩' : '拾光成册 听雨成诗'} />
+        <Link className="photo-invitation" href="/photography/">
+          <div className="photo-invitation-copy"><p className="eyebrow">A PERSONAL PHOTOBOOK / VOL. 01</p><h3>{t ? <>把尋常，<br />留在光裡。</> : <>把寻常，<br />留在光里。</>}</h3><p>{t ? '路過的風景，身邊的日常。\n一頁一頁，慢慢翻看。' : '路过的风景，身边的日常。\n一页一页，慢慢翻看。'}</p><span className="text-link">{t ? '翻開相冊' : '翻开相册'}<Arrow /></span></div>
+          <div className="photo-book-still" aria-hidden="true"><div className="photo-book-pages" /><div className="photo-book-cover"><span>LIGHT & RAIN</span><strong>{t ? '拾光聽雨' : '拾光听雨'}</strong><i /><small>{t ? '拾光成冊 聽雨成詩' : '拾光成册 听雨成诗'}</small><span>LARRY STUDIO / PHOTOGRAPHS</span></div></div>
+          <span className="photo-invitation-index">{String(photos.photos.length).padStart(3, '0')} PHOTOGRAPHS <Arrow diagonal /></span>
+        </Link>
       </div>
     </section>
   </main>;

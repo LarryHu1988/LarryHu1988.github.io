@@ -20,9 +20,10 @@ export function SiteHeader() {
   const home = pathname === '/' ? '' : '/';
   const links = [
     { href: `${home}#about`, label: traditional ? '關於我' : '关于我' },
-    { href: `${home}#apps`, label: traditional ? '數碼雨飯' : '数码雨饭' },
+    { href: `${home}#apps`, label: traditional ? '碼上有雨' : '码上有雨' },
     { href: `${home}#poetry`, label: traditional ? '詩情雨意' : '诗情雨意' },
     { href: '/poetry-picture/', label: traditional ? '詩情畫意' : '诗情画意' },
+    { href: '/photography/', label: traditional ? '拾光聽雨' : '拾光听雨' },
   ];
   return <header className="site-header">
     <div className="shell header-inner">

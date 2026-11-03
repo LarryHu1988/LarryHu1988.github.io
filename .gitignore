@@ -26,6 +26,7 @@ next-env.d.ts
 110_Site/public/keepfit/
 113_Local/
 114_Build/
+115_Photos/
 dist/
 build/
 .cache/

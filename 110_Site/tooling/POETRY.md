@@ -14,4 +14,6 @@ After importing, run `npm run fonts:sync` and `python3 tooling/generate-image-pr
 
 The existing local heartbeat runs at 08:30 and 23:30 Asia/Shanghai. The morning run synchronizes the prior day's newly confirmed publications; the evening run retains the dashboard inspection and retries any pending website synchronization. Publish only when reader content or its images changed. After deployment, confirm Pages completed and read back the changed public URLs.
 
+The photo publisher shares this checkout. If `113_Local/photo-sync/publishing.lock/pid` belongs to a live photo-watcher process, defer poetry edits/build/deployment until it finishes. Never stage or publish files from the private `115_Photos` source folder. Photo publishing likewise defers whenever unrelated website edits are present.
+
 Importer checks: `python3 -m unittest discover -s tests -p 'test_poetry_export.py'`.

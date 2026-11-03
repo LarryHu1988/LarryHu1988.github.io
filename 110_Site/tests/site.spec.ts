@@ -110,7 +110,7 @@ test('language preference survives reload and navigation', async ({ page }) => {
   await expect(page.locator('.bio-chinese')).toContainText('踢實況');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-Hant');
-  await expect(page.locator('#apps-title')).toHaveText('數碼雨飯.');
+  await expect(page.locator('#apps-title')).toHaveText('碼上有雨.');
 });
 
 test('product pages and legal routes remain available', async ({ request }) => {

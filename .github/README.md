@@ -3,9 +3,10 @@
 <p align="center">
   <a href="https://larryhu.com">访问个人网站 ↗</a>&nbsp;&nbsp; · &nbsp;&nbsp;
   <a href="https://larryhu.com/#about">滴水龙雨</a>&nbsp;&nbsp; · &nbsp;&nbsp;
-  <a href="https://larryhu.com/#apps">数码雨饭</a>&nbsp;&nbsp; · &nbsp;&nbsp;
+  <a href="https://larryhu.com/#apps">码上有雨</a>&nbsp;&nbsp; · &nbsp;&nbsp;
   <a href="https://larryhu.com/#poetry">诗情雨意</a>&nbsp;&nbsp; · &nbsp;&nbsp;
-  <a href="https://larryhu.com/poetry-picture/">诗情画意</a>
+  <a href="https://larryhu.com/poetry-picture/">诗情画意</a>&nbsp;&nbsp; · &nbsp;&nbsp;
+  <a href="https://larryhu.com/photography/">拾光听雨</a>
 </p>
 
 ## 滴水龙雨
@@ -14,9 +15,9 @@
 半导体行业从业十二年，从产品工程到工艺整合。<br />
 追梅西，忠巴萨，念科比。看读库，读新诗，写小诗。踢实况，打黑猴，码 APP。
 
-## 数码雨饭
+## 码上有雨
 
-从自己的日常出发，做一点有用的东西。
+一码之间 尽是风雨
 
 <p align="center">
   <a href="https://larryhu.com/simpleworth/"><img src="../112_Brand/simpleworth.png" width="260" alt="SimpleWorth · 简值：记得简单，心里有数。探索记账与储蓄 App。" /></a>
@@ -26,7 +27,7 @@
 
 ## 诗情雨意
 
-有些话，留给诗来说。
+以诗入雨 以意观心
 
 <p align="center">
   <a href="https://larryhu.com/poems/second-granduncle/"><img src="../112_Brand/second-granduncle.svg" width="400" alt="读《二姥爷是个哑巴》：在正月的日子里，我回忆起了他。" /></a>
@@ -38,5 +39,11 @@
 [把日子，翻成一张张诗的封面。](https://larryhu.com/poetry-picture/)
 
 每天一首诗、一幅画。左右翻阅封面，读原诗、解析与刊发缘起。
+
+## 拾光听雨
+
+[拾光成册 听雨成诗](https://larryhu.com/photography/)
+
+路过的风景，身边的日常。一页一页，慢慢翻看。
 
 [![日子慢慢过，文字慢慢写。](../112_Brand/signature.svg)](https://larryhu.com)

@@ -56,7 +56,17 @@ if (process.argv.includes('--check')) {
     manifest.subsets.push({ path, characters, sha256, bytes: bytes.length, critical: [...characters].some(char => critical.has(char)), source: url });
     console.log(`Added ${characters.length} characters (${Math.round(bytes.length / 1024)} KiB).`);
   }
-  for (const subset of manifest.subsets) subset.critical = [...subset.characters].some(char => critical.has(char));
+  // A newly-used glyph must not promote an entire article pack into a global preload.
+  let preloadBytes = 0;
+  const candidates = manifest.subsets.map(subset => {
+    const characters = [...subset.characters];
+    const used = characters.filter(char => critical.has(char));
+    return { subset, ratio: used.length / characters.length, score: used.reduce((sum, char) => sum + (frequency.get(char) || 0), 0) / subset.bytes };
+  }).filter(item => item.ratio >= .6).sort((a, b) => b.score - a.score);
+  for (const subset of manifest.subsets) subset.critical = false;
+  for (const { subset } of candidates) if (preloadBytes + subset.bytes <= 64 * 1024) {
+    subset.critical = true; preloadBytes += subset.bytes;
+  }
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   writeFileSync(cssPath, fontCSS(manifest, base));
   if (baseBefore !== digest(readFileSync(resolve(site, 'public' + basePath)))) throw new Error('The existing font must remain unchanged');

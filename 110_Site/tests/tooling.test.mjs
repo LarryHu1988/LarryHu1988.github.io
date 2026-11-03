@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { root, output, publishable } from '../tooling/paths.mjs';
 
 test('numbered workspace folders retain the consecutive source/private/build contract', () => {
-  for (const path of ['110_Site', '111_Products', '112_Brand']) assert(existsSync(resolve(root, path)), path);
+  for (const path of ['110_Site', '111_Products', '112_Brand', '115_Photos/1150_Inbox']) assert(existsSync(resolve(root, path)), path);
   assert.equal(output, resolve(root, '114_Build/site'));
   const ignore = readFileSync(resolve(root, '.gitignore'), 'utf8');
   for (const path of ['113_Local/', '114_Build/']) assert(ignore.split('\n').includes(path), path);
