@@ -1,0 +1,37 @@
+1:"$Sreact.fragment"
+3:"/_next/static/chunks/25c5m78lgzbll.js"
+4:"LanguageProvider"
+5:I[84617,["$3"],"$4"]
+6:I[71939,["$3"],"SiteHeader"]
+7:I[39756,["$3"],"default"]
+8:I[37457,["$3"],"default"]
+9:I[22016,["$3"],""]
+a:I[71939,["$3"],"SiteFooter"]
+e:"/_next/static/chunks/3mcr9l6egzh7e.js"
+f:I[48630,["$3","$e"],"PhotoAlbum"]
+10:I[97367,["$3"],"OutletBoundary"]
+11:"$Sreact.suspense"
+13:"ViewportBoundary"
+14:I[97367,["$3"],"$13"]
+16:"MetadataBoundary"
+17:I[97367,["$3"],"$16"]
+19:I[68027,["$3"],"default",1]
+:HL["/_next/static/chunks/39a0s_wda4sdl.css","style"]
+:HL["/_next/static/chunks/3nzvgml-43ujn.css","style"]
+:HL["/fonts/ibm-plex-mono-500.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/dm-sans.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/noto-serif-sc.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/serif/serif-7c61a1920ef9.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/serif/serif-b26f4a173204.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/serif/serif-db9d760238f0.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/fonts/serif/serif-f5a47cdcc930.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+2:["$","style",null,{"children":"img[data-responsive-managed]{display:none}"}]
+c:X
+d:[["children",{"s":"__PAGE__","h":512,"d":{"r":["$","$1","c",{"children":[["$","$Lf",null,{"photos":[]}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/3nzvgml-43ujn.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/3mcr9l6egzh7e.js","async":true,"nonce":"$undefined"}]],["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]]}],"p":false,"v":null}}]]
+b:[["children",{"s":"photography","h":512,"d":{"r":["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],"p":false,"v":"$c"},"c":"$Qd"}]]
+0:{"P":null,"c":["","photography",""],"q":"","i":false,"t":{"t":{"s":"","h":528,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/39a0s_wda4sdl.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/25c5m78lgzbll.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","link",null,{"rel":"preload","href":"/fonts/ibm-plex-mono-500.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}],["$","link",null,{"rel":"preload","href":"/fonts/dm-sans.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}],["$","link",null,{"rel":"preload","href":"/fonts/noto-serif-sc.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}],[["$","link","/fonts/serif/serif-7c61a1920ef9.woff2",{"rel":"preload","href":"/fonts/serif/serif-7c61a1920ef9.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}],["$","link","/fonts/serif/serif-b26f4a173204.woff2",{"rel":"preload","href":"/fonts/serif/serif-b26f4a173204.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}],["$","link","/fonts/serif/serif-db9d760238f0.woff2",{"rel":"preload","href":"/fonts/serif/serif-db9d760238f0.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}],["$","link","/fonts/serif/serif-f5a47cdcc930.woff2",{"rel":"preload","href":"/fonts/serif/serif-f5a47cdcc930.woff2","as":"font","type":"font/woff2","crossOrigin":"anonymous"}]],["$","meta",null,{"name":"theme-color","content":"#f5f3ed"}],["$","noscript",null,{"children":"$2"}]]}],["$","body",null,{"children":["$","$L5",null,{"children":[["$","a",null,{"className":"skip-link","href":"#main","children":"跳至主要内容"}],["$","$L6",null,{}],["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","main",null,{"id":"main","className":"not-found shell","children":[["$","p",null,{"className":"eyebrow","children":"404 / A SMALL DETOUR"}],["$","h1",null,{"children":"这页，暂时留白。"}],["$","p",null,{"children":"你要找的页面可能已经搬家。先回到首页，看看诗和作品。"}],["$","$L9",null,{"className":"button button-dark","href":"/","children":["回到首页 ",["$","span",null,{"aria-hidden":"true","children":"↗"}]]}]]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}],["$","$La",null,{}]]}]}]]}]]}],"p":false,"v":null},"c":"$Qb"},"h":{"r":["$","$1","h",{"children":[null,["$","$L14",null,{"children":"$L15"}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":"$L18"}]}],null]}],null]}],"p":false,"v":null}},"m":"$undefined","G":["$19",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/39a0s_wda4sdl.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"RITCx_PpBvxMDs1FBI-y7"}
+c:C
+15:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+1a:I[27201,["$3"],"IconMark"]
+12:null
+18:[["$","title","0",{"children":"拾光听雨 · 个人摄影集 · 滴水龙雨工作室"}],["$","meta","1",{"name":"description","content":"拾光成册，听雨成诗。滴水龙雨的摄影与日常影像，在一本可以翻阅的相册里慢慢收藏。"}],["$","link","2",{"rel":"canonical","href":"https://larryhu.com/photography/"}],["$","meta","3",{"property":"og:title","content":"滴水龙雨工作室 · LARRY STUDIO"}],["$","meta","4",{"property":"og:description","content":"写代码，也写小诗。一个半导体工程师的个人创作空间。"}],["$","meta","5",{"property":"og:locale","content":"zh_CN"}],["$","meta","6",{"property":"og:image","content":"https://larryhu.com/social.png?v=native-vector"}],["$","meta","7",{"property":"og:image:width","content":"3840"}],["$","meta","8",{"property":"og:image:height","content":"2016"}],["$","meta","9",{"property":"og:type","content":"website"}],["$","meta","10",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","11",{"name":"twitter:title","content":"滴水龙雨工作室 · LARRY STUDIO"}],["$","meta","12",{"name":"twitter:description","content":"写代码，也写小诗。一个半导体工程师的个人创作空间。"}],["$","meta","13",{"name":"twitter:image","content":"https://larryhu.com/social.png?v=native-vector"}],["$","meta","14",{"name":"twitter:image:width","content":"3840"}],["$","meta","15",{"name":"twitter:image:height","content":"2016"}],["$","link","16",{"rel":"icon","href":"/favicon.svg"}],["$","$L1a","17",{}]]
