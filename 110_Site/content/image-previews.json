@@ -2821,6 +2821,65 @@
       "bytes": 16572
     }
   },
+  "/poetry-picture/2026-11-03-cover.webp": {
+    "src": "/poetry-picture/previews/2026-11-03-cover.3f3fc59e925b.webp",
+    "width": 941,
+    "height": 1672,
+    "nativeWidth": 941,
+    "nativeHeight": 1672,
+    "bytes": 381766,
+    "nativeBytes": 1816244,
+    "variants": [
+      {
+        "src": "/poetry-picture/previews/2026-11-03-cover.w96.c0a243f1f64c.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 8380
+      },
+      {
+        "src": "/poetry-picture/previews/2026-11-03-cover.w192.1d564e31acbf.webp",
+        "width": 192,
+        "height": 341,
+        "bytes": 30034
+      },
+      {
+        "src": "/poetry-picture/previews/2026-11-03-cover.w320.dc1f73d94de2.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 77872
+      },
+      {
+        "src": "/poetry-picture/previews/2026-11-03-cover.w480.392a00a91bda.webp",
+        "width": 480,
+        "height": 853,
+        "bytes": 157776
+      },
+      {
+        "src": "/poetry-picture/previews/2026-11-03-cover.w640.35a26c592634.webp",
+        "width": 640,
+        "height": 1137,
+        "bytes": 264288
+      },
+      {
+        "src": "/poetry-picture/previews/2026-11-03-cover.w880.8ad4fd540b6f.webp",
+        "width": 880,
+        "height": 1564,
+        "bytes": 429440
+      },
+      {
+        "src": "/poetry-picture/previews/2026-11-03-cover.w941.d231921d58e3.webp",
+        "width": 941,
+        "height": 1672,
+        "bytes": 480756
+      }
+    ],
+    "thumbnail": {
+      "src": "/poetry-picture/previews/2026-11-03-cover.thumb.959154834e41.webp",
+      "width": 192,
+      "height": 341,
+      "bytes": 25152
+    }
+  },
   "/images/pdf-icon.png": {
     "src": "/images/previews/pdf-icon.be0a3e51c5c6.webp",
     "width": 192,
