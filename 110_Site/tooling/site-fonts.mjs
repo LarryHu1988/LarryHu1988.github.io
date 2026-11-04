@@ -27,7 +27,10 @@ export function fontNeeds(directory = site) {
       if (entry.isDirectory()) walk(path, important);
       else if (/\.(?:[cm]?[jt]sx?|json)$/.test(entry.name) && !['image-previews.json', 'font-subsets.json'].includes(entry.name)) {
         const text = readFileSync(path, 'utf8');
-        add(entry.name.endsWith('.json') ? JSON.stringify(JSON.parse(text)) : text, important || entry.name !== 'poetry-picture.json');
+        if (entry.name === 'photography.json') {
+          // Photo annotations use Studio Sans; only the printed photo captions need the serif glyph set.
+          add(JSON.parse(text).photos.map(photo => photo.title).join(''));
+        } else add(entry.name.endsWith('.json') ? JSON.stringify(JSON.parse(text)) : text, important || entry.name !== 'poetry-picture.json');
       }
     }
   }

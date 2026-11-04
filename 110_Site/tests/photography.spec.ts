@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import album from '../content/photography.json';
+import { captureLabel } from '../components/photobook/capture.mjs';
+import type { Photo } from '../components/photobook/types';
 
 test('series names and eight-character subtitles remain consistent with the photo entry', async ({ page }) => {
   await page.goto('/');
@@ -63,6 +65,7 @@ test('a missing WebGL context keeps the public photo collection accessible', asy
 test('photo artwork contains every source edge, keeps its ratio and chooses enough pixels', async ({ page }) => {
   const source = readFileSync(resolve(__dirname, '../components/photobook/page-art.js'), 'utf8');
   await page.route('**/__photo-qa/page-art.mjs', route => route.fulfill({ contentType: 'text/javascript', body: source }));
+  await page.route('**/__photo-qa/capture.mjs', route => route.fulfill({ contentType: 'text/javascript', body: readFileSync(resolve(__dirname, '../components/photobook/capture.mjs'), 'utf8') }));
   for (const [name, width, height] of [['wide', 1200, 400], ['tall', 400, 1200]] as const) {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><rect width="100%" height="100%" fill="#00ff00"/><rect width="${width / 8}" height="${height}" fill="#ff0000"/><rect x="${width * 7 / 8}" width="${width / 8}" height="${height}" fill="#0000ff"/></svg>`;
     const buffer = await sharp(Buffer.from(svg)).png().toBuffer();
@@ -104,7 +107,7 @@ test('photo page remains accessible and keeps its traditional Chinese selection'
 
 test('published photo cards use screen-density variants and open the full native image', async ({ page }) => {
   test.skip(!album.photos.length, 'No personal photographs have been supplied yet.');
-  const first = album.photos[0] as { width: number; height: number; original: { src: string; width: number }; variants: { src: string; width: number }[] };
+  const first = album.photos[0] as Photo;
   await page.goto('/photography/');
   const card = page.locator('.photo-grid a').first(), image = card.locator('img');
   await card.scrollIntoViewIfNeeded();
@@ -113,10 +116,30 @@ test('published photo cards use screen-density variants and open the full native
   const variant = [...first.variants, first.original].find(item => item.src === info.source)!;
   expect(variant.width).toBeGreaterThanOrEqual(Math.min(first.width, info.width * info.density) - 1);
   expect(info.ratio).toBeCloseTo(first.width / first.height, 2); expect(info.fit).toBe('contain');
+  const label = captureLabel(first.capture);
+  if (label) {
+    await expect(card.locator('[data-photo-watermark]')).toHaveText(label);
+    const geometry = await card.locator('[data-photo-watermark]').evaluate(element => {
+      const label = element.getBoundingClientRect(), image = element.parentElement!.querySelector('img')!.getBoundingClientRect();
+      return { inside: label.left >= image.left && label.right <= image.right && label.top >= image.top && label.bottom <= image.bottom, size: parseFloat(getComputedStyle(element).fontSize) };
+    });
+    expect(geometry.inside).toBe(true); expect(geometry.size).toBeLessThanOrEqual(10);
+  } else await expect(card.locator('[data-photo-watermark]')).toHaveCount(0);
   await card.click();
   await expect(page.locator('dialog')).toBeVisible();
   await expect(page.locator('dialog img')).toHaveAttribute('src', first.original.src);
   await expect(page.locator('dialog img')).toHaveJSProperty('complete', true);
   expect(await page.locator('dialog img').evaluate((element: HTMLImageElement) => element.naturalWidth)).toBe(first.width);
+  expect(await page.locator('dialog img').evaluate(element => {
+    const image = element.getBoundingClientRect(), stage = element.closest('.photo-lightbox-stage')!.getBoundingClientRect();
+    return Math.abs(image.y + image.height / 2 - stage.y - stage.height / 2);
+  })).toBeLessThan(1);
+  if (label) {
+    await expect(page.locator('dialog [data-photo-watermark]')).toHaveText(label);
+    expect(await page.locator('dialog [data-photo-watermark]').evaluate(element => {
+      const label = element.getBoundingClientRect(), image = element.parentElement!.querySelector('img')!.getBoundingClientRect();
+      return label.left >= image.left && label.right <= image.right && label.top >= image.top && label.bottom <= image.bottom;
+    })).toBe(true);
+  }
   await page.keyboard.press('Escape'); await expect(page.locator('dialog')).not.toBeVisible();
 });

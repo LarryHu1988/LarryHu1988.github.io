@@ -24,6 +24,7 @@
     "deploy": "npm run build && node tooling/deploy-pages-api.mjs --verify"
   },
   "dependencies": {
+    "exifr": "7.1.3",
     "next": "16.4.2",
     "quick_flipbook": "1.1.3",
     "react": "19.3.1",

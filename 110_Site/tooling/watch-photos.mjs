@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync,
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { root, site } from './paths.mjs';
-import { photoInbox, photoSnapshot, syncPhotos } from './photo-library.mjs';
+import { photoInbox, photoPipelineVersion, photoSnapshot, syncPhotos } from './photo-library.mjs';
 import { deployPages, github, verifyPages } from './deploy-pages-api.mjs';
 
 const local = join(root, '113_Local/photo-sync');
@@ -19,7 +19,7 @@ const allowed = /^(?:110_Site\/content\/photography\.json|110_Site\/public\/phot
 const git = args => execFileSync('git', args, { cwd: root, encoding: 'utf8', timeout: 120000 }).trim();
 const run = args => execFileSync(process.execPath, args, { cwd: site, stdio: 'inherit', timeout: 600000 });
 const save = state => {
-  writeFileSync(stateFile + '.tmp', JSON.stringify(state, null, 2) + '\n');
+  writeFileSync(stateFile + '.tmp', JSON.stringify({ ...state, pipelineVersion: photoPipelineVersion }, null, 2) + '\n');
   renameSync(stateFile + '.tmp', stateFile);
 };
 
@@ -45,8 +45,8 @@ async function checkOnce() {
   try {
     const state = existsSync(stateFile) ? JSON.parse(readFileSync(stateFile, 'utf8')) : {};
     const snapshot = JSON.stringify(photoSnapshot());
-    if (state.snapshot === snapshot && !state.pending) return;
-    if (state.failureSnapshot === snapshot && Date.now() < state.retryAfter) return;
+    if (state.snapshot === snapshot && !state.pending && state.pipelineVersion === photoPipelineVersion) return;
+    if (state.failureSnapshot === snapshot && Date.now() < state.retryAfter && state.pipelineVersion === photoPipelineVersion) return;
     const status = execFileSync('git', ['status', '--porcelain=v1', '-z', '--untracked-files=all'], { cwd: root, encoding: 'utf8' });
     if (!safePhotoPaths(status)) { console.log('Photo publishing deferred: unrelated repository work is in progress.'); return; }
     if (JSON.parse(snapshot).some(([, , modified]) => Date.now() - modified < 15000)) return;

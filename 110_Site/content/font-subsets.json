@@ -143,8 +143,32 @@
       "characters": "組",
       "sha256": "f5a47cdcc9309c26bd02fc66f9c1a01b73161cdbc9e81cd6153dc200ec52dd94",
       "bytes": 1820,
-      "critical": true,
+      "critical": false,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEaNfekg&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-47d6676f622b.woff2",
+      "characters": "^",
+      "sha256": "47d6676f622b34b669af8f523c3d9a2bf559f893fe39cfbd323d20fb4b8a0032",
+      "bytes": 1216,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEam4&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-9454d6a9cb29.woff2",
+      "characters": "冯",
+      "sha256": "9454d6a9cb2996b240ae456ed0c4ede2ddbfc4f52f90fb023926a751ec240e65",
+      "bytes": 1820,
+      "critical": true,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEaNXtuQ&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-3651d4564425.woff2",
+      "characters": "偶剪厉坏扮淌漾猛粼赠",
+      "sha256": "3651d4564425acf7ceb53b81322a15e39128c83cc82633287ee24f4b485f0e30",
+      "bytes": 6960,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEddXqoDyZyVHEYeAyVmxg28s0zaB2PrxHTgA2313cAg&skey=37fe335b8fd815cc&v=v36"
     }
   ]
 }

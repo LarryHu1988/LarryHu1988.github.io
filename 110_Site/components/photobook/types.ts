@@ -6,4 +6,5 @@ export type Photo = {
   height: number;
   original: PhotoVariant;
   variants: PhotoVariant[];
+  capture?: { takenAt?: string; offset?: string; make?: string; model?: string; lens?: string; aperture?: number; exposureTime?: number; iso?: number; focalLength?: number };
 };

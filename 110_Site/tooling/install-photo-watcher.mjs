@@ -45,5 +45,5 @@ if (process.argv.includes('--uninstall')) {
   execFileSync('/usr/bin/plutil', ['-lint', plist], { stdio: 'inherit' });
   spawnSync('launchctl', ['bootout', `${domain}/${label}`]);
   execFileSync('launchctl', ['bootstrap', domain, plist], { stdio: 'inherit' });
-  console.log(`Installed ${label}: only ${photoInbox} is watched; metadata-free copies publish after checks pass.`);
+  console.log(`Installed ${label}: only ${photoInbox} is watched; photographic EXIF is retained and private fields are excluded before publication.`);
 }

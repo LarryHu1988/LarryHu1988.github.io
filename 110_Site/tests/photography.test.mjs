@@ -5,17 +5,20 @@ import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, readdirSyn
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
+import exifr from 'exifr';
 import { photoFiles, syncPhotos, checkPhotos } from '../tooling/photo-library.mjs';
 import { safePhotoPaths } from '../tooling/watch-photos.mjs';
 import { bookPages, displayVariant } from '../components/photobook/page-art.js';
+import { captureLabel } from '../components/photobook/capture.mjs';
+import { captureTimestamp, checkPhotographicMetadata, extractCapture, photographicExif } from '../tooling/photo-metadata.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 
-test('photo import preserves oriented native pixels, strips metadata and never edits private originals', async () => {
+test('photo import retains photographic EXIF, removes private tags and never edits native pixels or originals', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'studio-photo-test-'));
   try {
     const inbox = join(dir, 'inbox'); mkdirSync(inbox);
-    const bytes = await sharp({ create: { width: 960, height: 640, channels: 3, background: '#456f89' } }).jpeg({ quality: 100 }).withExif({ IFD0: { Artist: 'Private Photographer', Make: 'Private Camera', ImageDescription: 'Private address' }, IFD3: { GPSLatitudeRef: 'N', GPSLatitude: '31/1 13/1 0/1', GPSLongitudeRef: 'E', GPSLongitude: '121/1 28/1 0/1' } }).withMetadata({ orientation: 6 }).toBuffer();
+    const bytes = await sharp({ create: { width: 960, height: 640, channels: 3, background: '#456f89' } }).jpeg({ quality: 100 }).withExif({ IFD0: { Artist: 'Private Photographer', Make: 'Apple', Model: 'iPhone 16 Pro', ImageDescription: 'Private address' }, IFD2: { DateTimeOriginal: '2026:11:04 17:42:08', OffsetTimeOriginal: '+08:00', BodySerialNumber: 'Private Serial', LensSerialNumber: 'Private Lens Serial', CameraOwnerName: 'Private Owner', FNumber: '18/10', ISOSpeedRatings: '125', ExposureTime: '1/250', FocalLength: '65/10' }, IFD3: { GPSLatitudeRef: 'N', GPSLatitude: '31/1 13/1 0/1', GPSLongitudeRef: 'E', GPSLongitude: '121/1 28/1 0/1' } }).withMetadata({ orientation: 6 }).toBuffer();
     assert((await sharp(bytes).metadata()).exif);
     const original = join(inbox, 'Private-name-and-address.jpg'); writeFileSync(original, bytes);
     writeFileSync(join(inbox, 'duplicate.jpg'), bytes);
@@ -25,12 +28,26 @@ test('photo import preserves oriented native pixels, strips metadata and never e
     const photo = album.photos[0]; assert.deepEqual([photo.width, photo.height], [640, 960]);
     assert.equal(digest(readFileSync(original)), digest(bytes));
     const native = readFileSync(join(options.assets, photo.original.src.split('/').pop()));
-    const metadata = await sharp(native).metadata(); assert(!metadata.exif && !metadata.xmp && !metadata.iptc);
+    const metadata = await sharp(native).metadata(); assert(metadata.exif && !metadata.xmp && !metadata.iptc);
+    assert.equal(captureLabel(photo.capture), '2026.11.04 17:42 · iPhone 16 Pro');
+    for (const asset of [photo.original, ...photo.variants]) {
+      const publicBytes = readFileSync(join(options.assets, asset.src.split('/').pop()));
+      const retained = await extractCapture(publicBytes);
+      assert.equal(retained.model, 'iPhone 16 Pro'); assert.equal(retained.takenAt, '2026-11-04T17:42:08');
+      assert.equal(retained.offset, '+08:00'); assert.equal(retained.iso, 125);
+      const info = await sharp(publicBytes).metadata();
+      const tags = await exifr.parse(info.exif.subarray(6), { reviveValues: false });
+      assert(Object.keys(tags).every(key => !/GPS|latitude|longitude|Serial|Owner|Artist|Description/i.test(key)));
+    }
     assert.deepEqual(await sharp(native).raw().toBuffer(), await sharp(bytes).autoOrient().raw().toBuffer());
     assert(!JSON.stringify(album).includes('Private'));
     assert.equal(photo.variants.length, 1); assert.deepEqual([photo.variants[0].width, photo.variants[0].height], [320, 480]);
     await checkPhotos(album, options.assets);
     const again = await syncPhotos(options); assert.deepEqual(again, album, 'unchanged imports must be idempotent');
+    const oldState = JSON.parse(readFileSync(options.privateState, 'utf8')); oldState.version = 1;
+    for (const value of Object.values(oldState.files)) delete value.capture;
+    writeFileSync(options.privateState, JSON.stringify(oldState));
+    assert.deepEqual(await syncPhotos(options), album, 'legacy imports must recover EXIF from untouched originals, even when photo files did not change');
     const withoutOriginals = await syncPhotos({ ...options, inbox: join(dir, 'other-checkout'), privateState: join(dir, 'no-private-state.json') });
     assert.deepEqual(withoutOriginals, album, 'a public source checkout must not erase an album');
     rmSync(original); rmSync(join(inbox, 'duplicate.jpg'));
@@ -38,6 +55,29 @@ test('photo import preserves oriented native pixels, strips metadata and never e
     assert.equal(readdirSync(options.assets).length, 0);
     assert(readdirSync(join(options.workspace, 'photo-retired')).length > 0, 'retired public derivatives remain recoverable');
   } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('capture dates stay in camera-local time and missing fields never use a file timestamp or guessed device', async () => {
+  assert.equal(captureTimestamp('2026:11:04 01:02:03'), '2026-11-04T01:02:03');
+  assert.equal(captureTimestamp('2024:02:29 23:59:59.123'), '2024-02-29T23:59:59.123');
+  for (const invalid of ['2026:02:29 12:00:00', '2026:13:01 12:00:00', '2026:11:04 24:00:00', '0000:00:00 00:00:00']) assert.equal(captureTimestamp(invalid), undefined);
+  assert.equal(captureLabel({}), '');
+  assert.equal(captureLabel({ model: 'X100VI' }), 'X100VI');
+  assert.equal(captureLabel({ make: 'Canon', model: 'Canon EOS R6' }), 'Canon EOS R6');
+  assert.equal(captureLabel({ takenAt: '2026-11-04T01:02:03', offset: '-05:00' }), '2026.11.04 01:02');
+  const plain = await sharp({ create: { width: 10, height: 10, channels: 3, background: '#fff' } }).png().toBuffer();
+  assert.deepEqual(await extractCapture(plain), {});
+});
+
+test('public validation rejects accidental GPS retention rather than accepting any EXIF block', async () => {
+  const unsafe = await sharp({ create: { width: 10, height: 10, channels: 3, background: '#fff' } }).webp().withExif({ IFD3: { GPSLatitudeRef: 'N', GPSLatitude: '31/1 13/1 0/1' } }).toBuffer();
+  await assert.rejects(checkPhotographicMetadata(unsafe, await sharp(unsafe).metadata(), {}), /Unexpected public EXIF field/);
+});
+
+test('photographic EXIF preserves fast shutter fractions rather than rounding them to a decimal grid', () => {
+  for (const denominator of [125, 250, 8000, 32000, 64000]) assert.equal(photographicExif({ exposureTime: 1 / denominator }).IFD2.ExposureTime, `1/${denominator}`);
+  assert.equal(photographicExif({ aperture: 1.8, focalLength: 6.5 }).IFD2.FNumber, '9/5');
+  assert.equal(photographicExif({ aperture: 1.8, focalLength: 6.5 }).IFD2.FocalLength, '13/2');
 });
 
 test('only supported photos inside the nominated folder are ingested, never symlinks or hidden files', () => {

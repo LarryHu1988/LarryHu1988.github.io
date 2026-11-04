@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, statSync,
 import { dirname, join, relative, resolve } from 'node:path';
 import sharp from 'sharp';
 import { root, site } from './paths.mjs';
+import { checkPhotographicMetadata, extractCapture, photographicExif } from './photo-metadata.mjs';
 
 export const photoInbox = resolve(root, '115_Photos/1150_Inbox');
 export const photoManifest = resolve(site, 'content/photography.json');
@@ -11,7 +12,8 @@ export const photoAssets = resolve(site, 'public/photography/assets');
 const statePath = resolve(root, '113_Local/photo-sync/import.json');
 const supported = /\.(?:jpe?g|png|webp|avif|hei[cf]|tiff?)$/i;
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const version = 1;
+export const photoPipelineVersion = 2;
+const version = photoPipelineVersion;
 const readJSON = (path, fallback) => existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : fallback;
 function saveJSON(path, value) {
   mkdirSync(dirname(path), { recursive: true });
@@ -54,7 +56,7 @@ export async function checkPhotos(manifest = readJSON(photoManifest, { version, 
       const bytes = readFileSync(join(assets, variant.src.split('/').pop()));
       if (!variant.src.includes(hash(bytes).slice(0, 24))) throw new Error('Photo asset checksum mismatch');
       const meta = await sharp(bytes).metadata();
-      if (meta.exif || meta.xmp || meta.iptc || meta.comments?.length) throw new Error('Public photo still contains private metadata');
+      await checkPhotographicMetadata(bytes, meta, photo.capture);
       if (bytes.length !== variant.bytes || meta.width !== variant.width || meta.height !== variant.height) throw new Error('Photo dimensions do not match manifest');
       if (variant.width > photo.width || variant.height > photo.height) throw new Error('Photo must not be upscaled');
       if (Math.abs(variant.height - photo.height * variant.width / photo.width) > 1) throw new Error('Photo was cropped or stretched');
@@ -90,6 +92,9 @@ export async function syncPhotos({ inbox = photoInbox, manifestPath = photoManif
       if (state.version === version && cached && [cached.original, ...cached.variants].every(v => existsSync(join(assets, v.src.split('/').pop())))) {
         photo = { ...cached };
       } else {
+        const capture = await extractCapture(bytes);
+        const exif = photographicExif(capture);
+        const withPhotography = pipeline => Object.keys(exif).length ? pipeline.withExif(exif) : pipeline;
         let input = bytes;
         if (/\.hei[cf]$/i.test(path)) {
           if (process.platform !== 'darwin') throw new Error('HEIC import needs macOS; export JPEG/PNG on this machine instead');
@@ -97,7 +102,7 @@ export async function syncPhotos({ inbox = photoInbox, manifestPath = photoManif
           execFileSync('/usr/bin/sips', ['-s', 'format', 'png', path, '--out', converted], { stdio: 'pipe', timeout: 120000 });
           input = readFileSync(converted);
         }
-        const originalBytes = await sharp(input, { limitInputPixels: 268402689 }).autoOrient().webp({ lossless: true, effort: 6 }).toBuffer();
+        const originalBytes = await withPhotography(sharp(input, { limitInputPixels: 268402689 }).autoOrient().webp({ lossless: true, effort: 6 })).toBuffer();
         if (originalBytes.length >= 90 * 1024 * 1024) throw new Error('Native image exceeds the safe publication size; no downscaling was performed');
         const meta = await sharp(originalBytes).metadata();
         if (!meta.width || !meta.height) throw new Error('Could not read native image dimensions');
@@ -110,10 +115,10 @@ export async function syncPhotos({ inbox = photoInbox, manifestPath = photoManif
         const original = await asset(originalBytes);
         const variants = [];
         for (const width of [320, 640, 960, 1280, 1920, 2560, 3840].filter(width => width < meta.width)) {
-          const display = await sharp(originalBytes).resize({ width, withoutEnlargement: true }).webp({ quality: 97, effort: 6, alphaQuality: 100 }).toBuffer();
+          const display = await withPhotography(sharp(originalBytes).resize({ width, withoutEnlargement: true }).webp({ quality: 97, effort: 6, alphaQuality: 100 })).toBuffer();
           variants.push(await asset(display));
         }
-        photo = { id, title: '', width: meta.width, height: meta.height, original, variants };
+        photo = { id, title: '', width: meta.width, height: meta.height, original, variants, capture };
       }
       const after = statSync(path);
       if (before.size !== after.size || before.mtimeMs !== after.mtimeMs) throw new Error('A photo changed while importing; retry after copying finishes');

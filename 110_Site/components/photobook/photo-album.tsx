@@ -1,12 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../language';
 import { Arrow } from '../site-chrome';
 import type { Photo } from './types';
+import { captureLabel } from './capture.mjs';
 
 const volumeSize = 24;
+
+function PhotoWatermark({ photo }: { photo: Photo }) {
+  const label = captureLabel(photo.capture);
+  return label ? <span className="photo-watermark" data-photo-watermark>{label}</span> : null;
+}
 
 function PhotoReader({ photos, volume }: { photos: Photo[]; volume: number }) {
   const { traditional } = useLanguage();
@@ -72,13 +78,13 @@ export function PhotoAlbum({ photos }: { photos: Photo[] }) {
     <PhotoReader key={`${volume}-${t ? 'hant' : 'hans'}`} photos={photos} volume={volume} />
     <section id="photo-contact-sheet" className="photo-contact-sheet" aria-labelledby="photo-sheet-title">
       <div className="photo-sheet-heading"><h2 id="photo-sheet-title">{t ? '日常的切片' : '日常的切片'}</h2><span>{String(photos.length).padStart(3, '0')} / COLLECTED MOMENTS</span></div>
-      {photos.length ? <div className="photo-grid">{photos.map(photo => <a key={photo.id} href={photo.original.src} target="_blank" rel="noreferrer" onClick={event => { event.preventDefault(); setSelected(photo); }} aria-label={`${photo.title}，${t ? '查看高清原圖' : '查看高清原图'}`}><figure><img src={(photo.variants[0] || photo.original).src} srcSet={[...photo.variants, photo.original].map(v => `${v.src} ${v.width}w`).join(', ')} sizes="(max-width:600px) calc(100vw - 48px), (max-width:1000px) calc((100vw - 72px) / 2), 360px" width={photo.width} height={photo.height} loading="lazy" decoding="async" alt={photo.title} /><figcaption><span>{photo.title}</span><Arrow diagonal /></figcaption></figure></a>)}</div> : <div className="photo-empty"><span aria-hidden="true">[ 00 ]</span><p>{t ? '相冊已打開，等待下一個瞬間。' : '相册已打开，等待下一个瞬间。'}</p><small>{t ? '路過的風景，身邊的日常。' : '路过的风景，身边的日常。'}</small></div>}
+      {photos.length ? <div className="photo-grid">{photos.map(photo => <a key={photo.id} href={photo.original.src} target="_blank" rel="noreferrer" onClick={event => { event.preventDefault(); setSelected(photo); }} aria-label={`${photo.title}，${t ? '查看高清原圖' : '查看高清原图'}`}><figure><div className="photo-image-frame"><img src={(photo.variants[0] || photo.original).src} srcSet={[...photo.variants, photo.original].map(v => `${v.src} ${v.width}w`).join(', ')} sizes="(max-width:600px) calc(100vw - 48px), (max-width:1000px) calc((100vw - 72px) / 2), 360px" width={photo.width} height={photo.height} loading="lazy" decoding="async" alt={photo.title} /><PhotoWatermark photo={photo} /></div><figcaption><span>{photo.title}</span><Arrow diagonal /></figcaption></figure></a>)}</div> : <div className="photo-empty"><span aria-hidden="true">[ 00 ]</span><p>{t ? '相冊已打開，等待下一個瞬間。' : '相册已打开，等待下一个瞬间。'}</p><small>{t ? '路過的風景，身邊的日常。' : '路过的风景，身边的日常。'}</small></div>}
     </section>
     <p className="photo-colophon">{t ? '光影有時，日常有聲。' : '光影有时，日常有声。'}<span>LARRY STUDIO · LIGHT & RAIN</span></p>
     <details className="photo-credits"><summary>{t ? '相冊製作鳴謝' : '相册制作鸣谢'}</summary><p>3D Book 2 · <a href="https://github.com/HaichaoLihc/create-photo-flipbook-ui" target="_blank" rel="noreferrer">Haichao Li</a> / <a href="/licenses/photo-flipbook-MIT.txt">MIT</a>. Quick FlipBook / <a href="/licenses/quick-flipbook-BSD.txt">BSD</a>. Three.js / <a href="/licenses/three-MIT.txt">MIT</a>. <a href="/licenses/three-modifiers-NOTICE.txt">three.modifiers</a>.</p></details>
     <dialog className="photo-lightbox" ref={dialog} aria-label={t ? '高清照片' : '高清照片'} onCancel={() => setSelected(null)} onClick={event => { if (event.target === event.currentTarget) setSelected(null); }}>
       <button type="button" className="photo-lightbox-close" onClick={() => setSelected(null)} aria-label={t ? '關閉照片' : '关闭照片'}>×</button>
-      {selected && <><img src={selected.original.src} width={selected.width} height={selected.height} alt={selected.title} /><div><span>{selected.title} / {selected.width} × {selected.height}</span><a href={selected.original.src} target="_blank" rel="noreferrer">{t ? '打開全尺寸原圖' : '打开全尺寸原图'}<Arrow diagonal /></a></div></>}
+      {selected && <><div className="photo-lightbox-stage"><div className="photo-lightbox-frame" style={{ '--photo-ratio': selected.width / selected.height } as CSSProperties}><img src={selected.original.src} width={selected.width} height={selected.height} alt={selected.title} /><PhotoWatermark photo={selected} /></div></div><div className="photo-lightbox-info"><span>{selected.title} / {selected.width} × {selected.height}</span><a href={selected.original.src} target="_blank" rel="noreferrer">{t ? '打開全尺寸原圖' : '打开全尺寸原图'}<Arrow diagonal /></a></div></>}
     </dialog>
   </main>;
 }

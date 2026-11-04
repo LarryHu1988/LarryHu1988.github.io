@@ -1,3 +1,5 @@
+import { captureLabel } from './capture.mjs';
+
 export function displayVariant(photo, width) {
   return [...photo.variants, photo.original].sort((a, b) => a.width - b.width).find(item => item.width >= width) || photo.original;
 }
@@ -49,6 +51,26 @@ export async function renderPhotoPage(page, width, ratio, traditional) {
     ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
     // Contain the whole photograph. Never crop, stretch or split it across a gutter.
     ctx.drawImage(image, (w - dw) / 2, h * .47 - dh / 2, dw, dh);
+    const label = captureLabel(photo.capture);
+    if (label) {
+      const density = window.devicePixelRatio || 1;
+      let size = Math.min(8 * density, dh * .25);
+      ctx.font = `400 ${size}px "Studio Sans", sans-serif`;
+      size *= Math.min(1, dw * .9 / Math.max(1, ctx.measureText(label).width));
+      ctx.font = `400 ${size}px "Studio Sans", sans-serif`;
+      const padding = Math.min(6 * density, dw * .025, dh * .1);
+      const right = (w + dw) / 2 - padding;
+      const bottom = h * .47 + dh / 2 - padding;
+      const textWidth = ctx.measureText(label).width;
+      ctx.save();
+      ctx.beginPath(); ctx.rect((w - dw) / 2, h * .47 - dh / 2, dw, dh); ctx.clip();
+      ctx.fillStyle = '#14291f66';
+      ctx.fillRect(right - textWidth - padding, bottom - size - padding, textWidth + padding * 2, size + padding * 2);
+      ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
+      ctx.fillStyle = '#fffffff0'; ctx.shadowColor = '#102519'; ctx.shadowBlur = size * .25;
+      ctx.fillText(label, right, bottom);
+      ctx.restore();
+    }
     write(photo.title, .93, .027, true);
   } else {
     write('A PERSONAL PHOTOBOOK', .27, .028);
