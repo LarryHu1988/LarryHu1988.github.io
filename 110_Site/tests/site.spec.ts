@@ -10,7 +10,7 @@ test('home keeps the selected content and real product images', async ({ page },
   await page.goto('/');
   await expect(page.locator('h1')).toContainText('写代码');
   await expect(page.locator('.hero-introduction')).toHaveText('你好，我是滴水龙雨。');
-  await expect(page.locator('.bio-chinese')).toContainText('踢实况，打黑猴，做应用。');
+  await expect(page.locator('.bio-chinese')).toContainText('踢实况，打黑猴，搞智能。');
   await expect(page.locator('.rain-drawing')).toBeVisible();
   await expect(page.getByText('雨的形状', { exact: true })).toHaveCount(0);
   await expect(page.getByText('FIELD NOTES / 001', { exact: true })).toHaveCount(0);
@@ -110,7 +110,7 @@ test('language preference survives reload and navigation', async ({ page }) => {
   await page.locator('.language-button').click();
   await expect(page.locator('#about-title')).toHaveText('滴水龍雨.');
   await expect(page.locator('.hero-introduction')).toHaveText('你好，我是滴水龍雨。');
-  await expect(page.locator('.bio-chinese')).toContainText('踢實況，打黑猴，做應用。');
+  await expect(page.locator('.bio-chinese')).toContainText('踢實況，打黑猴，搞智能。');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-Hant');
   await expect(page.locator('#apps-title')).toHaveText('碼上有雨.');
