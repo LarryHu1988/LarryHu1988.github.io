@@ -165,6 +165,78 @@
   font-weight: 400;
 }
 
+.icon-search-tools {
+  display: flex;
+  flex: 1 1 280px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.icon-search {
+  position: relative;
+  width: min(100%, 250px);
+  min-width: 0;
+}
+
+.icon-search input {
+  display: block;
+  appearance: none;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 56px 0 13px;
+  border: 1px solid #b8c1b1;
+  border-radius: 7px;
+  background: #faf9f4;
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+}
+
+.icon-search input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.icon-search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.icon-search input:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.icon-search button {
+  position: absolute;
+  inset: 1px 1px 1px auto;
+  min-width: 48px;
+  padding-inline: 8px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--green);
+  font-size: 13px;
+}
+
+.icon-search button:hover {
+  background: #e8eeea;
+}
+
+.icon-view-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.icon-empty {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #faf9f4;
+  padding: 30px 15px;
+  text-align: center;
+  color: var(--muted);
+}
+
 .icon-views button[aria-pressed='true'] .icon-series-english {
   color: #e1e9df;
 }
@@ -300,6 +372,10 @@
   .icon-views button { flex: 1; min-height: 44px; padding-inline: 6px; white-space: nowrap; }
   .icon-views .icon-series-english, .icon-comparison .icon-series-english { display: none; }
   .icon-toolbar { gap: 9px; padding-block: 12px; }
+  .icon-search-tools { flex: 1 1 100%; flex-wrap: wrap; justify-content: flex-start; gap: 6px; }
+  .icon-search { flex: 1 1 100%; width: auto; }
+  .icon-search input { padding-left: 9px; padding-right: 45px; }
+  .icon-search button { min-width: 43px; }
   .icon-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
   .icon-card { min-height: 118px; padding: 9px 5px; }
   .icon-card img { width: min(84%, 74px); margin-bottom: 5px; }

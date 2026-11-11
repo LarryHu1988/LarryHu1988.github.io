@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import apps from '@/content/icon-gallery.json';
 import { useLanguage } from './language';
 
@@ -14,6 +14,10 @@ const series = [
 type Series = (typeof series)[number];
 type IconApp = (typeof apps)[number];
 type View = Series['id'] | 'compare';
+
+function normalizeName(name: string) {
+  return name.normalize('NFKC').toLowerCase().replace(/\s+/g, '');
+}
 
 function Preview({ app, collection, alt = '', eager = false }: {
   app: IconApp;
@@ -37,8 +41,15 @@ function Preview({ app, collection, alt = '', eager = false }: {
 export function IconGallery() {
   const { traditional } = useLanguage();
   const [view, setView] = useState<View>('glosspop');
+  const [query, setQuery] = useState('');
+  const searchInput = useRef<HTMLInputElement>(null);
+  const keyword = normalizeName(query);
+  const visibleApps = apps.filter(app =>
+    [app.name, app.traditional, app.english].some(name => normalizeName(name).includes(keyword))
+  );
   const activeSeries = series.find(collection => collection.id === view);
   const compareLabel = traditional ? '並排對比' : '并排对比';
+  const searchLabel = traditional ? '搜尋應用名（中英文）' : '搜索应用名（中英文）';
   const appName = (app: IconApp) => traditional ? app.traditional : app.name;
 
   return (
@@ -86,15 +97,41 @@ export function IconGallery() {
               {compareLabel}
             </button>
           </div>
-          <p className="icon-view-count" aria-live="polite">
-            <span className="sr-only">{activeSeries?.name ?? compareLabel} · </span>
-            {traditional ? `精選 ${apps.length} 個應用` : `精选 ${apps.length} 个应用`}
-          </p>
+          <div className="icon-search-tools">
+            <div className="icon-search" role="search">
+              <input
+                ref={searchInput}
+                type="search"
+                aria-label={searchLabel}
+                placeholder={searchLabel}
+                value={query}
+                onChange={event => setQuery(event.target.value)}
+              />
+              {query && (
+                <button type="button" onClick={() => {
+                  setQuery('');
+                  searchInput.current?.focus();
+                }}>
+                  清除
+                </button>
+              )}
+            </div>
+            <p className="icon-view-count" aria-live="polite">
+              <span className="sr-only">{activeSeries?.name ?? compareLabel} · </span>
+              {keyword
+                ? (traditional ? `找到 ${visibleApps.length} 個應用` : `找到 ${visibleApps.length} 个应用`)
+                : (traditional ? `精選 ${apps.length} 個應用` : `精选 ${apps.length} 个应用`)}
+            </p>
+          </div>
         </div>
 
-        {activeSeries ? (
+        {visibleApps.length === 0 ? (
+          <p className="icon-empty">
+            {traditional ? '沒有符合的應用。試試其他中英文名稱。' : '没有匹配的应用。试试其他中英文名称。'}
+          </p>
+        ) : activeSeries ? (
           <ul className="icon-grid" aria-label={activeSeries.name}>
-            {apps.map(app => (
+            {visibleApps.map(app => (
               <li className="icon-card" data-series={activeSeries.id} key={app.id}>
                 <Preview app={app} collection={activeSeries} />
                 <span className="icon-app-label">{appName(app)}</span>
@@ -116,7 +153,7 @@ export function IconGallery() {
               </tr>
             </thead>
             <tbody>
-              {apps.map(app => (
+              {visibleApps.map(app => (
                 <tr key={app.id}>
                   <th scope="row">
                     <span className="icon-app-label">{appName(app)}</span>

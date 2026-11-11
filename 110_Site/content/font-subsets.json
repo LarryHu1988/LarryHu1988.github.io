@@ -201,6 +201,14 @@
       "bytes": 2324,
       "critical": false,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEbdb7iD-J2Q&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-1caedae8892f.woff2",
+      "characters": "匹搜沒符試配",
+      "sha256": "1caedae8892fa1a419abd5178cf0470b1e8980fb1cae0c26a943635a416ce48e",
+      "bytes": 4440,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEedXnrz-A_1L4euIDf2JA08QGzA&skey=37fe335b8fd815cc&v=v36"
     }
   ]
 }
