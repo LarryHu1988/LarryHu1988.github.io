@@ -8,6 +8,7 @@ const series = [
   { id: 'glosspop', name: '晶彩', english: 'GlossPop' },
   { id: 'creampop', name: '奶糖', english: 'CreamPop' },
   { id: 'objectcraft', name: '匠物', english: 'ObjectCraft' },
+  { id: 'pocketobjects', name: '小物', english: 'PocketObjects' },
 ] as const;
 
 type Series = (typeof series)[number];
@@ -47,10 +48,10 @@ export function IconGallery() {
           <p className="icon-kicker"><span /> ICON COLLECTION</p>
           <h1 id="icon-title">{traditional ? '雨藏萬象' : '雨藏万象'}</h1>
           <p className="icon-intro-description">
-            {traditional ? '同一個應用，三種模樣。' : '同一个应用，三种模样。'}
+            {traditional ? '同一個應用，四種模樣。' : '同一个应用，四种模样。'}
           </p>
           <p className="icon-intro-count">
-            {traditional ? '三套系列，每套 1000+ 款圖標' : '三套系列，每套 1000+ 款图标'}
+            {traditional ? '四套系列，每套 1000+ 款圖標' : '四套系列，每套 1000+ 款图标'}
           </p>
         </div>
         <figure className="icon-sample">
@@ -79,7 +80,9 @@ export function IconGallery() {
               </button>
             ))}
             <button className="icon-compare-button" type="button" aria-pressed={view === 'compare'} onClick={() => setView('compare')}>
-              <span className="icon-compare-symbol" aria-hidden="true"><i /><i /><i /></span>
+              <span className="icon-compare-symbol" aria-hidden="true">
+                {series.map(collection => <i key={collection.id} />)}
+              </span>
               {compareLabel}
             </button>
           </div>

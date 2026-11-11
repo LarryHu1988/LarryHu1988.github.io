@@ -51,7 +51,7 @@
 
 .icon-sample-art {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 5px;
   padding: 5px;
   border: 1px solid #deddd3;
@@ -98,6 +98,11 @@
 .icon-exhibit [data-series='objectcraft'] {
   --icon-tint: #efe9de;
   --icon-dot: #9b662f;
+}
+
+.icon-exhibit [data-series='pocketobjects'] {
+  --icon-tint: #eaeaf5;
+  --icon-dot: #5f64a0;
 }
 
 .icon-toolbar {
@@ -301,8 +306,13 @@
   .icon-app-label { font-size: 12px; }
   .icon-app-english { font-size: 10px; }
   .icon-comparison { border-spacing: 3px 4px; }
-  .icon-comparison thead th:first-child, .icon-comparison tbody th { width: 25%; }
+  .icon-comparison thead th:first-child, .icon-comparison tbody th { width: 22%; }
   .icon-comparison td { padding-block: 4px; }
+}
+
+@media (max-width: 374px) {
+  .icon-views .icon-compare-button { flex-basis: 100%; }
+  .icon-comparison thead .icon-series-dot { margin-right: 3px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
