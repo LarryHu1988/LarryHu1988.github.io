@@ -1,0 +1,36 @@
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body {
+  margin: 0;
+  background: #f4f8fb;
+  color: #162637;
+  font: 16px/1.55 system-ui, -apple-system, "PingFang SC", sans-serif;
+}
+main {
+  width: min(100% - 2.5rem, 36rem);
+  margin: clamp(3rem, 12vw, 7rem) auto;
+}
+.series { color: #235a8a; font-weight: 700; }
+.series span { margin-inline-start: .7rem; font-variant-numeric: tabular-nums; }
+h1 { margin: .45rem 0; font-size: clamp(1.9rem, 7vw, 3rem); line-height: 1.18; }
+.description, .help, footer { color: #455c73; }
+.description { margin: .7rem 0 1.8rem; }
+.downloads { display: grid; gap: .75rem; }
+.downloads a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .25rem 1rem;
+  padding: .9rem 1rem;
+  border: 1px solid #b8cddd;
+  border-radius: .65rem;
+  background: white;
+  color: #184f81;
+  text-decoration: none;
+}
+.downloads a:hover { background: #e8f2fa; }
+.downloads a:focus-visible { outline: 2px solid #184f81; outline-offset: 3px; }
+.downloads span, .help, footer { font-size: .88rem; }
+.help { margin-top: 1.3rem; }
+footer { margin-top: 2.1rem; border-top: 1px solid #cad8e3; padding-top: 1rem; }
