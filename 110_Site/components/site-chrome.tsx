@@ -24,18 +24,19 @@ export function SiteHeader() {
     { href: `${home}#poetry`, label: traditional ? '詩情雨意' : '诗情雨意' },
     { href: '/poetry-picture/', label: traditional ? '詩情畫意' : '诗情画意' },
     { href: '/photography/', label: traditional ? '拾光聽雨' : '拾光听雨' },
+    { href: '/icons/', label: traditional ? '雨藏萬象' : '雨藏万象' },
   ];
   return <header className="site-header">
     <div className="shell header-inner">
       <Link className="brand" href="/" aria-label={traditional ? 'LARRY STUDIO · 滴水龍雨工作室首頁' : 'LARRY STUDIO · 滴水龙雨工作室首页'} onClick={() => setMenuOpen(false)}><Mark /><span className="brand-copy"><span className="brand-name">LARRY<span className="brand-light"> STUDIO</span><span className="brand-period">.</span></span><span className="brand-chinese">{traditional ? '滴水龍雨工作室' : '滴水龙雨工作室'}</span></span></Link>
-      <nav className="desktop-nav" aria-label={traditional ? '主要導覽' : '主要导航'}>{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
+      <nav className="desktop-nav" aria-label={traditional ? '主要導覽' : '主要导航'}>{links.map(link => <a key={link.href} href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>)}</nav>
       <div className="header-actions">
         <button className="language-button" onClick={toggle} aria-label={traditional ? '切换为简体中文' : '切換為繁體中文'}>{traditional ? '简' : '繁'}<span aria-hidden="true"> / {traditional ? '繁' : '简'}</span></button>
         <a className="github-link" href="https://github.com/LarryHu1988" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a>
         <button className="menu-button" aria-expanded={menuOpen} aria-controls="mobile-nav" aria-label={menuOpen ? '关闭菜单' : '打开菜单'} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
       </div>
     </div>
-    <nav id="mobile-nav" className="mobile-nav" aria-label="移动导航" hidden={!menuOpen}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}<Arrow /></a>)}</nav>
+    <nav id="mobile-nav" className="mobile-nav" aria-label="移动导航" hidden={!menuOpen}>{links.map(link => <a key={link.href} href={link.href} aria-current={pathname === link.href ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{link.label}<Arrow /></a>)}</nav>
   </header>;
 }
 

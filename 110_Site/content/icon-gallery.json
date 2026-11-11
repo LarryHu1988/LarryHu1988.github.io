@@ -1,0 +1,182 @@
+[
+  {
+    "id": "camera",
+    "name": "相机",
+    "traditional": "相機",
+    "english": "Camera"
+  },
+  {
+    "id": "weather",
+    "name": "天气",
+    "traditional": "天氣",
+    "english": "Weather"
+  },
+  {
+    "id": "music",
+    "name": "音乐",
+    "traditional": "音樂",
+    "english": "Music"
+  },
+  {
+    "id": "calendar",
+    "name": "日历",
+    "traditional": "日曆",
+    "english": "Calendar"
+  },
+  {
+    "id": "wechat",
+    "name": "微信",
+    "traditional": "微信",
+    "english": "WeChat"
+  },
+  {
+    "id": "compass",
+    "name": "指南针",
+    "traditional": "指南針",
+    "english": "Compass"
+  },
+  {
+    "id": "photos",
+    "name": "照片",
+    "traditional": "照片",
+    "english": "Photos"
+  },
+  {
+    "id": "clock",
+    "name": "时钟",
+    "traditional": "時鐘",
+    "english": "Clock"
+  },
+  {
+    "id": "messages",
+    "name": "信息",
+    "traditional": "訊息",
+    "english": "Messages"
+  },
+  {
+    "id": "phone",
+    "name": "电话",
+    "traditional": "電話",
+    "english": "Phone"
+  },
+  {
+    "id": "settings",
+    "name": "设置",
+    "traditional": "設定",
+    "english": "Settings"
+  },
+  {
+    "id": "notes",
+    "name": "备忘录",
+    "traditional": "備忘錄",
+    "english": "Notes"
+  },
+  {
+    "id": "amap",
+    "name": "高德地图",
+    "traditional": "高德地圖",
+    "english": "Amap"
+  },
+  {
+    "id": "google-maps",
+    "name": "谷歌地图",
+    "traditional": "Google 地圖",
+    "english": "Google Maps"
+  },
+  {
+    "id": "alipay",
+    "name": "支付宝",
+    "traditional": "支付寶",
+    "english": "Alipay"
+  },
+  {
+    "id": "taobao",
+    "name": "淘宝",
+    "traditional": "淘寶",
+    "english": "Taobao"
+  },
+  {
+    "id": "jd-com",
+    "name": "京东",
+    "traditional": "京東",
+    "english": "JD.com"
+  },
+  {
+    "id": "meituan",
+    "name": "美团",
+    "traditional": "美團",
+    "english": "Meituan"
+  },
+  {
+    "id": "douyin",
+    "name": "抖音",
+    "traditional": "抖音",
+    "english": "Douyin"
+  },
+  {
+    "id": "xiaohongshu",
+    "name": "小红书",
+    "traditional": "小紅書",
+    "english": "Xiaohongshu"
+  },
+  {
+    "id": "bilibili",
+    "name": "哔哩哔哩",
+    "traditional": "嗶哩嗶哩",
+    "english": "bilibili"
+  },
+  {
+    "id": "youtube",
+    "name": "YouTube",
+    "traditional": "YouTube",
+    "english": "YouTube"
+  },
+  {
+    "id": "whatsapp",
+    "name": "WhatsApp",
+    "traditional": "WhatsApp",
+    "english": "WhatsApp"
+  },
+  {
+    "id": "instagram",
+    "name": "Instagram",
+    "traditional": "Instagram",
+    "english": "Instagram"
+  },
+  {
+    "id": "qq",
+    "name": "QQ",
+    "traditional": "QQ",
+    "english": "QQ"
+  },
+  {
+    "id": "weibo",
+    "name": "微博",
+    "traditional": "微博",
+    "english": "Weibo"
+  },
+  {
+    "id": "gmail",
+    "name": "Gmail",
+    "traditional": "Gmail",
+    "english": "Gmail"
+  },
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "traditional": "ChatGPT",
+    "english": "ChatGPT"
+  },
+  {
+    "id": "deepseek",
+    "name": "DeepSeek",
+    "traditional": "DeepSeek",
+    "english": "DeepSeek"
+  },
+  {
+    "id": "google-gemini",
+    "name": "Google Gemini",
+    "traditional": "Google Gemini",
+    "english": "Google Gemini"
+  }
+]
