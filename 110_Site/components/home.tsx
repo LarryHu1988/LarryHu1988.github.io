@@ -44,7 +44,7 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
       <div className="hero-copy">
         <p className="eyebrow hero-eyebrow"><span className="status-dot" />{t ? '上海 · 滴水湖' : '上海 · 滴水湖'}<span className="eyebrow-rule" /> A PERSONAL SPACE</p>
         <h1 id="hero-title">{t ? '寫代碼，' : '写代码，'}<br />{t ? '也寫' : '也写'}<em>{t ? '小詩。' : '小诗。'}</em></h1>
-        <p className="hero-introduction">{t ? '你好，我是滴水龍雨。' : '你好，我是滴水龙雨。'}<br /><span>{t ? '半導體工程師，獨立開發者，也寫一點詩。' : '半导体工程师，独立开发者，也写一点诗。'}</span></p>
+        <p className="hero-introduction">{t ? '你好，我是滴水龍雨。' : '你好，我是滴水龙雨。'}</p>
         <div className="hero-links"><a className="button button-dark" href="#apps">{t ? '看看我的作品' : '看看我的作品'}<Arrow /></a><a className="text-link" href="#poetry">{t ? '讀一首小詩' : '读一首小诗'}<Arrow diagonal /></a></div>
         <p className="hero-footnote">ENGINEERING BY DAY. CREATING ALONG THE WAY.</p>
       </div>
@@ -54,7 +54,7 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
 
     <section id="about" className="about-section shell section-space" aria-labelledby="about-title" data-reveal>
       <div className="about-label"><p className="eyebrow">01 / THE PERSON BEHIND</p><h2 id="about-title">{t ? '滴水龍雨' : '滴水龙雨'}<span className="heading-dot">.</span></h2><p className="about-name">Lawrence Hu<span> / Larry</span></p><div className="about-seal" aria-hidden="true">{t ? '生於滴水沿' : '生于滴水沿'}<br />{t ? '現居滴水湖' : '现居滴水湖'}</div></div>
-      <div className="bio-chinese"><p>{t ? '生於滴水沿，現居滴水湖。' : '生于滴水沿，现居滴水湖。'}<br />{t ? '生肖屬龍，生時逢雨。' : '生肖属龙，生时逢雨。'}</p><p>{t ? '半導體行業從業十二年，' : '半导体行业从业十二年，'}<br />{t ? '從產品工程到工藝整合。' : '从产品工程到工艺整合。'}</p><p>{t ? '追梅西，忠巴薩，念科比。' : '追梅西，忠巴萨，念科比。'}<br />{t ? '看讀庫，讀新詩，寫小詩。' : '看读库，读新诗，写小诗。'}<br />{t ? '踢實況，打黑猴，碼 APP。' : '踢实况，打黑猴，码 APP。'}</p></div>
+      <div className="bio-chinese"><p>{t ? '生於滴水沿，現居滴水湖。' : '生于滴水沿，现居滴水湖。'}<br />{t ? '生肖屬龍，生時逢雨。' : '生肖属龙，生时逢雨。'}</p><p>{t ? '半導體行業從業十二年，' : '半导体行业从业十二年，'}<br />{t ? '從產品工程到工藝整合。' : '从产品工程到工艺整合。'}</p><p>{t ? '追梅西，忠巴薩，念科比。' : '追梅西，忠巴萨，念科比。'}<br />{t ? '看讀庫，讀新詩，寫小詩。' : '看读库，读新诗，写小诗。'}<br />{t ? '踢實況，打黑猴，做應用。' : '踢实况，打黑猴，做应用。'}</p></div>
       <div className="bio-english" lang="en"><p>12 years in semiconductors,<br /><span className="engineering-line">from product engineering to process integration.</span></p><p>Messi follower, Barça culer, Kobe in memory.<br />A Duku reader and Chinese poetry enthusiast.<br />A gamer of eFootball and Black Myth.<br />An independent app developer.</p></div>
     </section>
 
