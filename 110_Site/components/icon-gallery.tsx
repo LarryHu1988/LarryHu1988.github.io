@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import apps from '@/content/icon-gallery.json';
 import { useLanguage } from './language';
 
@@ -42,7 +42,10 @@ export function IconGallery() {
   const { traditional } = useLanguage();
   const [view, setView] = useState<View>('glosspop');
   const [query, setQuery] = useState('');
+  const [selectedApp, setSelectedApp] = useState<IconApp | null>(null);
   const searchInput = useRef<HTMLInputElement>(null);
+  const appDialog = useRef<HTMLDialogElement>(null);
+  const dialogTrigger = useRef<HTMLButtonElement>(null);
   const keyword = normalizeName(query);
   const visibleApps = apps.filter(app =>
     [app.name, app.traditional, app.english].some(name => normalizeName(name).includes(keyword))
@@ -51,6 +54,22 @@ export function IconGallery() {
   const compareLabel = traditional ? '並排對比' : '并排对比';
   const searchLabel = traditional ? '搜尋應用名（中英文）' : '搜索应用名（中英文）';
   const appName = (app: IconApp) => traditional ? app.traditional : app.name;
+
+  useEffect(() => {
+    if (selectedApp && appDialog.current && !appDialog.current.open) {
+      appDialog.current.showModal();
+    }
+  }, [selectedApp]);
+
+  function openComparison(app: IconApp, trigger: HTMLButtonElement) {
+    dialogTrigger.current = trigger;
+    setSelectedApp(app);
+  }
+
+  function closeComparison() {
+    setSelectedApp(null);
+    dialogTrigger.current?.focus({ preventScroll: true });
+  }
 
   return (
     <main id="main" className="icon-exhibit shell">
@@ -132,10 +151,18 @@ export function IconGallery() {
         ) : activeSeries ? (
           <ul className="icon-grid" aria-label={activeSeries.name}>
             {visibleApps.map(app => (
-              <li className="icon-card" data-series={activeSeries.id} key={app.id}>
-                <Preview app={app} collection={activeSeries} />
-                <span className="icon-app-label">{appName(app)}</span>
-                {appName(app) !== app.english && <span className="icon-app-english" lang="en">{app.english}</span>}
+              <li key={app.id}>
+                <button
+                  className="icon-card"
+                  type="button"
+                  data-series={activeSeries.id}
+                  aria-haspopup="dialog"
+                  onClick={event => openComparison(app, event.currentTarget)}
+                >
+                  <Preview app={app} collection={activeSeries} />
+                  <span className="icon-app-label">{appName(app)}</span>
+                  {appName(app) !== app.english && <span className="icon-app-english" lang="en">{app.english}</span>}
+                </button>
               </li>
             ))}
           </ul>
@@ -161,7 +188,14 @@ export function IconGallery() {
                   </th>
                   {series.map(collection => (
                     <td key={collection.id} data-series={collection.id}>
-                      <Preview app={app} collection={collection} alt={`${collection.name}${appName(app)}`} />
+                      <button
+                        className="icon-comparison-trigger"
+                        type="button"
+                        aria-haspopup="dialog"
+                        onClick={event => openComparison(app, event.currentTarget)}
+                      >
+                        <Preview app={app} collection={collection} alt={`${collection.name}${appName(app)}`} />
+                      </button>
                     </td>
                   ))}
                 </tr>
@@ -170,6 +204,31 @@ export function IconGallery() {
           </table>
         )}
       </section>
+
+      <dialog className="icon-detail" ref={appDialog} aria-labelledby="icon-detail-title" onClose={closeComparison}>
+        {selectedApp && (
+          <>
+            <div className="icon-detail-header">
+              <div>
+                <h2 id="icon-detail-title">{appName(selectedApp)}</h2>
+                {appName(selectedApp) !== selectedApp.english && <p lang="en">{selectedApp.english}</p>}
+              </div>
+              <form method="dialog">
+                <button type="submit" autoFocus>返回列表</button>
+              </form>
+            </div>
+            <ul className="icon-detail-grid">
+              {series.map(collection => (
+                <li key={collection.id} data-series={collection.id}>
+                  <Preview app={selectedApp} collection={collection} eager />
+                  <span className="icon-app-label">{collection.name}</span>
+                  <span className="icon-app-english" lang="en">{collection.english}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </dialog>
     </main>
   );
 }

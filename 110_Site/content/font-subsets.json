@@ -159,7 +159,7 @@
       "characters": "冯",
       "sha256": "9454d6a9cb2996b240ae456ed0c4ede2ddbfc4f52f90fb023926a751ec240e65",
       "bytes": 1820,
-      "critical": true,
+      "critical": false,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEaNXtuQ&skey=37fe335b8fd815cc&v=v36"
     },
     {
@@ -209,6 +209,22 @@
       "bytes": 4440,
       "critical": false,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEedXnrz-A_1L4euIDf2JA08QGzA&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-03582b6ba9c4.woff2",
+      "characters": "琴谅",
+      "sha256": "03582b6ba9c43034068d544e471e007758c49ddf43de076fc3ee037915c74fb5",
+      "bytes": 2320,
+      "critical": true,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEbdf7ojGg5g&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-07fb631d0379.woff2",
+      "characters": "冉嫩宛宿恤惨慈拂拼挺捧撕擎敲昂枚棕溢潜烛烹玲珑盲瞥祥究笼粟纵绮罂罩舸茎荧谱速遍邀闲驶骄",
+      "sha256": "07fb631d03791f3297afa73c8c924110ce039300cf253067579566baba45db13",
+      "bytes": 23984,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOE6jGOkFD1yB2vRp5KdzUP9Illwu4sBdMtXmVi6AmPLuivwMn0e0rs6I-V63PZKJE2nDJueHeEUFGD4cy3DKICNsdNnQR80raCnR0VZ4v2kvJQkwqjscHzrEPeq6Ej3o3ncO1oUkXifGsdS_Ye0Ux8C0pDfWhZg7na1cRC0W2xQBhBoXM&skey=37fe335b8fd815cc&v=v36"
     }
   ]
 }
