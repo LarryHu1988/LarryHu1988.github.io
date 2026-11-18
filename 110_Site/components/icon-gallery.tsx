@@ -54,7 +54,8 @@ export function IconGallery() {
   );
   const activeSeries = series.find(collection => collection.id === view);
   const compareLabel = traditional ? '並排對比' : '并排对比';
-  const searchLabel = traditional ? '搜尋應用名（中英文）' : '搜索应用名（中英文）';
+  const searchPlaceholder = traditional ? '搜尋應用名' : '搜索应用名';
+  const searchLabel = `${searchPlaceholder}（中英文）`;
   const appName = (app: IconApp) => traditional ? app.traditional : app.name;
 
   useEffect(() => {
@@ -111,20 +112,20 @@ export function IconGallery() {
                 <span className="icon-series-english" lang="en">{collection.english}</span>
               </button>
             ))}
+          </div>
+          <div className="icon-toolbar-actions">
             <button className="icon-compare-button" type="button" aria-pressed={view === 'compare'} onClick={() => setView('compare')}>
               <span className="icon-compare-symbol" aria-hidden="true">
                 {series.map(collection => <i key={collection.id} />)}
               </span>
               {compareLabel}
             </button>
-          </div>
-          <div className="icon-search-tools">
             <div className="icon-search" role="search">
               <input
                 ref={searchInput}
                 type="search"
                 aria-label={searchLabel}
-                placeholder={searchLabel}
+                placeholder={searchPlaceholder}
                 value={query}
                 onChange={event => setQuery(event.target.value)}
               />
@@ -137,13 +138,13 @@ export function IconGallery() {
                 </button>
               )}
             </div>
-            <p className="icon-view-count" aria-live="polite">
-              <span className="sr-only">{activeSeries?.name ?? compareLabel} · </span>
-              {keyword
-                ? (traditional ? `找到 ${visibleApps.length} 個應用` : `找到 ${visibleApps.length} 个应用`)
-                : (traditional ? `精選 ${apps.length} 個應用` : `精选 ${apps.length} 个应用`)}
-            </p>
           </div>
+          <p className="icon-view-count" aria-live="polite">
+            <span className="sr-only">{activeSeries?.name ?? compareLabel} · </span>
+            {keyword
+              ? (traditional ? `找到 ${visibleApps.length} 個應用` : `找到 ${visibleApps.length} 个应用`)
+              : (traditional ? `精選 ${apps.length} 個應用` : `精选 ${apps.length} 个应用`)}
+          </p>
         </div>
 
         {visibleApps.length === 0 ? (

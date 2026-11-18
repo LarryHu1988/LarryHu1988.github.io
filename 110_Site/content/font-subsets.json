@@ -199,7 +199,7 @@
       "characters": "搞智",
       "sha256": "a38c791e82871221184d11040dacb6bc1b42eb360336030c113077654b0e040e",
       "bytes": 2324,
-      "critical": false,
+      "critical": true,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEbdb7iD-J2Q&skey=37fe335b8fd815cc&v=v36"
     },
     {
@@ -215,7 +215,7 @@
       "characters": "琴谅",
       "sha256": "03582b6ba9c43034068d544e471e007758c49ddf43de076fc3ee037915c74fb5",
       "bytes": 2320,
-      "critical": true,
+      "critical": false,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEbdf7ojGg5g&skey=37fe335b8fd815cc&v=v36"
     },
     {
@@ -225,6 +225,14 @@
       "bytes": 23984,
       "critical": false,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOE6jGOkFD1yB2vRp5KdzUP9Illwu4sBdMtXmVi6AmPLuivwMn0e0rs6I-V63PZKJE2nDJueHeEUFGD4cy3DKICNsdNnQR80raCnR0VZ4v2kvJQkwqjscHzrEPeq6Ej3o3ncO1oUkXifGsdS_Ye0Ux8C0pDfWhZg7na1cRC0W2xQBhBoXM&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-5efd69e713c4.woff2",
+      "characters": "嘷宫拨枣殿湄烬瓢瞭蝉蟒觅诸躁迁龄",
+      "sha256": "5efd69e713c41597d5c240ce3b36f8c7332367de2a1f370504c529b5b757b776",
+      "bytes": 10500,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEW9XzoTy-yFLBQOMxemxHyss6xaFJLLxYdwAazl30K7rW34a1bDelw-nJ_ymAMfpuhg&skey=37fe335b8fd815cc&v=v36"
     }
   ]
 }
