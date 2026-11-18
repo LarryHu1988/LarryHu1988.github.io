@@ -9,6 +9,8 @@ const series = [
   { id: 'creampop', name: '奶糖', english: 'CreamPop' },
   { id: 'objectcraft', name: '匠物', english: 'ObjectCraft' },
   { id: 'pocketobjects', name: '小物', english: 'PocketObjects' },
+  { id: 'iceglass', name: '冰透', english: 'IceGlass' },
+  { id: 'category-miniatures', name: '微景', english: 'Category Miniatures' },
 ] as const;
 
 type Series = (typeof series)[number];
@@ -78,10 +80,10 @@ export function IconGallery() {
           <p className="icon-kicker"><span /> ICON COLLECTION</p>
           <h1 id="icon-title">{traditional ? '雨藏萬象' : '雨藏万象'}</h1>
           <p className="icon-intro-description">
-            {traditional ? '同一個應用，四種模樣。' : '同一个应用，四种模样。'}
+            {traditional ? '同一個應用，六種模樣。' : '同一个应用，六种模样。'}
           </p>
           <p className="icon-intro-count">
-            {traditional ? '四套系列，每套 1000+ 款圖標' : '四套系列，每套 1000+ 款图标'}
+            {traditional ? '六套系列，每套 1000+ 款圖標' : '六套系列，每套 1000+ 款图标'}
           </p>
         </div>
         <figure className="icon-sample">

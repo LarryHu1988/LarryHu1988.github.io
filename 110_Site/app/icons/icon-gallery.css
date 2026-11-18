@@ -51,7 +51,7 @@
 
 .icon-sample-art {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 5px;
   padding: 5px;
   border: 1px solid #deddd3;
@@ -103,6 +103,16 @@
 .icon-exhibit [data-series='pocketobjects'] {
   --icon-tint: #eaeaf5;
   --icon-dot: #5f64a0;
+}
+
+.icon-exhibit [data-series='iceglass'] {
+  --icon-tint: #e0edf4;
+  --icon-dot: #447991;
+}
+
+.icon-exhibit [data-series='category-miniatures'] {
+  --icon-tint: #f2e7dd;
+  --icon-dot: #a65c40;
 }
 
 .icon-toolbar {
@@ -335,6 +345,7 @@
   font-size: 13px;
   font-weight: 650;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .icon-comparison thead th:first-child,
@@ -429,7 +440,7 @@ html:has(.icon-detail[open]) {
 
 .icon-detail-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin: 0;
   padding: 0;
@@ -464,8 +475,10 @@ html:has(.icon-detail[open]) {
 }
 
 @media (max-width: 560px) {
-  .icon-views { width: 100%; }
-  .icon-views button { flex: 1; min-height: 44px; padding-inline: 6px; white-space: nowrap; }
+  .icon-views { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .icon-views button { min-height: 44px; padding-inline: 6px; white-space: nowrap; }
+  .icon-views .icon-compare-button { grid-column: 1 / -1; }
+  .icon-sample-cell img { width: 88%; }
   .icon-views .icon-series-english, .icon-comparison .icon-series-english { display: none; }
   .icon-toolbar { gap: 9px; padding-block: 12px; }
   .icon-search-tools { flex: 1 1 100%; flex-wrap: wrap; justify-content: flex-start; gap: 6px; }
@@ -479,12 +492,9 @@ html:has(.icon-detail[open]) {
   .icon-app-english { font-size: 10px; }
   .icon-comparison { border-spacing: 3px 4px; }
   .icon-comparison thead th:first-child, .icon-comparison tbody th { width: 22%; }
-  .icon-comparison-trigger { padding-block: 4px; }
-}
-
-@media (max-width: 374px) {
-  .icon-views .icon-compare-button { flex-basis: 100%; }
-  .icon-comparison thead .icon-series-dot { margin-right: 3px; }
+  .icon-comparison thead th:not(:first-child) { padding-inline: 1px; font-size: 12px; }
+  .icon-comparison thead .icon-series-dot { display: none; }
+  .icon-comparison-trigger { min-height: 44px; padding-block: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
