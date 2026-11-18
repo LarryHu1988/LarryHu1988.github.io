@@ -9,4 +9,4 @@
 :HL["/fonts/serif/serif-03582b6ba9c4.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"photography","h":96,"c":"$Q2"}]]
-0:{"b":"_Wba_uDN3rNrE2c0qgVyt","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"lNyvqcC6-sfZu3l4LGK17","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
