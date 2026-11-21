@@ -22,7 +22,7 @@
 <p align="center">
   <a href="https://larryhu.com/simpleworth/"><img src="../112_Brand/simpleworth.png" width="260" alt="SimpleWorth · 简值：记得简单，心里有数。探索记账与储蓄 App。" /></a>
   <a href="https://larryhu.com/keepfit/"><img src="../112_Brand/keepfit.png" width="260" alt="KeepFit：管住嘴，迈开腿。探索饮食与运动记录 App。" /></a>
-  <a href="https://larryhu.com/PDFLibrarian/"><img src="../112_Brand/pdflibrarian.png" width="260" alt="PDF Librarian：给 PDF，一份清楚的书目。探索 Mac 书籍元数据工具。" /></a>
+  <a href="https://larryhu.com/PDFLibrarian/"><img src="../112_Brand/pdflibrarian.png" width="260" alt="PDF Librarian - 书目匠：给 PDF，一份清楚的书目。探索 Mac 书籍元数据工具。" /></a>
 </p>
 
 ## 诗情雨意

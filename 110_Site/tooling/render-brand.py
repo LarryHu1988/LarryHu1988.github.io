@@ -1,6 +1,8 @@
 """Render repository-native artwork using the site's licensed font outlines."""
 
 import base64
+import json
+from functools import cache
 from html import escape
 from pathlib import Path
 
@@ -25,13 +27,22 @@ MONO = font("ibm-plex-mono-500.woff2")
 SERIF = font("noto-serif-sc.woff2")
 
 
+@cache
+def supplemental_font(char):
+    manifest = json.loads((ROOT / "110_Site/content/font-subsets.json").read_text())
+    for subset in manifest["subsets"]:
+        if char in subset["characters"]:
+            return font(subset["path"].removeprefix("/fonts/"))
+    raise ValueError(f"Font subset is missing {char!r}")
+
+
 def text(value, x, y, size, face=SERIF, fill=INK, spacing=0):
     paths, advance = [], 0
     for char in value:
         active = face if ord(char) in face.getBestCmap() else MONO
+        if ord(char) not in active.getBestCmap():
+            active = SERIF if ord(char) in SERIF.getBestCmap() else supplemental_font(char)
         cmap, glyphs = active.getBestCmap(), active.getGlyphSet()
-        if ord(char) not in cmap:
-            raise ValueError(f"Font subset is missing {char!r}")
         scale = size / active["head"].unitsPerEm
         glyph = glyphs[cmap[ord(char)]]
         pen = SVGPathPen(glyphs)
@@ -129,7 +140,7 @@ OUT.mkdir(exist_ok=True)
 cover()
 app_card("simpleworth", "SimpleWorth", "记得简单，心里有数。", "111_Products/simpleworth/assets/icon.png", "111_Products/simpleworth/assets/zh-Hans-01-expenses.webp", "iPhone / iPad", "#e5e8dc")
 app_card("keepfit", "KeepFit", "管住嘴，迈开腿。", "111_Products/keepfit/assets/icon.png", "111_Products/keepfit/assets/zh-eat-overview.webp", "iPhone / iPad", "#eadfd1")
-app_card("pdflibrarian", "PDF Librarian", "给 PDF，一份清楚的书目。", "110_Site/public/images/pdf-icon.png", "110_Site/public/images/pdf-workspace-1.5.0.png", "macOS", "#e0e7e3")
+app_card("pdflibrarian", "PDF Librarian - 书目匠", "给 PDF，一份清楚的书目。", "110_Site/public/images/pdf-icon.png", "110_Site/public/images/pdf-workspace-1.5.0.png", "macOS", "#e0e7e3")
 poem_card("second-granduncle", "二姥爷是个哑巴", ["在正月的日子里", "我回忆起了他"], 1)
 poem_card("performance", "表演", ["这是一个无尽的舞台", "所有人都在刻意不刻意地表演"], 2)
 svg("signature", 1200, 120, "日子慢慢过，文字慢慢写。", '<path d="M40 20h1120" stroke="#dcded2"/>' + text("日子慢慢过，文字慢慢写。", 474, 68, 21, fill=MUTED) + text("LARRY STUDIO / larryhu.com", 517, 99, 11, MONO, GREEN))

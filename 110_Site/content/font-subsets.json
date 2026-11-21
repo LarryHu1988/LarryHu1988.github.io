@@ -233,6 +233,22 @@
       "bytes": 10500,
       "critical": false,
       "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEW9XzoTy-yFLBQOMxemxHyss6xaFJLLxYdwAazl30K7rW34a1bDelw-nJ_ymAMfpuhg&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-d118f41740b1.woff2",
+      "characters": "國摩陸",
+      "sha256": "d118f41740b1d20a832e0b8ad79a1c31707d5db11dc108f7eb430fd949e3517f",
+      "bytes": 3032,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEYtX3nT-Byl3TUA&skey=37fe335b8fd815cc&v=v36"
+    },
+    {
+      "path": "/fonts/serif/serif-e215d55dcc18.woff2",
+      "characters": "「」俩俱兰廊彻慨慷曰欲筛芝蓦裎裸雅髣髴",
+      "sha256": "e215d55dcc18d74aaf174beb30e92327583080fa665c781a5de82c08869584d4",
+      "bytes": 10832,
+      "critical": false,
+      "source": "https://fonts.gstatic.com/l/font?kit=H4chBXePl9DZ0Xe7gG9cyOj7oqOEUtPrmjqQ7lD1QeEQaG9sxcg4y6N3O71OfQEB1FPyErTl_4m_cjeA5ung2CmcPvtzukETXgvJSRrO6A&skey=37fe335b8fd815cc&v=v36"
     }
   ]
 }

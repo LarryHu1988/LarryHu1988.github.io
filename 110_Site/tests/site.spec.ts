@@ -16,6 +16,10 @@ test('home keeps the selected content and real product images', async ({ page },
   await expect(page.getByText('FIELD NOTES / 001', { exact: true })).toHaveCount(0);
   await expect(page.locator('.study-caption')).toContainText('一滴水，一个小小的世界。');
   await expect(page.locator('.app-card')).toHaveCount(3);
+  const pdf = page.locator('.pdflibrarian');
+  await expect(pdf.getByRole('heading', { level: 3 })).toContainText('书目匠');
+  await expect(pdf.getByRole('link', { name: 'PDF Librarian - 书目匠 App Store 国区' }))
+    .toHaveAttribute('href', 'https://apps.apple.com/cn/app/id6760351540?mt=12');
   await expect(page.locator('.poem-card')).toHaveCount(2);
   await expect(page.locator('#sports, #insight, #notes, #melody, #cinema')).toHaveCount(0);
   await page.locator('#apps').scrollIntoViewIfNeeded();
@@ -114,6 +118,7 @@ test('language preference survives reload and navigation', async ({ page }) => {
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-Hant');
   await expect(page.locator('#apps-title')).toHaveText('碼上有雨.');
+  await expect(page.locator('.pdflibrarian').getByRole('link', { name: 'PDF Librarian - 書目匠 App Store 中國大陸' })).toHaveCount(1);
 });
 
 test('product pages and legal routes remain available', async ({ request }) => {

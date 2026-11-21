@@ -7,7 +7,7 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://larryhu.com'),
   title: { default: '滴水龙雨工作室 · LARRY STUDIO', template: '%s · 滴水龙雨工作室' },
-  description: '生于滴水沿，现居滴水湖。Lawrence Hu 的个人网站，记录诗歌与独立开发的 App：SimpleWorth、KeepFit 和 PDF Librarian。',
+  description: '生于滴水沿，现居滴水湖。Lawrence Hu 的个人网站，记录诗歌与独立开发的 App：SimpleWorth、KeepFit 和 PDF Librarian - 书目匠。',
   alternates: { canonical: '/' },
   icons: { icon: '/favicon.svg' },
   openGraph: {
