@@ -64,7 +64,7 @@ export function Home({ dailyPoems }: { dailyPoems: PoetrySleeve[] }) {
         <div className="apps-grid">{apps.map(app => {
           const localizedName = t ? app.traditional : app.chinese;
           const displayName = localizedName ? `${app.name} - ${localizedName}` : app.name;
-          const storeLabel = 'storeLabel' in app ? (t ? app.storeLabelHant : app.storeLabel) : 'App Store';
+          const storeLabel = 'storeLabel' in app ? app.storeLabel : 'App Store';
           return <article className={`app-card ${app.id}`} key={app.id} data-reveal>
             <a className="app-visual" href={app.home} aria-label={`${displayName} ${t ? '產品主頁' : '产品主页'}`}>
               <div className="app-visual-top"><span>{app.category}</span><span>{app.number}</span></div>

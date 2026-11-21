@@ -30,7 +30,7 @@ export const apps = [
     description: '在三栏工作区中检索、对比并写入 PDF 元数据，以对应分色的文件名整理书籍与论文。提供三种主题与中英文界面。',
     descriptionHant: '在三欄工作區中檢索、比較並寫入 PDF 中繼資料，以對應分色的檔案名稱整理書籍與論文。提供三種主題與中英文介面。',
     home: 'https://larryhu.com/PDFLibrarian/', store: 'https://apps.apple.com/cn/app/id6760351540?mt=12',
-    storeLabel: 'App Store 国区', storeLabelHant: 'App Store 中國大陸',
+    storeLabel: 'Mac App Store',
     support: 'https://larryhu.com/PDFLibrarian/support/', privacy: 'https://larryhu.com/PDFLibrarian/privacy-policy/',
     icon: '/images/pdf-icon.png?v=native-lossless', screen: '/images/pdf-workspace-1.5.0.optimized.png',
     screenAlt: 'PDF Librarian - 书目匠原生应用截图，完整展示 PDF 元数据编辑与核对界面',
