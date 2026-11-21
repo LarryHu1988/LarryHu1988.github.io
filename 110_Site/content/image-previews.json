@@ -3884,85 +3884,85 @@
     ]
   },
   "/images/pdf-workspace-1.5.0.optimized.png": {
-    "src": "/images/previews/pdf-workspace-1.5.0.optimized.1f9a153117b3.webp",
+    "src": "/images/previews/pdf-workspace-1.5.0.optimized.0ed72ebad70b.webp",
     "width": 1600,
     "height": 1000,
     "nativeWidth": 2880,
     "nativeHeight": 1800,
-    "bytes": 73864,
-    "nativeBytes": 447155,
+    "bytes": 74538,
+    "nativeBytes": 448219,
     "variants": [
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w96.e1afd9828be8.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w96.a2599deacf6a.webp",
         "width": 96,
         "height": 60,
-        "bytes": 5742
+        "bytes": 5748
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w192.e8d6df70561d.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w192.4fd892fd3a32.webp",
         "width": 192,
         "height": 120,
-        "bytes": 8282
+        "bytes": 8294
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w320.66c6b86c5c7a.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w320.8a898109cfa9.webp",
         "width": 320,
         "height": 200,
-        "bytes": 12304
+        "bytes": 12348
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w480.8493ec3de576.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w480.06faed72f0b7.webp",
         "width": 480,
         "height": 300,
-        "bytes": 17970
+        "bytes": 18058
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w640.29870726f2e8.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w640.6413393868a5.webp",
         "width": 640,
         "height": 400,
-        "bytes": 25456
+        "bytes": 25556
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w880.2894168cf5fb.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w880.bc4558f52fc4.webp",
         "width": 880,
         "height": 550,
-        "bytes": 38754
+        "bytes": 39136
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w960.a0438278e545.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w960.6d3200f97eca.webp",
         "width": 960,
         "height": 600,
-        "bytes": 44534
+        "bytes": 44904
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w1280.b1b40e17b6f2.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w1280.c9620e5af192.webp",
         "width": 1280,
         "height": 800,
-        "bytes": 64482
+        "bytes": 65076
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w1600.90bafbd2f305.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w1600.19e3ab7b4d00.webp",
         "width": 1600,
         "height": 1000,
-        "bytes": 86574
+        "bytes": 87196
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w1920.88a6e5353507.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w1920.740b5e66ce07.webp",
         "width": 1920,
         "height": 1200,
-        "bytes": 109236
+        "bytes": 110026
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w2560.d91f6dfdf911.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w2560.c7b9283669d7.webp",
         "width": 2560,
         "height": 1600,
-        "bytes": 160422
+        "bytes": 161376
       },
       {
-        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w2880.4f6cdd49c272.webp",
+        "src": "/images/previews/pdf-workspace-1.5.0.optimized.w2880.ce729cf139c9.webp",
         "width": 2880,
         "height": 1800,
-        "bytes": 178540
+        "bytes": 179680
       }
     ]
   }

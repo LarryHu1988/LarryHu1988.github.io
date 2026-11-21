@@ -32,7 +32,7 @@ export const apps = [
     home: 'https://larryhu.com/PDFLibrarian/', store: 'https://apps.apple.com/cn/app/id6760351540?mt=12',
     storeLabel: 'Mac App Store',
     support: 'https://larryhu.com/PDFLibrarian/support/', privacy: 'https://larryhu.com/PDFLibrarian/privacy-policy/',
-    icon: '/images/pdf-icon.png?v=native-lossless', screen: '/images/pdf-workspace-1.5.0.optimized.png',
+    icon: '/images/pdf-icon.png?v=native-lossless', screen: '/images/pdf-workspace-1.5.0.optimized.png?v=book-title',
     screenAlt: 'PDF Librarian - 书目匠原生应用截图，完整展示 PDF 元数据编辑与核对界面',
     features: ['三栏工作区', '元数据对比', '分色命名'], featuresHant: ['三欄工作區', '中繼資料比較', '分色命名'],
   },
